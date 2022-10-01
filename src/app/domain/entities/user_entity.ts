@@ -12,6 +12,7 @@ export class UserEntity extends BaseEntity {
 
   constructor(props: UserEntityProps) {
     super(props);
+    this.props = props;
 
     this.email = props.email;
     this.name = props.name;
@@ -19,7 +20,7 @@ export class UserEntity extends BaseEntity {
     this.birthDate = props.birthDate;
   }
 
-  private props!: UserEntityProps;
+  private props: UserEntityProps;
 
   public set email(email: string) {
     this.props.email = email;
