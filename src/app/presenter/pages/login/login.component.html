@@ -1,1 +1,29 @@
-<p>login works!</p>
+<div class="page">
+  <img src="assets/images/logo.png" />
+
+  <form>
+    <label class="label">Email</label>
+    <input class="input" />
+
+    <label class="label">Senha</label>
+
+    <div class="password-input">
+      <input class="input" [type]="isShowingPassword ? 'text' : 'password'" />
+
+      <img
+        *ngIf="isShowingPassword"
+        (click)="isShowingPassword = false"
+        src="assets/images/eye-off-outline.svg"
+      />
+      <img
+        *ngIf="!isShowingPassword"
+        (click)="isShowingPassword = true"
+        src="assets/images/eye-outline.svg"
+      />
+    </div>
+
+    <button class="button">Entrar</button>
+  </form>
+
+  <span>Primeiro acesso</span>
+</div>

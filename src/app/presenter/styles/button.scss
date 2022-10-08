@@ -1,0 +1,16 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 3rem;
+
+  color: white;
+  font-weight: bold;
+  font-size: 1rem;
+  border: 0;
+
+  background: var(--color-pink);
+  box-shadow: 4px 8px 24px rgba(255, 87, 92, 0.25);
+  border-radius: 100px;
+}
