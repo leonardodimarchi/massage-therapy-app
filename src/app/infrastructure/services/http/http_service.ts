@@ -1,7 +1,9 @@
+import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { lastValueFrom } from "rxjs";
 import { HttpServiceInterface } from "../../contracts/services/http/http_service.interface";
 
+@Injectable()
 export class HttpService implements HttpServiceInterface {
 
     constructor(
