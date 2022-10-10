@@ -1,20 +1,13 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { LoginUsecase } from 'src/app/domain/usecases/user/login_usecase';
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
-  let fixture: ComponentFixture<LoginComponent>;
+  let loginUsecase: jasmine.SpyObj<LoginUsecase>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(LoginComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    loginUsecase = jasmine.createSpyObj('LoginUsecase', ['call']);
+    component = new LoginComponent(loginUsecase);
   });
 
   it('should create', () => {
