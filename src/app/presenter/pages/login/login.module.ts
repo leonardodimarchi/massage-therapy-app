@@ -9,12 +9,14 @@ import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { UserRepository } from 'src/app/infrastructure/repositories/user/user_repository';
 import { HttpServiceInterface } from 'src/app/infrastructure/contracts/services/http/http_service.interface';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
   imports: [
     CommonModule,
     LoginRoutingModule,
+    ReactiveFormsModule
   ],
   declarations: [
     LoginComponent,

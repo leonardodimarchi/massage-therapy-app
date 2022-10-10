@@ -1,14 +1,13 @@
 <div class="page">
   <img src="assets/images/logo.png" />
 
-  <form>
+  <form [formGroup]="form">
     <label class="label">Email</label>
-    <input class="input" />
+    <input class="input" formControlName="email" />
 
     <label class="label">Senha</label>
-
     <div class="password-input">
-      <input class="input" [type]="isShowingPassword ? 'text' : 'password'" />
+      <input class="input" formControlName="password" [type]="isShowingPassword ? 'text' : 'password'" />
 
       <img
         *ngIf="isShowingPassword"
