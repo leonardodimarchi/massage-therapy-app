@@ -1,4 +1,3 @@
-import { HttpService } from './../../../infrastructure/services/http/http_service';
 import { UserDatasource } from './../../../infrastructure/datasources/user/user_datasource';
 import { UserDatasourceInterface } from './../../../infrastructure/contracts/datasources/user_datasource.interface';
 import { UserRepositoryInterface } from 'src/app/domain/contracts/repositories/user_repository.interface';
@@ -10,7 +9,7 @@ import { LoginRoutingModule } from './login-routing.module';
 import { UserRepository } from 'src/app/infrastructure/repositories/user/user_repository';
 import { HttpServiceInterface } from 'src/app/infrastructure/contracts/services/http/http_service.interface';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import { HttpService } from 'src/app/infrastructure/modules/http/services/http_service';
 
 @NgModule({
   imports: [
@@ -37,7 +36,6 @@ import { ReactiveFormsModule } from '@angular/forms';
       useFactory: (httpService: HttpServiceInterface) => new UserDatasource(httpService),
       deps: [HttpService],
     },
-    HttpService,
   ],
 })
 export class LoginModule { }

@@ -26,4 +26,8 @@ export class LoginComponent {
   public form: FormGroup<LoginPayloadForm>;
 
   public isShowingPassword: boolean = false;
+
+  public login(): void {
+    
+  }
 }
