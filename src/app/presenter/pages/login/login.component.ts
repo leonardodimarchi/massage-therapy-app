@@ -27,7 +27,15 @@ export class LoginComponent {
 
   public isShowingPassword: boolean = false;
 
-  public login(): void {
-    
+  public async login(): Promise<void> {
+    const { 
+      email, 
+      password,
+     } = this.form.getRawValue();
+
+    await this.loginUsecase.call({
+      email,
+      password,
+    })
   }
 }
