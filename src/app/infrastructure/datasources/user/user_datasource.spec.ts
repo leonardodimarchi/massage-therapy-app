@@ -1,5 +1,6 @@
 import { LoginPayload } from "src/app/domain/contracts/payloads/user/login_payload";
 import { mockedUserModelProps } from "src/app/mocks/user/user_model_mock";
+import { routes } from "src/environments/api_routes";
 import { HttpServiceInterface } from "../../contracts/services/http/http_service.interface";
 import { UserDatasource } from "./user_datasource";
 
@@ -23,7 +24,7 @@ describe('UserDatasource', () => {
 
             await datasource.login(params);
 
-            expect(httpService.post).toHaveBeenCalledOnceWith('/login', params);
+            expect(httpService.post).toHaveBeenCalledOnceWith(routes.auth.login, params);
         });
     });
 });
