@@ -28,7 +28,8 @@
               "src/assets"
             ],
             "styles": [
-              "src/app/presenter/styles.scss"
+              "src/app/presenter/styles.scss",
+              "node_modules/ngx-toastr/toastr.css"
             ],
             "scripts": []
           },
