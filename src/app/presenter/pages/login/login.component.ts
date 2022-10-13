@@ -1,3 +1,4 @@
+import { ToastService } from './../../../infrastructure/modules/toast/services/toast.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { LoginUsecase } from 'src/app/domain/usecases/user/login_usecase';
@@ -16,6 +17,7 @@ export class LoginComponent {
 
   constructor(
     private readonly loginUsecase: LoginUsecase,
+    private readonly toastService: ToastService,
   ) {
     this.form = new FormGroup({
       email: new FormControl(),
@@ -28,14 +30,20 @@ export class LoginComponent {
   public isShowingPassword: boolean = false;
 
   public async login(): Promise<void> {
-    const { 
-      email, 
+    const {
+      email,
       password,
      } = this.form.getRawValue();
 
-    await this.loginUsecase.call({
-      email,
-      password,
-    })
+    try {
+      await this.loginUsecase.call({
+        email,
+        password,
+      });
+    } catch (error: any) {
+      this.toastService.showError({
+        message: error.message,
+      })
+    }
   }
 }

@@ -1,20 +1,25 @@
+import { ToastService } from './../../../infrastructure/modules/toast/services/toast.service';
 import { LoginUsecase } from 'src/app/domain/usecases/user/login_usecase';
 import { LoginComponent } from './login.component';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
+
   let loginUsecase: jasmine.SpyObj<LoginUsecase>;
+  let toastService: jasmine.SpyObj<ToastService>;
 
   beforeEach(async () => {
     loginUsecase = jasmine.createSpyObj('LoginUsecase', ['call']);
-    component = new LoginComponent(loginUsecase);
+    toastService = jasmine.createSpyObj('ToastService', ['showError']);
+
+    component = new LoginComponent(loginUsecase, toastService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  describe('Login', () => { 
+  describe('Login', () => {
     it('should call the login usecase with the correct params', async () => {
       const expectedEmail = 'mocked@email.com';
       const expectedPassword = '123456';
@@ -26,6 +31,17 @@ describe('LoginComponent', () => {
       expect(loginUsecase.call).toHaveBeenCalledOnceWith({
         email: expectedEmail,
         password: expectedPassword,
+      })
+    });
+
+    it('should show an error toast when receiving an error from the usecase', async () => {
+      const message = 'mocked error';
+      loginUsecase.call.and.throwError(message);
+
+      await component.login();
+
+      expect(toastService.showError).toHaveBeenCalledOnceWith({
+        message,
       })
     });
   });
