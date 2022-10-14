@@ -1,6 +1,6 @@
 import { LoginPayload } from "src/app/domain/contracts/payloads/user/login_payload";
-import { UserEntity } from "src/app/domain/entities/user/user_entity";
+import { JwtProxy } from "src/app/domain/contracts/proxies/jwt_proxy";
 
 export interface UserDatasourceInterface {
-  login(params: LoginPayload): Promise<UserEntity>;
+  login(params: LoginPayload): Promise<JwtProxy>;
 }
