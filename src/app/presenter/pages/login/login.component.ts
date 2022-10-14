@@ -29,7 +29,11 @@ export class LoginComponent {
 
   public isShowingPassword: boolean = false;
 
+  public isLoading: boolean = false;
+
   public async login(): Promise<void> {
+    this.isLoading = true;
+
     const {
       email,
       password,
@@ -44,6 +48,8 @@ export class LoginComponent {
       this.toastService.showError({
         message: error.message,
       })
+    } finally {
+      this.isLoading = false;
     }
   }
 }

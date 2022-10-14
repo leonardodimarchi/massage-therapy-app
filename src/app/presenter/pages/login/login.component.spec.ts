@@ -44,5 +44,17 @@ describe('LoginComponent', () => {
         message,
       })
     });
+
+    it('should set loading state as true when calling the usecase', () => {
+      component.login();
+
+      expect(component.isLoading).toBeTrue();
+    });
+
+    it('should set loading state as false when finishing the usecase call', async () => {
+      await component.login();
+
+      expect(component.isLoading).toBeFalse();
+    });
   });
 });
