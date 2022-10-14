@@ -32,6 +32,9 @@ export class LoginComponent {
   public isLoading: boolean = false;
 
   public async login(): Promise<void> {
+    if (this.isLoading)
+      return;
+
     this.isLoading = true;
 
     const {

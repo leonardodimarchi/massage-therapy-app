@@ -56,5 +56,13 @@ describe('LoginComponent', () => {
 
       expect(component.isLoading).toBeFalse();
     });
+
+    it('should not call usecase if it\'s already loading', async () => {
+      component.isLoading = true;
+
+      await component.login();
+
+      expect(loginUsecase.call).not.toHaveBeenCalled();
+    });
   });
 });
