@@ -1,5 +1,5 @@
+import { mockedJwtProxy } from './../../../mocks/jwt/jwt_proxy.mock';
 import { LoginPayload } from './../../../domain/contracts/payloads/user/login_payload';
-import { mockedUserEntity } from 'src/app/mocks/user/user_entity_mock';
 import { UserDatasourceInterface } from './../../contracts/datasources/user_datasource.interface';
 import { UserRepository } from './user_repository';
 
@@ -13,7 +13,8 @@ describe('UserRepository', () => {
   });
 
   it('should call the datasource with the correct params', async () => {
-    datasource.login.and.resolveTo(mockedUserEntity);
+    datasource.login.and.resolveTo(mockedJwtProxy);
+
     const params: LoginPayload = {
       email: 'mock@email.com',
       password: '123456',
