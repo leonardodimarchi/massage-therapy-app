@@ -1,15 +1,16 @@
+import { StorageServiceInterface } from './../models/storage-service.interface';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StorageService {
+export class StorageService implements StorageServiceInterface {
 
-  public set(key: string, value: any): void {
+  public async set(key: string, value: any): Promise<void> {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  public get<ReturnType = any>(key: string): ReturnType | null {
+  public async get<ReturnType = any>(key: string): Promise<ReturnType | null> {
     const item = localStorage.getItem(key);
 
     if (item)
