@@ -1,4 +1,4 @@
-import { StorageServiceInterface } from './../models/storage-service.interface';
+import { StorageServiceInterface } from '../models/storage-service-interface';
 import { Injectable } from '@angular/core';
 
 @Injectable({
