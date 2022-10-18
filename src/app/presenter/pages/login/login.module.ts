@@ -10,6 +10,8 @@ import { UserRepository } from 'src/app/infrastructure/repositories/user/user_re
 import { HttpServiceInterface } from 'src/app/infrastructure/contracts/services/http/http_service.interface';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from 'src/app/infrastructure/modules/http/services/http_service';
+import { StorageService } from 'src/app/infrastructure/modules/storage/services/storage.service';
+import { StorageServiceInterface } from 'src/app/infrastructure/modules/storage/models/storage-service-interface';
 
 @NgModule({
   imports: [
@@ -23,8 +25,10 @@ import { HttpService } from 'src/app/infrastructure/modules/http/services/http_s
   providers: [
     {
       provide: LoginUsecase,
-      useFactory: (repo: UserRepositoryInterface) => new LoginUsecase(repo),
-      deps: [UserRepository],
+      useFactory: (repo: UserRepositoryInterface, storageService: StorageServiceInterface) => { 
+        return new LoginUsecase(repo, storageService);
+      },
+      deps: [UserRepository, StorageService],
     },
     {
       provide: UserRepository,
