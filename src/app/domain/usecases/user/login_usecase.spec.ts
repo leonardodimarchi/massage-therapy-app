@@ -40,7 +40,7 @@ describe('LoginUsecase', () => {
   describe('Validators', () => {
     describe('Email', () => {
       it('should call the email validator', async () => {
-        const validatorSpy = spyOn(UserValidators, 'email');
+        const validatorSpy = spyOn(UserValidators, 'isValidEmail');
         validatorSpy.and.returnValue(true);
         
         const payload: LoginPayload = {
@@ -54,7 +54,7 @@ describe('LoginUsecase', () => {
       });
   
       it('should throw and error if the email is invalid', async () => {
-        spyOn(UserValidators, 'email').and.returnValue(false);
+        spyOn(UserValidators, 'isValidEmail').and.returnValue(false);
         
         const payload: LoginPayload = {
           email: 'myemail@email.com',
@@ -67,7 +67,7 @@ describe('LoginUsecase', () => {
 
     describe('Password', () => {
       it('should call the password validator', async () => {
-        const validatorSpy = spyOn(UserValidators, 'password');
+        const validatorSpy = spyOn(UserValidators, 'isValidPassword');
         validatorSpy.and.returnValue(true);
         
         const payload: LoginPayload = {
@@ -81,7 +81,7 @@ describe('LoginUsecase', () => {
       });
   
       it('should throw and error if the password is invalid', async () => {
-        spyOn(UserValidators, 'password').and.returnValue(false);
+        spyOn(UserValidators, 'isValidPassword').and.returnValue(false);
         
         const payload: LoginPayload = {
           email: 'myemail@email.com',
