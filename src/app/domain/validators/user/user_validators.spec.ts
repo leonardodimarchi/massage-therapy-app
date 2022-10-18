@@ -14,4 +14,18 @@ describe('UserValidators', () => {
             expect(isValid).toBeFalse();
         });
     });
+
+    describe('Email', () => {
+        it('should pass if the email is valid', () => {
+            const isValid = UserValidators.email('email@email.com');
+
+            expect(isValid).toBeTrue();
+        });
+
+        it('should not pass if the email is invalid', () => {
+            const isValid = UserValidators.email('email.com');
+
+            expect(isValid).toBeFalse();
+        });
+    });
 });
