@@ -38,29 +38,58 @@ describe('LoginUsecase', () => {
   });
 
   describe('Validators', () => {
-    it('should call the email validator', async () => {
-      const validatorSpy = spyOn(UserValidators, 'email');
-      validatorSpy.and.returnValue(true);
-      
-      const payload: LoginPayload = {
-        email: 'myemail@email.com',
-        password: '123456'
-      };
-
-      await usecase.call(payload);
-
-      expect(validatorSpy).toHaveBeenCalledOnceWith(payload.email);
+    describe('Email', () => {
+      it('should call the email validator', async () => {
+        const validatorSpy = spyOn(UserValidators, 'email');
+        validatorSpy.and.returnValue(true);
+        
+        const payload: LoginPayload = {
+          email: 'myemail@email.com',
+          password: '123456'
+        };
+  
+        await usecase.call(payload);
+  
+        expect(validatorSpy).toHaveBeenCalledOnceWith(payload.email);
+      });
+  
+      it('should throw and error if the email is invalid', async () => {
+        spyOn(UserValidators, 'email').and.returnValue(false);
+        
+        const payload: LoginPayload = {
+          email: 'myemail@email.com',
+          password: '123456'
+        };
+  
+        await expectAsync(usecase.call(payload)).toBeRejectedWithError();
+      });
     });
 
-    it('should throw and error if the email is invalid', async () => {
-      spyOn(UserValidators, 'email').and.returnValue(false);
-      
-      const payload: LoginPayload = {
-        email: 'myemail@email.com',
-        password: '123456'
-      };
-
-      await expectAsync(usecase.call(payload)).toBeRejectedWithError();
+    describe('Password', () => {
+      it('should call the password validator', async () => {
+        const validatorSpy = spyOn(UserValidators, 'password');
+        validatorSpy.and.returnValue(true);
+        
+        const payload: LoginPayload = {
+          email: 'myemail@email.com',
+          password: '123456'
+        };
+  
+        await usecase.call(payload);
+  
+        expect(validatorSpy).toHaveBeenCalledOnceWith(payload.password);
+      });
+  
+      it('should throw and error if the password is invalid', async () => {
+        spyOn(UserValidators, 'password').and.returnValue(false);
+        
+        const payload: LoginPayload = {
+          email: 'myemail@email.com',
+          password: '123456'
+        };
+  
+        await expectAsync(usecase.call(payload)).toBeRejectedWithError();
+      });
     });
   });
 });

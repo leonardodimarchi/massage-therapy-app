@@ -13,9 +13,13 @@ export class LoginUsecase implements UseCase<LoginPayload, void> {
 
   async call(params: LoginPayload): Promise<void> {
     const isValidEmail = UserValidators.email(params.email);
+    const isValidPassword = UserValidators.password(params.password);
 
     if (!isValidEmail)
       throw new Error('Por favor, enviar um e-mail válido.');
+
+    if (!isValidPassword)
+      throw new Error('Por favor, enviar uma senha válida.');
 
     const jwt = await this.repository.login(params);
 
