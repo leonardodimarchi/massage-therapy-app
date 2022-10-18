@@ -6,6 +6,6 @@ export class UserValidators {
     }
 
     public static isValidPassword(value: string): boolean {
-        return value.trim().length >= 6;
+        return value?.trim()?.length >= 6;
     }
 }
