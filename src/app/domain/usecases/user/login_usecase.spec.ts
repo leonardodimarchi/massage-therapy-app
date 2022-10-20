@@ -1,9 +1,10 @@
 import { StorageServiceInterface } from 'src/app/infrastructure/modules/storage/models/storage-service-interface';
-import { mockedJwtProxy } from 'src/app/mocks/jwt/jwt_proxy.mock';
+import { mockedJwtEntity } from 'src/app/mocks/jwt/jwt_entity_mock';
+import { mockedUserEntity } from 'src/app/mocks/user/entities/user_entity_mock';
 import { storageKeys } from 'src/environments/storage_keys';
-import { LoginPayload } from '../../contracts/payloads/user/login_payload';
+import { LoginEntity } from '../../entities/auth/login_entity';
 import { UserValidators } from '../../validators/user/user_validators';
-import { UserRepositoryInterface } from './../../contracts/repositories/user_repository.interface';
+import { LoginParams, UserRepositoryInterface } from './../../contracts/repositories/user_repository.interface';
 import { LoginUsecase } from "./login_usecase";
 
 describe('LoginUsecase', () => {
@@ -16,7 +17,10 @@ describe('LoginUsecase', () => {
     storageServiceSpy = jasmine.createSpyObj('StorageServiceInterface', ['set']);
     usecase = new LoginUsecase(repository, storageServiceSpy);
 
-    repository.login.and.resolveTo(mockedJwtProxy);
+    repository.login.and.resolveTo(new LoginEntity({
+      jwt: mockedJwtEntity,
+      loggedUser: mockedUserEntity,
+    }));
   });
 
   it('should call login repository', async () => {
@@ -34,7 +38,9 @@ describe('LoginUsecase', () => {
       password: '123456'
     });
 
-    expect(storageServiceSpy.set).toHaveBeenCalledOnceWith(storageKeys.userToken, mockedJwtProxy.access_token);
+    expect(storageServiceSpy.set).toHaveBeenCalledWith(storageKeys.userToken, mockedJwtEntity.accessToken);
+    expect(storageServiceSpy.set).toHaveBeenCalledWith(storageKeys.loggedUser, mockedUserEntity);
+    expect(storageServiceSpy.set).toHaveBeenCalledTimes(2);
   });
 
   describe('Validators', () => {
@@ -43,7 +49,7 @@ describe('LoginUsecase', () => {
         const validatorSpy = spyOn(UserValidators, 'isValidEmail');
         validatorSpy.and.returnValue(true);
         
-        const payload: LoginPayload = {
+        const payload: LoginParams = {
           email: 'myemail@email.com',
           password: '123456'
         };
@@ -56,7 +62,7 @@ describe('LoginUsecase', () => {
       it('should throw and error if the email is invalid', async () => {
         spyOn(UserValidators, 'isValidEmail').and.returnValue(false);
         
-        const payload: LoginPayload = {
+        const payload: LoginParams = {
           email: 'myemail@email.com',
           password: '123456'
         };
@@ -70,7 +76,7 @@ describe('LoginUsecase', () => {
         const validatorSpy = spyOn(UserValidators, 'isValidPassword');
         validatorSpy.and.returnValue(true);
         
-        const payload: LoginPayload = {
+        const payload: LoginParams = {
           email: 'myemail@email.com',
           password: '123456'
         };
@@ -83,7 +89,7 @@ describe('LoginUsecase', () => {
       it('should throw and error if the password is invalid', async () => {
         spyOn(UserValidators, 'isValidPassword').and.returnValue(false);
         
-        const payload: LoginPayload = {
+        const payload: LoginParams = {
           email: 'myemail@email.com',
           password: '123456'
         };

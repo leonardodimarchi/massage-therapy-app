@@ -1,4 +1,4 @@
-import { UserEntity } from './../../domain/entities/user/user_entity';
+import { UserEntity } from '../../../domain/entities/user/user_entity';
 
 const id = 1;
 const createdAt = new Date(2022, 9, 5);

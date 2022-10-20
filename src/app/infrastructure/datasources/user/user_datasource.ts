@@ -1,8 +1,10 @@
-import { JwtProxy } from './../../../domain/contracts/proxies/jwt_proxy';
-import { LoginPayload } from "src/app/domain/contracts/payloads/user/login_payload";
-import { routes } from "src/environments/api_routes";
+import { LoginParams } from "src/app/domain/contracts/repositories/user_repository.interface";
+import { LoginEntity } from "src/app/domain/entities/auth/login_entity";
 import { UserDatasourceInterface } from "../../contracts/datasources/user_datasource.interface";
-import { HttpServiceInterface } from "../../contracts/services/http/http_service.interface";
+import { HttpServiceInterface } from "../../modules/http/contracts/http_service.interface";
+import { LoginDto } from "../../models/auth/dto/login_dto";
+import { LoginMapper } from "../../models/auth/mappers/login_mapper";
+import { ApiEndpoints } from "../endpoints";
 
 export class UserDatasource implements UserDatasourceInterface {
 
@@ -10,7 +12,9 @@ export class UserDatasource implements UserDatasourceInterface {
         private readonly httpService: HttpServiceInterface,
     ) { }
 
-    async login(params: LoginPayload): Promise<JwtProxy> {
-        return await this.httpService.post<JwtProxy>(routes.auth.login, params);
+    async login(params: LoginParams): Promise<LoginEntity> {
+        const result = await this.httpService.post<LoginDto>(ApiEndpoints.Auth.login(), params);
+
+        return new LoginMapper(result).toEntity();
     }
 }

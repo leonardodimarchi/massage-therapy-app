@@ -1,17 +1,11 @@
 import { UserEntity } from "src/app/domain/entities/user/user_entity";
-import { BaseModelProps, Model } from "../model";
+import { Mapper } from "../../shared/mappers/mapper";
+import { UserDto } from "../dto/user_dto";
 
-export interface UserModelProps extends BaseModelProps {
-    email: string;
-    name: string;
-    phone: string;
-    birthDate: string;
-}
+export class UserMapper extends Mapper<UserEntity> {
+    private props: UserDto;
 
-export class UserModel extends Model<UserEntity> {
-    private props: UserModelProps;
-
-    constructor(props: UserModelProps) {
+    constructor(props: UserDto) {
         super();
 
         this.props = props;

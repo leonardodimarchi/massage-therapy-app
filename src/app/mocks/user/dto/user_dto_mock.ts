@@ -1,4 +1,4 @@
-import { UserModelProps } from "src/app/infrastructure/models/user/user_model";
+import { UserDto } from "src/app/infrastructure/models/user/dto/user_dto";
 
 const id = 1;
 const createdAt = new Date(2022, 9, 5);
@@ -8,7 +8,7 @@ const email = 'myemail@email.com';
 const name = 'My name';
 const phone = '5515991849367';
 
-export const mockedUserModelProps: UserModelProps = {
+export const mockedUserModelProps: UserDto = {
     id,
     createdAt: createdAt.toISOString(),
     updatedAt: updatedAt.toISOString(),

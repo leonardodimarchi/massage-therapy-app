@@ -1,5 +1,5 @@
-import { BaseEntity } from './../../shared/base_entity';
-import { BaseEntityProps } from "../../shared/base_entity";
+import { BaseEntity } from '../base_entity';
+import { BaseEntityProps } from "../base_entity";
 
 export interface UserEntityProps extends BaseEntityProps {
   email: string;
