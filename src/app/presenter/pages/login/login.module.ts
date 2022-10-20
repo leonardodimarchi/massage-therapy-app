@@ -7,11 +7,11 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginRoutingModule } from './login-routing.module';
 import { UserRepository } from 'src/app/infrastructure/repositories/user/user_repository';
-import { HttpServiceInterface } from 'src/app/infrastructure/contracts/services/http/http_service.interface';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from 'src/app/infrastructure/modules/http/services/http_service';
 import { StorageService } from 'src/app/infrastructure/modules/storage/services/storage.service';
 import { StorageServiceInterface } from 'src/app/infrastructure/modules/storage/models/storage-service-interface';
+import { HttpServiceInterface } from 'src/app/infrastructure/modules/http/contracts/http_service.interface';
 
 @NgModule({
   imports: [

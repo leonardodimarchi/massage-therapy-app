@@ -1,4 +1,4 @@
-import { HttpConfig } from './../models/http_config.interface';
+import { HttpConfig } from '../contracts/http_config.interface';
 import { HttpClient } from "@angular/common/http";
 import { EventEmitter } from "@angular/core";
 import { fakeAsync, tick } from "@angular/core/testing";

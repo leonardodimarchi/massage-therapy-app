@@ -2,7 +2,7 @@ import { HTTP_MODULE_CONFIG } from './tokens/http_config_injection_token';
 import { HttpClientModule } from "@angular/common/http";
 import { NgModule, ModuleWithProviders } from "@angular/core";
 import { HttpService } from "./services/http_service";
-import { HttpConfig } from "./models/http_config.interface";
+import { HttpConfig } from "./contracts/http_config.interface";
 
 @NgModule({
   imports: [

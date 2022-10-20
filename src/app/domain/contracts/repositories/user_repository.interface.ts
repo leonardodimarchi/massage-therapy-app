@@ -1,6 +1,11 @@
-import { JwtProxy } from './../proxies/jwt_proxy';
-import { LoginPayload } from './../payloads/user/login_payload';
+import { LoginEntity } from '../../entities/auth/login_entity';
 
 export interface UserRepositoryInterface {
-  login(params: LoginPayload): Promise<JwtProxy>;
+  login(params: LoginParams): Promise<LoginEntity>;
 }
+
+export interface LoginParams {
+  email: string;
+  password: string;
+}
+
