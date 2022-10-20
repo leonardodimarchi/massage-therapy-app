@@ -5,13 +5,16 @@ import { StorageServiceInterface } from 'src/app/infrastructure/modules/storage/
 import { storageKeys } from 'src/environments/storage_keys';
 import { UserValidators } from '../../validators/user/user_validators';
 
-export class LoginUsecase implements UseCase<LoginPayload, void> {
+export type LoginUsecaseInput = LoginPayload;
+export type LoginUsecaseOutput = void;
+
+export class LoginUsecase implements UseCase<LoginPayload, LoginUsecaseOutput> {
   constructor(
     private readonly repository: UserRepositoryInterface,
     private readonly storageService: StorageServiceInterface,
   ) { }
 
-  async call(params: LoginPayload): Promise<void> {
+  async call(params: LoginUsecaseInput): Promise<LoginUsecaseOutput> {
     const isValidEmail = UserValidators.isValidEmail(params.email);
     const isValidPassword = UserValidators.isValidPassword(params.password);
 
