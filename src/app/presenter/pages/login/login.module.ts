@@ -9,15 +9,16 @@ import { LoginRoutingModule } from './login-routing.module';
 import { UserRepository } from 'src/app/infrastructure/repositories/user/user_repository';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from 'src/app/infrastructure/modules/http/services/http_service';
-import { StorageService } from 'src/app/infrastructure/modules/storage/services/storage.service';
-import { StorageServiceInterface } from 'src/app/domain/contracts/services/storage_service.interface';
 import { HttpServiceInterface } from 'src/app/domain/contracts/services/http_service.interface';
+import { UserServiceInterface } from 'src/app/domain/contracts/services/user_service.interface';
+import { UserModule } from 'src/app/infrastructure/modules/user/user.module';
 
 @NgModule({
   imports: [
     CommonModule,
     LoginRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    UserModule,
   ],
   declarations: [
     LoginComponent,
@@ -25,13 +26,13 @@ import { HttpServiceInterface } from 'src/app/domain/contracts/services/http_ser
   providers: [
     {
       provide: LoginUsecase,
-      useFactory: (repo: UserRepositoryInterface, storageService: StorageServiceInterface) => { 
-        return new LoginUsecase(repo, storageService);
+      useFactory: (repo: UserRepositoryInterface, userService: UserServiceInterface) => { 
+        return new LoginUsecase(repo, userService);
       },
-      deps: [UserRepository, StorageService],
+      deps: [UserRepositoryInterface, UserServiceInterface],
     },
     {
-      provide: UserRepository,
+      provide: UserRepositoryInterface,
       useFactory: (datasource: UserDatasourceInterface) => new UserRepository(datasource),
       deps: [UserDatasource],
     },

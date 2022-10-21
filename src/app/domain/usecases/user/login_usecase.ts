@@ -1,8 +1,7 @@
 import { UserRepositoryInterface } from './../../contracts/repositories/user_repository.interface';
 import { UseCase } from '../usecase';
-import { StorageServiceInterface } from 'src/app/domain/contracts/services/storage_service.interface';
-import { storageKeys } from 'src/environments/storage_keys';
 import { UserValidators } from '../../validators/user/user_validators';
+import { UserServiceInterface } from '../../contracts/services/user_service.interface';
 
 export interface LoginUsecaseInput {
   email: string;
@@ -14,7 +13,7 @@ export type LoginUsecaseOutput = void;
 export class LoginUsecase implements UseCase<LoginUsecaseInput, LoginUsecaseOutput> {
   constructor(
     private readonly repository: UserRepositoryInterface,
-    private readonly storageService: StorageServiceInterface,
+    private readonly userService: UserServiceInterface,
   ) { }
 
   async call(params: LoginUsecaseInput): Promise<LoginUsecaseOutput> {
@@ -29,7 +28,7 @@ export class LoginUsecase implements UseCase<LoginUsecaseInput, LoginUsecaseOutp
 
     const { jwt, loggedUser } = await this.repository.login(params);
 
-    await this.storageService.set(storageKeys.userToken, jwt.accessToken);
-    await this.storageService.set(storageKeys.loggedUser, loggedUser);
+    await this.userService.setJwt(jwt);
+    await this.userService.setLoggedUser(loggedUser);
   }
 }

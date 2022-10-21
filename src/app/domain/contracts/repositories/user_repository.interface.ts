@@ -1,7 +1,7 @@
 import { LoginEntity } from '../../entities/auth/login_entity';
 
-export interface UserRepositoryInterface {
-  login(params: LoginParams): Promise<LoginEntity>;
+export abstract class UserRepositoryInterface {
+  abstract login(params: LoginParams): Promise<LoginEntity>;
 }
 
 export interface LoginParams {

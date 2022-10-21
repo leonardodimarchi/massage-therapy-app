@@ -2,6 +2,7 @@ import { StorageServiceInterface } from 'src/app/domain/contracts/services/stora
 import { mockedJwtEntity } from 'src/app/mocks/jwt/jwt_entity_mock';
 import { mockedUserEntity } from 'src/app/mocks/user/entities/user_entity_mock';
 import { storageKeys } from 'src/environments/storage_keys';
+import { UserServiceInterface } from '../../contracts/services/user_service.interface';
 import { LoginEntity } from '../../entities/auth/login_entity';
 import { UserValidators } from '../../validators/user/user_validators';
 import { LoginParams, UserRepositoryInterface } from './../../contracts/repositories/user_repository.interface';
@@ -10,12 +11,13 @@ import { LoginUsecase } from "./login_usecase";
 describe('LoginUsecase', () => {
   let usecase: LoginUsecase;
   let repository: jasmine.SpyObj<UserRepositoryInterface>;
-  let storageServiceSpy: jasmine.SpyObj<StorageServiceInterface>;
+  let userServiceSpy: jasmine.SpyObj<UserServiceInterface>;
 
   beforeEach(() => {
     repository = jasmine.createSpyObj('UserRepositoryInterface', ['login']);
-    storageServiceSpy = jasmine.createSpyObj('StorageServiceInterface', ['set']);
-    usecase = new LoginUsecase(repository, storageServiceSpy);
+    userServiceSpy = jasmine.createSpyObj('UserServiceInterface', ['setLoggedUser', 'setJwt']);
+
+    usecase = new LoginUsecase(repository, userServiceSpy);
 
     repository.login.and.resolveTo(new LoginEntity({
       jwt: mockedJwtEntity,
@@ -38,9 +40,8 @@ describe('LoginUsecase', () => {
       password: '123456'
     });
 
-    expect(storageServiceSpy.set).toHaveBeenCalledWith(storageKeys.userToken, mockedJwtEntity.accessToken);
-    expect(storageServiceSpy.set).toHaveBeenCalledWith(storageKeys.loggedUser, mockedUserEntity);
-    expect(storageServiceSpy.set).toHaveBeenCalledTimes(2);
+    expect(userServiceSpy.setJwt).toHaveBeenCalledOnceWith(mockedJwtEntity);
+    expect(userServiceSpy.setLoggedUser).toHaveBeenCalledOnceWith(mockedUserEntity);
   });
 
   describe('Validators', () => {
