@@ -10,8 +10,8 @@ export class UserService implements UserServiceInterface {
 
   private readonly loggedUserSubject: BehaviorSubject<UserEntity | null> = new BehaviorSubject<UserEntity | null>(null);
 
-  subscribeLoggedUserFroChanges(listener: UserSubscriptionListener): Unsubscribable {
-    throw new Error('Method not implemented.');
+  subscribeLoggedUserForChanges(listener: UserSubscriptionListener): Unsubscribable {
+    return this.loggedUserSubject.subscribe(listener);
   }
 
   setLoggedUser(user: UserEntity): void {
