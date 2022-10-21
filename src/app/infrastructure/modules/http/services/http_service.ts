@@ -1,9 +1,9 @@
-import { HTTP_MODULE_CONFIG } from './../tokens/http_config_injection_token';
+import { HTTP_MODULE_CONFIG } from '../tokens/http_config_injection_token';
 import { Inject, Injectable, Optional } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { lastValueFrom } from 'rxjs';
 import { HttpConfig } from '../contracts/http_config.interface';
-import { HttpServiceInterface } from '../contracts/http_service.interface';
+import { HttpServiceInterface } from '../../../../domain/contracts/services/http_service.interface';
 
 @Injectable()
 export class HttpService implements HttpServiceInterface {

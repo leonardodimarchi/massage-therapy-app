@@ -1,6 +1,6 @@
 import { LoginParams } from "src/app/domain/contracts/repositories/user_repository.interface";
 import { mockedUserModelProps } from "src/app/mocks/user/dto/user_dto_mock";
-import { HttpServiceInterface } from "../../modules/http/contracts/http_service.interface";
+import { HttpServiceInterface } from "../../../domain/contracts/services/http_service.interface";
 import { LoginDto } from "../../models/auth/dto/login_dto";
 import { ApiEndpoints } from "../endpoints";
 import { UserDatasource } from "./user_datasource";

@@ -1,6 +1,6 @@
 import { UserRepositoryInterface } from './../../contracts/repositories/user_repository.interface';
 import { UseCase } from '../usecase';
-import { StorageServiceInterface } from 'src/app/infrastructure/modules/storage/models/storage-service-interface';
+import { StorageServiceInterface } from 'src/app/domain/contracts/services/storage_service.interface';
 import { storageKeys } from 'src/environments/storage_keys';
 import { UserValidators } from '../../validators/user/user_validators';
 

@@ -1,4 +1,4 @@
-import { ToastConfig } from './../models/toast-config.interface';
+import { ToastConfig } from '../contracts/toast-config.interface';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 
