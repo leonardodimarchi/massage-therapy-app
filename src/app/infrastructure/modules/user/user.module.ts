@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserServiceInterface } from 'src/app/domain/contracts/services/user_service.interface';
 import { StorageServiceInterface } from 'src/app/domain/contracts/services/storage_service.interface';
-import { StorageModule } from '../storage/storage.module';
 import { UserService } from './services/user.service';
 
 @NgModule({
