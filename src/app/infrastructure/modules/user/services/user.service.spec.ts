@@ -68,4 +68,14 @@ describe('UserService', () => {
       expect(result).toBeFalse();
     });
   });
+
+  describe('setUpLoggedUser', () => {
+    it('should set the subject if there is an user at the storage', async () => {
+      storageServiceSpy.get.and.resolveTo(mockedUserEntity);
+
+      await service.setUpLoggedUser();
+
+      expect((service as any).loggedUserSubject.getValue()).toEqual(mockedUserEntity);
+    });
+  });
 });

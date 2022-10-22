@@ -37,6 +37,8 @@ export class UserService implements UserServiceInterface {
   }
 
   async setUpLoggedUser(): Promise<void> {
-    throw new Error('Method not implemented.');
+    const user = await this.storageService.get<UserEntity>(storageKeys.loggedUser);
+
+    this.loggedUserSubject.next(user);
   }
 }
