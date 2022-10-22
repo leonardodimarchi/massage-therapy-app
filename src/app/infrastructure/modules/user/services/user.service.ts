@@ -29,4 +29,14 @@ export class UserService implements UserServiceInterface {
   async setJwt(token: JwtEntity): Promise<void> {
     await this.storageService.set(storageKeys.userToken, token);
   }
+
+  async isLogged(): Promise<boolean> {
+    const user = await this.storageService.get<UserEntity>(storageKeys.loggedUser);
+  
+    return !!user;
+  }
+
+  async setUpLoggedUser(): Promise<void> {
+    throw new Error('Method not implemented.');
+  }
 }

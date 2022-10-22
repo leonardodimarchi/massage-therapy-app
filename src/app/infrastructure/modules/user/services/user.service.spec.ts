@@ -9,7 +9,7 @@ describe('UserService', () => {
   let storageServiceSpy: jasmine.SpyObj<StorageServiceInterface>;
 
   beforeEach(() => {
-    storageServiceSpy = jasmine.createSpyObj('StorageServiceInterface', ['set']);
+    storageServiceSpy = jasmine.createSpyObj('StorageServiceInterface', ['set', 'get']);
     service = new UserService(storageServiceSpy);
   });
 
@@ -42,10 +42,30 @@ describe('UserService', () => {
   });
 
   describe('setJwt', () => {
-    it('should set the user', async () => {
+    it('should set the jwt token', async () => {
       await service.setJwt(mockedJwtEntity);
 
       expect(storageServiceSpy.set).toHaveBeenCalledOnceWith(storageKeys.userToken, mockedJwtEntity);
+    });
+  });
+
+  describe('isLogged', () => {
+    it('should get the user from storage and return true if it exists', async () => {
+      storageServiceSpy.get.and.resolveTo(mockedUserEntity);
+
+      const result = await service.isLogged();
+
+      expect(storageServiceSpy.get).toHaveBeenCalledOnceWith(storageKeys.loggedUser);
+      expect(result).toBe(true);
+    });
+
+    it('should get the user from storage and return false if it does\'t exists', async () => {
+      storageServiceSpy.get.and.resolveTo(null);
+
+      const result = await service.isLogged();
+
+      expect(storageServiceSpy.get).toHaveBeenCalledOnceWith(storageKeys.loggedUser);
+      expect(result).toBeFalse();
     });
   });
 });
