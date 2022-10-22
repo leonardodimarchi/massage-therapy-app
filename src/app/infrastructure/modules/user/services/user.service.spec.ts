@@ -1,5 +1,3 @@
-import { TestBed } from '@angular/core/testing';
-import { Subscription } from 'rxjs';
 import { StorageServiceInterface } from 'src/app/domain/contracts/services/storage_service.interface';
 import { mockedJwtEntity } from 'src/app/mocks/jwt/jwt_entity_mock';
 import { mockedUserEntity } from 'src/app/mocks/user/entities/user_entity_mock';
