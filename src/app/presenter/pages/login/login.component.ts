@@ -1,4 +1,4 @@
-import { ToastService } from './../../../infrastructure/modules/toast/services/toast.service';
+import { ToastServiceInterface } from 'src/app/infrastructure/modules/toast/contracts/toast-service.interface';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { LoginUsecase } from 'src/app/domain/usecases/user/login_usecase';
@@ -17,7 +17,7 @@ export class LoginComponent {
 
   constructor(
     private readonly loginUsecase: LoginUsecase,
-    private readonly toastService: ToastService,
+    private readonly toastService: ToastServiceInterface,
   ) {
     this.form = new FormGroup({
       email: new FormControl(),

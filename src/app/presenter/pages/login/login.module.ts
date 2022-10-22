@@ -11,14 +11,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { HttpService } from 'src/app/infrastructure/modules/http/services/http_service';
 import { HttpServiceInterface } from 'src/app/domain/contracts/services/http_service.interface';
 import { UserServiceInterface } from 'src/app/domain/contracts/services/user_service.interface';
-import { UserModule } from 'src/app/infrastructure/modules/user/user.module';
 
 @NgModule({
   imports: [
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
-    UserModule,
   ],
   declarations: [
     LoginComponent,

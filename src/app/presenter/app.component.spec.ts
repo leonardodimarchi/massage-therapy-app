@@ -1,23 +1,43 @@
-import { TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppComponent } from './app.component';
+import { fakeAsync, tick } from "@angular/core/testing";
+import { UserServiceInterface } from "../domain/contracts/services/user_service.interface";
+import { AppComponent } from "./app.component";
 
 describe('AppComponent', () => {
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [
-        RouterTestingModule
-      ],
-      declarations: [
-        AppComponent
-      ],
-    }).compileComponents();
+  let component: AppComponent;
+  let userServiceSpy: jasmine.SpyObj<UserServiceInterface>;
+
+  const createComponent = () => {
+    return new AppComponent(userServiceSpy);
+  }
+
+  beforeEach(() => {
+    userServiceSpy = jasmine.createSpyObj('UserServiceInterface', ['isLogged', 'setUpLoggedUser']);
+    userServiceSpy.isLogged.and.resolveTo(true);
+
+    component = createComponent();
+
+    userServiceSpy.isLogged.calls.reset();
   });
 
-  it('should create the app', () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const app = fixture.componentInstance;
-    expect(app).toBeTruthy();
-  });
+  describe('Setup logged user', () => {
+    it('should setup logged user if there is a logged user', fakeAsync(() => {
+      userServiceSpy.isLogged.and.resolveTo(true);
 
+      createComponent();
+
+      tick();
+
+      expect(userServiceSpy.setUpLoggedUser).toHaveBeenCalledTimes(1);
+    }));
+
+    it('should not setup logged user if there is no logged user', fakeAsync(() => {
+      userServiceSpy.isLogged.and.resolveTo(false);
+
+      createComponent();
+
+      tick();
+
+      expect(userServiceSpy.setUpLoggedUser).not.toHaveBeenCalled();
+    }));
+  });
 });

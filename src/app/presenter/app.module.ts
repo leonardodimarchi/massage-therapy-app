@@ -6,8 +6,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ToastModule } from '../infrastructure/modules/toast/toast.module';
 import { StorageModule } from '../infrastructure/modules/storage/storage.module';
+import { UserModule } from '../infrastructure/modules/user/user.module';
+import { ToastModule } from '../infrastructure/modules/toast/toast.module';
 
 @NgModule({
   declarations: [
@@ -16,8 +17,9 @@ import { StorageModule } from '../infrastructure/modules/storage/storage.module'
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    ToastModule,
-    StorageModule,
+    StorageModule.forRoot(),
+    ToastModule.forRoot(),
+    UserModule.forRoot(),
     AppRoutingModule,
     HttpModule.with({
       baseUrl: environment.apiBaseUrl,

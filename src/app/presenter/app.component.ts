@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserServiceInterface } from '../domain/contracts/services/user_service.interface';
 
 @Component({
   selector: 'app-root',
@@ -6,4 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
+
+  constructor(
+    private readonly userService: UserServiceInterface,
+  ) {
+    this.setupLoggedUserIfNeeded();
+  }
+
+  private async setupLoggedUserIfNeeded(): Promise<void> {
+    const isLogged = await this.userService.isLogged();
+
+    if (isLogged)
+      await this.userService.setUpLoggedUser();
+  }
 }

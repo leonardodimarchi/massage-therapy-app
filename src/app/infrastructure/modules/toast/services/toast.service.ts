@@ -1,9 +1,10 @@
 import { ToastConfig } from '../contracts/toast-config.interface';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { ToastServiceInterface } from '../contracts/toast-service.interface';
 
 @Injectable()
-export class ToastService {
+export class ToastService implements ToastServiceInterface {
 
   constructor(
     private readonly toastr: ToastrService,

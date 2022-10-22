@@ -32,7 +32,7 @@ export class UserService implements UserServiceInterface {
 
   async isLogged(): Promise<boolean> {
     const user = await this.storageService.get<UserEntity>(storageKeys.loggedUser);
-  
+
     return !!user;
   }
 
