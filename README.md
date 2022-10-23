@@ -1,6 +1,6 @@
 # MassageTherapyApp
 
-This project is being built to practice some Clean Architecture principles and to help a massage therapist's clients schedule their appointments.
+This project is being built to practice some Clean Architecture principles and to help a massage therapist's clients to schedule their appointments.
 
 ## Layers
 
