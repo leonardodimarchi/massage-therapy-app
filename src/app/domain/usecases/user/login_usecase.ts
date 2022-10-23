@@ -26,6 +26,9 @@ export class LoginUsecase implements UseCase<LoginUsecaseInput, LoginUsecaseOutp
     if (!isValidPassword)
       throw new Error('Por favor, enviar uma senha válida.');
 
+    params.email = params.email.trim();
+    params.password = params.password.trim();
+
     const { jwt, loggedUser } = await this.repository.login(params);
 
     await this.userService.setJwt(jwt);
