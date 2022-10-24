@@ -44,7 +44,7 @@ The infrastructure layer is responsible for implementing the interfaces defined 
     - The repositories are responsibles for calling the datasources and handle the errors that may exist. They are called by the usecases (at the domain layer) 
 
 ### Presenter
-The presenter layer is our last one. It will have all the UI part of the APP. The Angular framework will appear here (and just a bit at the infrastructure layer, cause we're using the Angular HttpClient)
+The presenter layer is our last one. It will have all the UI part of the APP. The Angular framework will appear here (and just a bit at the infrastructure layer, cause we're using the Angular HttpClient).
 
 - Pages
     - Here, we'll have the app UI, with all the pages and modules for each one. We'll need to inject all the dependencies for the pages, telling the page to use X usecase with Y repository and Z datasource. 
