@@ -30,6 +30,10 @@ export class UserService implements UserServiceInterface {
     await this.storageService.set(storageKeys.userToken, token);
   }
 
+  async getJwt(): Promise<JwtEntity | null> {
+    return await this.storageService.get<JwtEntity>(storageKeys.userToken);
+  }
+
   async isLogged(): Promise<boolean> {
     const user = await this.storageService.get<UserEntity>(storageKeys.loggedUser);
 

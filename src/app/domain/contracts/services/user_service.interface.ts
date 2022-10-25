@@ -11,6 +11,7 @@ export abstract class UserServiceInterface {
     abstract subscribeLoggedUserForChanges(listener: UserSubscriptionListener): Unsubscribable;
     abstract setLoggedUser(user: UserEntity): Promise<void>;
     abstract setJwt(token: JwtEntity): Promise<void>;
+    abstract getJwt(): Promise<JwtEntity | null>;
     abstract isLogged(): Promise<boolean>;
     abstract setUpLoggedUser(): Promise<void>;
 }

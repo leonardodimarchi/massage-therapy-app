@@ -35,17 +35,30 @@ describe('UserService', () => {
         expect(user).toEqual(mockedUserEntity);
         done();
       });
-      
+
       expect(typeof unsubscribe).toBe('function');
       (service as any).loggedUserSubject.next(mockedUserEntity);
     });
   });
 
-  describe('setJwt', () => {
-    it('should set the jwt token', async () => {
-      await service.setJwt(mockedJwtEntity);
+  describe('JWT', () => {
+    describe('setJwt', () => {
+      it('should set the jwt token', async () => {
+        await service.setJwt(mockedJwtEntity);
 
-      expect(storageServiceSpy.set).toHaveBeenCalledOnceWith(storageKeys.userToken, mockedJwtEntity);
+        expect(storageServiceSpy.set).toHaveBeenCalledOnceWith(storageKeys.userToken, mockedJwtEntity);
+      });
+    });
+
+    describe('getJwt', () => {
+      it('should get the jwt token', async () => {
+        storageServiceSpy.get.and.resolveTo(mockedJwtEntity);
+
+        const result = await service.getJwt();
+
+        expect(storageServiceSpy.get).toHaveBeenCalledOnceWith(storageKeys.userToken);
+        expect(result).toEqual(mockedJwtEntity);
+      });
     });
   });
 
