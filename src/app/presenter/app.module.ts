@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { StorageModule } from '../infrastructure/modules/storage/storage.module';
 import { UserModule } from '../infrastructure/modules/user/user.module';
 import { ToastModule } from '../infrastructure/modules/toast/toast.module';
 
@@ -17,7 +16,6 @@ import { ToastModule } from '../infrastructure/modules/toast/toast.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    StorageModule.forRoot(),
     ToastModule.forRoot(),
     UserModule.forRoot(),
     AppRoutingModule,

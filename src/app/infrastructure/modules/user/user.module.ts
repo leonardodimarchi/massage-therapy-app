@@ -1,3 +1,4 @@
+import { StorageModule } from './../storage/storage.module';
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserServiceInterface } from 'src/app/domain/contracts/services/user_service.interface';
@@ -7,6 +8,7 @@ import { UserService } from './services/user.service';
 @NgModule({
   imports: [
     CommonModule,
+    StorageModule,
   ],
 })
 export class UserModule {
