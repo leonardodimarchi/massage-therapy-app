@@ -1,6 +1,6 @@
-import { UserEntity } from "src/app/domain/entities/user/user_entity";
-import { Mapper } from "../../shared/mappers/mapper";
-import { UserDto } from "../dto/user_dto";
+import { UserEntity } from "@domain/entities/user/user_entity";
+import { Mapper } from "@infra/models/shared/mappers/mapper";
+import { UserDto } from "@infra/models/user/dto/user_dto";
 
 export class UserMapper extends Mapper<UserEntity> {
     private props: UserDto;

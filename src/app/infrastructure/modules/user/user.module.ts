@@ -1,9 +1,8 @@
-import { StorageModule } from './../storage/storage.module';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { UserServiceInterface } from 'src/app/domain/contracts/services/user_service.interface';
-import { StorageServiceInterface } from 'src/app/domain/contracts/services/storage_service.interface';
-import { UserService } from './services/user.service';
+import { CommonModule } from "@angular/common";
+import { NgModule, Optional, SkipSelf, ModuleWithProviders } from "@angular/core";
+import { UserServiceInterface, StorageServiceInterface } from "@domain/contracts/services";
+import { StorageModule } from "@infra/modules/storage/storage.module";
+import { UserService } from "@infra/modules/user/services/user.service";
 
 @NgModule({
   imports: [

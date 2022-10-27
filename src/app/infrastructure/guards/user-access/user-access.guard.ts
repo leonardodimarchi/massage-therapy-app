@@ -1,7 +1,7 @@
-import { UserServiceInterface } from 'src/app/domain/contracts/services/user_service.interface';
-import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from "@angular/router";
-import { RouterServiceInterface } from '../../modules/router/contracts/router-service.interface';
-import { Injectable } from '@angular/core';
+import { Injectable } from "@angular/core";
+import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot } from "@angular/router";
+import { UserServiceInterface } from "@domain/contracts/services";
+import { RouterServiceInterface } from "@infra/modules/router/contracts/router-service.interface";
 
 @Injectable({
   providedIn: 'root',

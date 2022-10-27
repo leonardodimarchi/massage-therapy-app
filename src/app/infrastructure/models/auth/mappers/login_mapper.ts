@@ -1,8 +1,8 @@
-import { LoginEntity } from "src/app/domain/entities/auth/login_entity";
-import { Mapper } from "../../shared/mappers/mapper";
-import { UserMapper } from "../../user/mappers/user_mapper";
-import { LoginDto } from "../dto/login_dto";
-import { JwtMapper } from "./jwt_mapper";
+import { LoginEntity } from "@domain/entities/auth/login_entity";
+import { Mapper } from "@infra/models/shared/mappers/mapper";
+import { UserMapper } from "@infra/models/user/mappers/user_mapper";
+import { LoginDto } from "@infra/models/auth/dto/login_dto";
+import { JwtMapper } from "@infra/models/auth/mappers/jwt_mapper";
 
 export class LoginMapper extends Mapper<LoginEntity> {
     private props: LoginDto;

@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { StorageServiceInterface } from 'src/app/domain/contracts/services/storage_service.interface';
-import { Unsubscribable, UserServiceInterface, UserSubscriptionListener } from 'src/app/domain/contracts/services/user_service.interface';
-import { JwtEntity } from 'src/app/domain/entities/auth/jwt_entity';
-import { UserEntity } from 'src/app/domain/entities/user/user_entity';
-import { storageKeys } from 'src/environments/storage_keys';
+import { Injectable } from "@angular/core";
+import { UserServiceInterface, StorageServiceInterface, UserSubscriptionListener } from "@domain/contracts/services";
+import { JwtEntity } from "@domain/entities/auth/jwt_entity";
+import { UserEntity } from "@domain/entities/user/user_entity";
+import { storageKeys } from "@env/storage_keys";
+import { BehaviorSubject, Unsubscribable } from "rxjs";
 
 @Injectable({
   providedIn: 'root'

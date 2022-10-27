@@ -1,11 +1,11 @@
-import { UserServiceInterface } from 'src/app/domain/contracts/services/user_service.interface';
-import { UserTokenInterceptor } from './interceptors/user-token.interceptor';
-import { HTTP_MODULE_CONFIG } from './tokens/http_config_injection_token';
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule, ModuleWithProviders } from "@angular/core";
-import { HttpService } from "./services/http_service";
-import { HttpConfig } from "./contracts/http_config.interface";
-import { UserModule } from '../user/user.module';
+import { UserServiceInterface } from "@domain/contracts/services";
+import { UserModule } from "@infra/modules/user/user.module";
+import { HttpConfig } from "@infra/modules/http/contracts/http_config.interface";
+import { UserTokenInterceptor } from "@infra/modules/http/interceptors/user-token.interceptor";
+import { HttpService } from "@infra/modules/http/services/http_service";
+import { HTTP_MODULE_CONFIG } from "@infra/modules/http/tokens/http_config_injection_token";
 
 @NgModule({
   imports: [

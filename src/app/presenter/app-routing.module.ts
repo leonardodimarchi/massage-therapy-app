@@ -1,6 +1,6 @@
-import { UserAccessModule } from './../infrastructure/guards/user-access/user-access.module';
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { UserAccessModule } from "@infra/guards/user-access/user-access.module";
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
 // TODO: Use UserAccessGuard
 

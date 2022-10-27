@@ -1,7 +1,7 @@
-import { StorageServiceInterface } from '../../../domain/contracts/services/storage_service.interface';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { StorageService } from './services/storage.service';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { StorageServiceInterface } from "@domain/contracts/services";
+import { StorageService } from "@infra/modules/storage/services/storage.service";
 
 @NgModule({
   imports: [

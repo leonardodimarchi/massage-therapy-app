@@ -1,4 +1,4 @@
-import { UserValidators } from "./user_validators";
+import { UserValidators } from "@domain/validators/user/user_validators";
 
 describe('UserValidators', () => {
     describe('Password', () => {

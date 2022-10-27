@@ -1,4 +1,4 @@
-import { LoginEntity } from '../../entities/auth/login_entity';
+import { LoginEntity } from '@domain/entities/auth/login_entity';
 
 export abstract class UserRepositoryInterface {
   abstract login(params: LoginParams): Promise<LoginEntity>;

@@ -19,10 +19,11 @@
     "target": "es2020",
     "module": "es2020",
     "paths": {
-      "@/presenter/*": ["./src/app/presenter/*"],
-      "@/infra/*": ["./src/app/infrastructure/*"],
-      "@/domain/*": ["./src/app/domain/*"],
-      "@/mocks/*": ["./src/app/mocks/*"]
+      "@presenter/*": ["./src/app/presenter/*"],
+      "@infra/*": ["./src/app/infrastructure/*"],
+      "@domain/*": ["./src/app/domain/*"],
+      "@mocks/*": ["./src/app/mocks/*"],
+      "@env/*": ["./src/environments/*"],
     },
     "lib": [
       "es2020",
