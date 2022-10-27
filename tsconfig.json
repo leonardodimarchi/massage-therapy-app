@@ -18,6 +18,12 @@
     "importHelpers": true,
     "target": "es2020",
     "module": "es2020",
+    "paths": {
+      "@/presenter/*": ["./src/app/presenter/*"],
+      "@/infra/*": ["./src/app/infrastructure/*"],
+      "@/domain/*": ["./src/app/domain/*"],
+      "@/mocks/*": ["./src/app/mocks/*"]
+    },
     "lib": [
       "es2020",
       "dom"
