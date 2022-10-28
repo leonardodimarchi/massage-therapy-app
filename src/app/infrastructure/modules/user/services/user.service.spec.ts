@@ -1,8 +1,8 @@
-import { StorageServiceInterface } from 'src/app/domain/contracts/services/storage_service.interface';
-import { mockedJwtEntity } from 'src/app/mocks/jwt/jwt_entity_mock';
-import { mockedUserEntity } from 'src/app/mocks/user/entities/user_entity_mock';
-import { storageKeys } from 'src/environments/storage_keys';
-import { UserService } from './user.service';
+import { StorageServiceInterface } from "@domain/contracts/services";
+import { storageKeys } from "@env/storage_keys";
+import { mockedJwtEntity } from "@mocks/jwt/jwt_entity_mock";
+import { mockedUserEntity } from "@mocks/user/entities/user_entity_mock";
+import { UserService } from "@infra/modules/user/services/user.service";
 
 describe('UserService', () => {
   let service: UserService;

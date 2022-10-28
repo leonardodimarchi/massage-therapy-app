@@ -1,4 +1,4 @@
-import { BaseEntityDto } from "../../shared/dto/base_entity_dto";
+import { BaseEntityDto } from "@infra/models/shared/dto/base_entity_dto";
 
 export interface UserDto extends BaseEntityDto {
     email: string;

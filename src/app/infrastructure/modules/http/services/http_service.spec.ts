@@ -1,8 +1,8 @@
-import { HttpConfig } from '../contracts/http_config.interface';
 import { HttpClient } from "@angular/common/http";
 import { EventEmitter } from "@angular/core";
 import { fakeAsync, tick } from "@angular/core/testing";
-import { HttpService } from "./http_service";
+import { HttpConfig } from "@infra/modules/http/contracts/http_config.interface";
+import { HttpService } from "@infra/modules/http/services/http_service";
 
 describe('HttpService', () => {
     let httpClient: jasmine.SpyObj<HttpClient>;

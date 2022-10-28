@@ -1,7 +1,7 @@
-import { HttpErrorHandler } from '../shared/errors/http_error_handler';
-import { UserDatasourceInterface } from './../../contracts/datasources/user_datasource.interface';
-import { LoginParams, UserRepositoryInterface } from 'src/app/domain/contracts/repositories/user_repository.interface';
-import { LoginEntity } from 'src/app/domain/entities/auth/login_entity';
+import { UserRepositoryInterface, LoginParams } from "@domain/contracts/repositories";
+import { LoginEntity } from "@domain/entities/auth/login_entity";
+import { UserDatasourceInterface } from "@infra/contracts/datasources";
+import { HttpErrorHandler } from "@infra/repositories/shared/errors/http_error_handler";
 
 export class UserRepository implements UserRepositoryInterface {
 

@@ -1,7 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { TestBed } from '@angular/core/testing';
-
-import { ToastService } from './toast.service';
+import { ToastService } from '@infra/modules/toast/services/toast.service';
 
 describe('ToastService', () => {
   let service: ToastService;

@@ -1,9 +1,9 @@
-import { LoginParams } from "src/app/domain/contracts/repositories/user_repository.interface";
-import { mockedUserModelProps } from "src/app/mocks/user/dto/user_dto_mock";
-import { HttpServiceInterface } from "../../../domain/contracts/services/http_service.interface";
-import { LoginDto } from "../../models/auth/dto/login_dto";
-import { ApiEndpoints } from "../endpoints";
-import { UserDatasource } from "./user_datasource";
+import { LoginParams } from "@domain/contracts/repositories";
+import { HttpServiceInterface } from "@domain/contracts/services";
+import { LoginDto } from "@infra/models/auth/dto/login_dto";
+import { ApiEndpoints } from "@infra/datasources/endpoints";
+import { UserDatasource } from "@infra/datasources/user/user_datasource";
+import { mockedUserModelProps } from "@mocks/user/dto/user_dto_mock";
 
 describe('UserDatasource', () => {
     let httpService: jasmine.SpyObj<HttpServiceInterface>;
@@ -25,7 +25,7 @@ describe('UserDatasource', () => {
                 }
             }
             httpService.post.and.resolveTo(returnValue);
-            
+
             const params: LoginParams = {
                 email: 'mocked@email.com',
                 password: '123456',

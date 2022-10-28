@@ -1,7 +1,5 @@
-import { BadRequestError } from './../../../../domain/errors/bad_request_error';
-import { ServerError } from './../../../../domain/errors/server_error';
-import { UnauthorizedError } from './../../../../domain/errors/unauthorized_error';
-import { HttpErrorResponse, HttpStatusCode } from '@angular/common/http';
+import { HttpStatusCode, HttpErrorResponse } from "@angular/common/http";
+import { UnauthorizedError, BadRequestError, ServerError } from "@domain/errors";
 
 interface UnknownHttpErrorWithMessage {
   message: string;

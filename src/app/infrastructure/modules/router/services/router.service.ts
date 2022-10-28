@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { RouterServiceInterface } from '../contracts/router-service.interface';
+import { RouterServiceInterface } from '@infra/modules/router/contracts/router-service.interface';
 
 @Injectable()
 export class RouterService implements RouterServiceInterface {

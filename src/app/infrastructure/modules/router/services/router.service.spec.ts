@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 
-import { RouterService } from './router.service';
+import { RouterService } from '@infra/modules/router/services/router.service';
 
 describe('RouterService', () => {
   let service: RouterService;

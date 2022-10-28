@@ -1,8 +1,8 @@
-import { ToastService } from './services/toast.service';
-import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ToastrModule } from 'ngx-toastr';
-import { ToastServiceInterface } from './contracts/toast-service.interface';
+import { CommonModule } from "@angular/common";
+import { NgModule, Optional, SkipSelf, ModuleWithProviders } from "@angular/core";
+import { ToastrModule } from "ngx-toastr";
+import { ToastServiceInterface } from "@infra/modules/toast/contracts/toast-service.interface";
+import { ToastService } from "@infra/modules/toast/services/toast.service";
 
 @NgModule({
   imports: [
@@ -10,7 +10,7 @@ import { ToastServiceInterface } from './contracts/toast-service.interface';
     ToastrModule.forRoot(),
   ],
 })
-export class ToastModule { 
+export class ToastModule {
   constructor(@Optional() @SkipSelf() parentModule?: ToastModule) {
     if (parentModule) {
       throw new Error('ToastModule is already loaded. Import it in the AppModule only');

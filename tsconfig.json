@@ -22,7 +22,8 @@
       "@presenter/*": ["./src/app/presenter/*"],
       "@infra/*": ["./src/app/infrastructure/*"],
       "@domain/*": ["./src/app/domain/*"],
-      "@mocks/*": ["./src/app/mocks/*"]
+      "@mocks/*": ["./src/app/mocks/*"],
+      "@env/*": ["./src/environments/*"],
     },
     "lib": [
       "es2020",

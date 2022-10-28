@@ -1,6 +1,6 @@
-import { UserServiceInterface } from 'src/app/domain/contracts/services/user_service.interface';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from "@angular/common/http";
-import { concatAll, from, map, Observable } from "rxjs";
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from "@angular/common/http";
+import { UserServiceInterface } from "@domain/contracts/services";
+import { Observable, from, map, concatAll } from "rxjs";
 
 export class UserTokenInterceptor implements HttpInterceptor {
 

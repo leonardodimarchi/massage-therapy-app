@@ -1,7 +1,7 @@
-import { ToastConfig } from '../contracts/toast-config.interface';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { ToastServiceInterface } from '../contracts/toast-service.interface';
+import { ToastConfig } from '@infra/modules/toast/contracts/toast-config.interface';
+import { ToastServiceInterface } from '@infra/modules/toast/contracts/toast-service.interface';
 
 @Injectable()
 export class ToastService implements ToastServiceInterface {
