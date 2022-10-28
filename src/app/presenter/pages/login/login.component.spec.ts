@@ -1,6 +1,6 @@
-import { ToastService } from './../../../infrastructure/modules/toast/services/toast.service';
-import { LoginUsecase } from 'src/app/domain/usecases/user/login_usecase';
-import { LoginComponent } from './login.component';
+import { LoginUsecase } from "@domain/usecases/user/login_usecase";
+import { ToastService } from "@infra/modules/toast/services/toast.service";
+import { LoginComponent } from "@presenter/pages/login/login.component";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

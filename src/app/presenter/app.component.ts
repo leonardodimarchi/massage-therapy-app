@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { UserServiceInterface } from '../domain/contracts/services/user_service.interface';
+import { UserServiceInterface } from '@domain/contracts/services/user_service.interface';
 
 @Component({
   selector: 'app-root',

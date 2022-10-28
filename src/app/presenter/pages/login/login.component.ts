@@ -1,7 +1,7 @@
-import { ToastServiceInterface } from 'src/app/infrastructure/modules/toast/contracts/toast-service.interface';
-import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { LoginUsecase } from 'src/app/domain/usecases/user/login_usecase';
+import { ToastServiceInterface } from "@infra/modules/toast/contracts/toast-service.interface";
+import { Component } from "@angular/core";
+import { FormControl, FormGroup } from "@angular/forms";
+import { LoginUsecase } from "@domain/usecases/user/login_usecase";
 
 interface LoginPayloadForm {
   email: FormControl<string>,
