@@ -1,4 +1,4 @@
-import { UserDto } from "src/app/infrastructure/models/user/dto/user_dto";
+import { UserDto } from "@infra/models/user/dto/user_dto";
 
 const id = 1;
 const createdAt = new Date(2022, 9, 5);
