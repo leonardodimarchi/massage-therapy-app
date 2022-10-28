@@ -1,0 +1,41 @@
+:host {
+    opacity: 1;
+    position: absolute;
+    border-radius: inherit;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    visibility: visible;
+    background-color: rgba(0, 0, 0, 0.33);
+
+    .spin-circle {
+      animation: spin 1s infinite linear;
+      border-radius: 50%;
+      border-style: dotted;
+      border-width: 0.125em;
+      width: 1em;
+      height: 1em;
+    }
+
+    .message {
+      margin-left: 0.5rem;
+      color: black;
+    }
+  }
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  // TODO: Adicionar diferentes tamanhos e cores (basic, danger, etc)
