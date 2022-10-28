@@ -1,4 +1,4 @@
-import { JwtEntity } from "./jwt_entity";
+import { JwtEntity } from "@domain/entities/auth/jwt_entity";
 
 describe('JwtEntity', () => {
   it('should create with correct properties', () => {

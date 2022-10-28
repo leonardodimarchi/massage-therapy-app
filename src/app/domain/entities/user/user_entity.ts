@@ -1,5 +1,4 @@
-import { BaseEntity } from '../base_entity';
-import { BaseEntityProps } from "../base_entity";
+import { BaseEntityProps, BaseEntity } from "@domain/entities/base_entity";
 
 export interface UserEntityProps extends BaseEntityProps {
   email: string;

@@ -1,7 +1,7 @@
-import { UserRepositoryInterface } from './../../contracts/repositories/user_repository.interface';
-import { UseCase } from '../usecase';
-import { UserValidators } from '../../validators/user/user_validators';
-import { UserServiceInterface } from '../../contracts/services/user_service.interface';
+import { UserRepositoryInterface } from "@domain/contracts/repositories/user_repository.interface";
+import { UserServiceInterface } from "@domain/contracts/services/user_service.interface";
+import { UserValidators } from "@domain/validators/user/user_validators";
+import { UseCase } from "@domain/usecases/usecase";
 
 export interface LoginUsecaseInput {
   email: string;

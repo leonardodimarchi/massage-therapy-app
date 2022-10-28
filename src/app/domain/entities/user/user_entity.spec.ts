@@ -1,4 +1,4 @@
-import { UserEntity } from './user_entity';
+import { UserEntity } from "@domain/entities/user/user_entity";
 
 describe('UserEntity', () => {
   it('should create with correct properties', () => {

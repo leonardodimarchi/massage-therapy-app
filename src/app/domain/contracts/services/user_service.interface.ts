@@ -1,5 +1,5 @@
-import { JwtEntity } from "../../entities/auth/jwt_entity";
-import { UserEntity } from "../../entities/user/user_entity";
+import { JwtEntity } from "@domain/entities/auth/jwt_entity";
+import { UserEntity } from "@domain/entities/user/user_entity";
 
 export interface Unsubscribable {
     unsubscribe: () => void;
