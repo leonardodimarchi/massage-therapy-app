@@ -1,41 +1,139 @@
 :host {
-    opacity: 1;
-    position: absolute;
-    border-radius: inherit;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
-    overflow: hidden;
-    z-index: 9999;
+  opacity: 1;
+  position: absolute;
+  border-radius: inherit;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: visible;
+
+  .spin-container {
     display: flex;
-    justify-content: center;
     align-items: center;
-    visibility: visible;
-    background-color: rgba(0, 0, 0, 0.33);
+    width: 100%;
+    height: 100%;
+
+    animation: fade-in 0.7s;
 
     .spin-circle {
       animation: spin 1s infinite linear;
       border-radius: 50%;
       border-style: dotted;
-      border-width: 0.125em;
-      width: 1em;
-      height: 1em;
     }
 
     .message {
       margin-left: 0.5rem;
       color: black;
     }
+
+    &.size-small {
+      .spin-circle {
+        height: 0.9rem;
+        width: 0.9rem;
+        border-width: 3px;
+      }
+
+      .message {
+        font-size: 0.9rem;
+      }
+    }
+
+    &.size-medium {
+      .spin-circle {
+        height: 1.2rem;
+        width: 1.2rem;
+        border-width: 3px;
+      }
+
+      .message {
+        font-size: 1rem;
+      }
+    }
+
+    &.size-large {
+      .spin-circle {
+        height: 2rem;
+        width: 2rem;
+        border-width: 5px;
+      }
+
+      .message {
+        font-size: 1.5rem;
+      }
+    }
+
+    &.status-basic {
+      .spin-circle {
+        border-color: white;
+      }
+
+      .message {
+        color: white;
+      }
+    }
+
+    &.status-danger {
+      .spin-circle {
+        border-color: rgb(255, 217, 2);
+      }
+
+      .message {
+        color: rgb(255, 217, 2);
+      }
+    }
+
+    &.status-error {
+      .spin-circle {
+        border-color: rgb(184, 16, 16);
+      }
+
+      .message {
+        color: rgb(184, 16, 16);
+      }
+    }
+
+    &.position-center {
+      justify-content: center;
+    }
+
+    &.position-right {
+      justify-content: flex-end;
+      padding-right: 1.2rem;
+    }
+
+    &.position-left {
+      justify-content: flex-start;
+      padding-left: 1.2rem;
+    }
+
+    &.with-backdrop {
+      background-color: rgba(0, 0, 0, 0.33);
+    }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
   }
 
-  @keyframes spin {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
 
-  // TODO: Adicionar diferentes tamanhos e cores (basic, danger, etc)
+  to {
+    opacity: 1;
+  }
+}

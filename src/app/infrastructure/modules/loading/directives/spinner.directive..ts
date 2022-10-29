@@ -11,7 +11,7 @@ export class SpinnerDirective implements OnInit {
     ) { }
 
     @Input('loadingSpinnerMessage')
-    public spinnerMessage?: string;
+    spinnerMessage?: string;
 
     @Input('loadingSpinnerStatus')
     spinnerStatus: 'basic' | 'danger' | 'error' = 'basic';
@@ -19,9 +19,15 @@ export class SpinnerDirective implements OnInit {
     @Input('loadingSpinnerSize')
     size: 'small' | 'large' | 'medium' = 'medium';
 
+    @Input('loadingSpinnerPosition')
+    position: 'center' | 'left' | 'right' = 'center';
+
+    @Input('loadingSpinnerBackdrop')
+    hasBackdrop: boolean = true;
+
     @Input('loadingSpinner')
     set nbSpinner(val: boolean) {
-        if (this.spinner) {
+        if (this.finishedFirstLoad) {
             if (val) {
                 this.show();
             } else {
@@ -37,11 +43,14 @@ export class SpinnerDirective implements OnInit {
 
     private shouldShow = false;
     private spinner?: ComponentRef<SpinnerComponent>;
+    private finishedFirstLoad: boolean = false;
 
     ngOnInit() {
         if (this.shouldShow) {
             this.show();
         }
+
+        this.finishedFirstLoad = true;
     }
 
     hide() {
@@ -65,5 +74,7 @@ export class SpinnerDirective implements OnInit {
         instance.message = this.spinnerMessage
         typeof this.spinnerStatus !== 'undefined' && (instance.status = this.spinnerStatus);
         typeof this.size !== 'undefined' && (instance.size = this.size);
+        typeof this.position !== 'undefined' && (instance.position = this.position);
+        typeof this.hasBackdrop !== 'undefined' && (instance.hasBackdrop = this.hasBackdrop);
     }
 }

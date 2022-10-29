@@ -7,7 +7,11 @@
 
     <label class="label">Senha</label>
     <div class="password-input">
-      <input class="input" formControlName="password" [type]="isShowingPassword ? 'text' : 'password'" />
+      <input
+        class="input"
+        formControlName="password"
+        [type]="isShowingPassword ? 'text' : 'password'"
+      />
 
       <img
         *ngIf="isShowingPassword"
@@ -21,7 +25,15 @@
       />
     </div>
 
-    <button class="button" type="submit">Entrar</button>
+    <button
+      class="button"
+      type="submit"
+      [loadingSpinner]="isLoading"
+      [loadingSpinnerBackdrop]="false"
+      loadingSpinnerPosition="right"
+    >
+      Entrar
+    </button>
   </form>
 
   <span>Primeiro acesso</span>
