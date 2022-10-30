@@ -1,22 +1,23 @@
-import { UserDatasource } from './../../../infrastructure/datasources/user/user_datasource';
-import { UserDatasourceInterface } from './../../../infrastructure/contracts/datasources/user_datasource.interface';
-import { UserRepositoryInterface } from 'src/app/domain/contracts/repositories/user_repository.interface';
-import { LoginUsecase } from './../../../domain/usecases/user/login_usecase';
-import { LoginComponent } from './login.component';
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LoginRoutingModule } from './login-routing.module';
-import { UserRepository } from 'src/app/infrastructure/repositories/user/user_repository';
-import { ReactiveFormsModule } from '@angular/forms';
-import { HttpService } from 'src/app/infrastructure/modules/http/services/http_service';
-import { HttpServiceInterface } from 'src/app/domain/contracts/services/http_service.interface';
-import { UserServiceInterface } from 'src/app/domain/contracts/services/user_service.interface';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { ReactiveFormsModule } from "@angular/forms";
+import { UserRepositoryInterface } from "@domain/contracts/repositories";
+import { UserServiceInterface, HttpServiceInterface } from "@domain/contracts/services";
+import { LoginUsecase } from "@domain/usecases/user/login_usecase";
+import { UserDatasourceInterface } from "@infra/contracts/datasources";
+import { UserDatasource } from "@infra/datasources/user/user_datasource";
+import { HttpService } from "@infra/modules/http/services/http_service";
+import { LoadingSpinnerModule } from "@infra/modules/loading/loading.module";
+import { UserRepository } from "@infra/repositories/user/user_repository";
+import { LoginRoutingModule } from "./login-routing.module";
+import { LoginComponent } from "./login.component";
 
 @NgModule({
   imports: [
     CommonModule,
     LoginRoutingModule,
     ReactiveFormsModule,
+    LoadingSpinnerModule,
   ],
   declarations: [
     LoginComponent,
@@ -24,7 +25,7 @@ import { UserServiceInterface } from 'src/app/domain/contracts/services/user_ser
   providers: [
     {
       provide: LoginUsecase,
-      useFactory: (repo: UserRepositoryInterface, userService: UserServiceInterface) => { 
+      useFactory: (repo: UserRepositoryInterface, userService: UserServiceInterface) => {
         return new LoginUsecase(repo, userService);
       },
       deps: [UserRepositoryInterface, UserServiceInterface],
