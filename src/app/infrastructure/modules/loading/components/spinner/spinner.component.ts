@@ -2,44 +2,25 @@ import { Component, Input } from "@angular/core";
 
 @Component({
   selector: 'loading-spinner',
-  template: `
-    <div class="spin-container"
-      [class.with-backdrop]="hasBackdrop"
-      [class.status-basic]="basic"
-      [class.status-danger]="danger"
-      [class.status-error]="error"
-      [class.size-small]="small"
-      [class.size-medium]="medium"
-      [class.size-large]="large"
-      [class.position-right]="right"
-      [class.position-left]="left"
-      [class.position-center]="center">
-
-      <span class="spin-circle"></span>
-
-      <span *ngIf="message" class="message">
-        {{ message }}
-      </span>
-    </div>
-    `,
+  templateUrl: './spinner.component.html',
   styleUrls: ['./spinner.component.scss'],
 })
 export class SpinnerComponent {
 
   @Input()
-  message?: string;
+  public message?: string;
 
   @Input()
-  size: 'small' | 'medium' | 'large' = 'medium';
+  public size: 'small' | 'medium' | 'large' = 'medium';
 
   @Input()
-  status: 'basic' | 'danger' | 'error' = 'basic';
+  public status: 'basic' | 'danger' | 'error' = 'basic';
 
   @Input()
-  position: 'center' | 'left' | 'right' = 'center';
+  public position: 'center' | 'left' | 'right' = 'center';
 
   @Input()
-  hasBackdrop: boolean = true;
+  public hasBackdrop: boolean = true;
 
   get small(): boolean {
     return this.size === 'small';

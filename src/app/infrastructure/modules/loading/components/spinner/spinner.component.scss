@@ -1,17 +1,20 @@
 :host {
-  opacity: 1;
   position: absolute;
-  border-radius: inherit;
+  z-index: 9999;
   top: 0;
   right: 0;
   left: 0;
   bottom: 0;
-  overflow: hidden;
-  z-index: 9999;
+
+  visibility: visible;
+  opacity: 1;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  visibility: visible;
+
+  overflow: hidden;
+  border-radius: inherit;
 
   .spin-container {
     display: flex;
