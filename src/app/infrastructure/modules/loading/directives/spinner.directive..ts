@@ -4,77 +4,89 @@ import { SpinnerComponent } from "../components/spinner/spinner.component";
 @Directive({ selector: '[loadingSpinner]' })
 export class SpinnerDirective implements OnInit {
 
-    constructor(
-        private directiveView: ViewContainerRef,
-        private renderer: Renderer2,
-        private directiveElement: ElementRef,
-    ) { }
+  constructor(
+    private containerRef: ViewContainerRef,
+    private renderer: Renderer2,
+    private directive: ElementRef,
+  ) { }
 
-    @Input('loadingSpinnerMessage')
-    spinnerMessage?: string;
+  @Input('loadingSpinnerMessage')
+  public spinnerMessage?: string;
 
-    @Input('loadingSpinnerStatus')
-    spinnerStatus: 'basic' | 'danger' | 'error' = 'basic';
+  @Input('loadingSpinnerStatus')
+  public spinnerStatus: 'basic' | 'danger' | 'error' = 'basic';
 
-    @Input('loadingSpinnerSize')
-    size: 'small' | 'large' | 'medium' = 'medium';
+  @Input('loadingSpinnerSize')
+  public size: 'small' | 'large' | 'medium' = 'medium';
 
-    @Input('loadingSpinnerPosition')
-    position: 'center' | 'left' | 'right' = 'center';
+  @Input('loadingSpinnerPosition')
+  public position: 'center' | 'left' | 'right' = 'center';
 
-    @Input('loadingSpinnerBackdrop')
-    hasBackdrop: boolean = true;
+  @Input('loadingSpinnerBackdrop')
+  public hasBackdrop: boolean = true;
 
-    @Input('loadingSpinner')
-    set nbSpinner(val: boolean) {
-        if (this.finishedFirstLoad) {
-            if (val) {
-                this.show();
-            } else {
-                this.hide();
-            }
-        } else {
-            this.shouldShow = val;
-        }
+  @Input('loadingSpinner')
+  set loadingSpinner(isLoading: boolean) {
+    if (this.finishedFirstLoad) {
+      if (isLoading)
+        this.show();
+      else
+        this.hide();
+    } else
+      this.shouldShowOnInit = isLoading;
+  }
+
+  @HostBinding('class.spinner-container')
+  private exists = false;
+
+  private spinner?: ComponentRef<SpinnerComponent>;
+
+  private shouldShowOnInit: boolean = false;
+  private finishedFirstLoad: boolean = false;
+
+  public ngOnInit(): void {
+    if (this.shouldShowOnInit)
+      this.show();
+
+    this.finishedFirstLoad = true;
+  }
+
+  public hide(): void {
+    if (this.exists) {
+      this.containerRef.remove();
+      this.exists = false;
     }
+  }
 
-    @HostBinding('class.spinner-container')
-    private isSpinnerExist = false;
-
-    private shouldShow = false;
-    private spinner?: ComponentRef<SpinnerComponent>;
-    private finishedFirstLoad: boolean = false;
-
-    ngOnInit() {
-        if (this.shouldShow) {
-            this.show();
-        }
-
-        this.finishedFirstLoad = true;
+  public show(): void {
+    if (!this.exists) {
+      this.createSpinner();
+      this.exists = true;
     }
+  }
 
-    hide() {
-        if (this.isSpinnerExist) {
-            this.directiveView.remove();
-            this.isSpinnerExist = false;
-        }
-    }
+  private createSpinner(): void {
+    this.spinner = this.containerRef.createComponent<SpinnerComponent>(SpinnerComponent);
+    this.setSpinnerInputs(this.spinner.instance);
 
-    show() {
-        if (!this.isSpinnerExist) {
-            this.spinner = this.directiveView.createComponent<SpinnerComponent>(SpinnerComponent);
-            this.setInstanceInputs(this.spinner.instance);
-            this.spinner.changeDetectorRef.detectChanges();
-            this.renderer.appendChild(this.directiveElement.nativeElement, this.spinner.location.nativeElement);
-            this.isSpinnerExist = true;
-        }
-    }
+    this.spinner.changeDetectorRef.detectChanges();
+    this.renderer.appendChild(this.directive.nativeElement, this.spinner.location.nativeElement);
+  }
 
-    setInstanceInputs(instance: SpinnerComponent) {
-        instance.message = this.spinnerMessage
-        typeof this.spinnerStatus !== 'undefined' && (instance.status = this.spinnerStatus);
-        typeof this.size !== 'undefined' && (instance.size = this.size);
-        typeof this.position !== 'undefined' && (instance.position = this.position);
-        typeof this.hasBackdrop !== 'undefined' && (instance.hasBackdrop = this.hasBackdrop);
-    }
+  private setSpinnerInputs(spinner: SpinnerComponent): void {
+    if (this.spinnerMessage)
+      spinner.message = this.spinnerMessage
+
+    if (this.spinnerStatus)
+      spinner.status = this.spinnerStatus;
+
+    if (this.size)
+      spinner.size = this.size;
+
+    if (this.position)
+      spinner.position = this.position;
+
+    if (this.hasBackdrop)
+      spinner.hasBackdrop = this.hasBackdrop;
+  }
 }
