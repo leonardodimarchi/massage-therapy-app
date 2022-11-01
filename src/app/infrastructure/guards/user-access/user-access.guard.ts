@@ -16,8 +16,6 @@ export class UserAccessGuard implements CanActivate {
   public async canActivate(route: ActivatedRouteSnapshot, _: RouterStateSnapshot) {
     const { isUnprotectedRoute, isProtectedRoute, redirectTo } = route.data || {};
 
-    console.log(route.data)
-
     if (!redirectTo)
       return true;
 
@@ -26,8 +24,6 @@ export class UserAccessGuard implements CanActivate {
     const hasUnprotectedAccess = !isLogged && isUnprotectedRoute;
 
     const shouldActivate = hasProtectedAccess || hasUnprotectedAccess;
-
-    console.log(isLogged)
 
     if (shouldActivate)
       return true;

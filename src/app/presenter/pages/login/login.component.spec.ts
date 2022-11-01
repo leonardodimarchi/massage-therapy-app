@@ -1,18 +1,21 @@
 import { LoginUsecase } from "@domain/usecases/user/login_usecase";
-import { ToastService } from "@infra/modules/toast/services/toast.service";
 import { LoginComponent } from "@presenter/pages/login/login.component";
+import { ToastServiceInterface } from "@infra/modules/toast/contracts/toast-service.interface";
+import { RouterServiceInterface } from "@infra/modules/router/contracts/router-service.interface";
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
 
   let loginUsecase: jasmine.SpyObj<LoginUsecase>;
-  let toastService: jasmine.SpyObj<ToastService>;
+  let toastService: jasmine.SpyObj<ToastServiceInterface>;
+  let routerService: jasmine.SpyObj<RouterServiceInterface>;
 
   beforeEach(async () => {
     loginUsecase = jasmine.createSpyObj('LoginUsecase', ['call']);
-    toastService = jasmine.createSpyObj('ToastService', ['showError']);
+    toastService = jasmine.createSpyObj('ToastServiceInterface', ['showError']);
+    routerService = jasmine.createSpyObj('RouterServiceInterface', ['navigate']);
 
-    component = new LoginComponent(loginUsecase, toastService);
+    component = new LoginComponent(loginUsecase, toastService, routerService);
   });
 
   it('should create', () => {
@@ -63,6 +66,12 @@ describe('LoginComponent', () => {
       await component.login();
 
       expect(loginUsecase.call).not.toHaveBeenCalled();
+    });
+
+    it('should navigate after logging in', async () => {
+      await component.login();
+
+      expect(routerService.navigate).toHaveBeenCalledOnceWith('home');
     });
   });
 });

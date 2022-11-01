@@ -2,6 +2,7 @@ import { ToastServiceInterface } from "@infra/modules/toast/contracts/toast-serv
 import { Component } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { LoginUsecase } from "@domain/usecases/user/login_usecase";
+import { RouterServiceInterface } from "@infra/modules/router/contracts/router-service.interface";
 
 interface LoginPayloadForm {
   email: FormControl<string>,
@@ -18,6 +19,7 @@ export class LoginComponent {
   constructor(
     private readonly loginUsecase: LoginUsecase,
     private readonly toastService: ToastServiceInterface,
+    private readonly routerService: RouterServiceInterface,
   ) {
     this.form = new FormGroup({
       email: new FormControl(),
@@ -40,13 +42,15 @@ export class LoginComponent {
     const {
       email,
       password,
-     } = this.form.getRawValue();
+    } = this.form.getRawValue();
 
     try {
       await this.loginUsecase.call({
         email,
         password,
       });
+
+      await this.routerService.navigate('home');
     } catch (error: any) {
       this.toastService.showError({
         message: error.message,

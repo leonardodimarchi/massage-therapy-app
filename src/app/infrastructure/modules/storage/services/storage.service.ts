@@ -1,9 +1,5 @@
 import { StorageServiceInterface } from '@domain/contracts/services/storage_service.interface';
-import { Injectable } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
 export class StorageService implements StorageServiceInterface {
 
   public async set(key: string, value: any): Promise<void> {
