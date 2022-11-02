@@ -7,6 +7,11 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
+    canActivate: [UserAccessGuard],
+    data: {
+      isUnProtectedRoute: true,
+      redirectTo: 'home'
+    }
   },
   {
     path: 'home',

@@ -1,0 +1,15 @@
+<div
+  class="menu-button"
+  [class.background-green]="isGreenBackground"
+  [class.background-purple]="isPurpleBackground">
+
+  <ng-container *ngIf="isAppointmentIcon">
+    <img src="assets/icons/appointment-icon.svg">
+  </ng-container>
+
+  <ng-container *ngIf="isInfoIcon">
+    <img src="assets/icons/info-icon.svg">
+  </ng-container>
+
+  <span>{{ text }}</span>
+</div>
