@@ -2,30 +2,38 @@ import { UserAccessModule } from "@infra/guards/user-access/user-access.module";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { UserAccessGuard } from "@infra/guards/user-access/user-access.guard";
+import { RouteData } from "./models/interfaces/route-data.interface";
+
+const routeData: { [key: string]: RouteData } = {
+  login: {
+    isUnprotectedRoute: true,
+    redirectTo: 'home',
+    animation: 'fromLeft',
+  },
+  home: {
+    isProtectedRoute: true,
+    redirectTo: 'login',
+    animation: 'fromRight',
+  },
+}
 
 const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
     canActivate: [UserAccessGuard],
-    data: {
-      isUnprotectedRoute: true,
-      redirectTo: 'home'
-    }
+    data: routeData['login'],
   },
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
     canActivate: [UserAccessGuard],
-    data: {
-      isProtectedRoute: true,
-      redirectTo: 'login'
-    }
+    data: routeData['home'],
   },
   {
     path: '**',
     pathMatch: 'full',
-    redirectTo: 'login'
+    redirectTo: 'login',
   }
 ];
 

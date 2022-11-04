@@ -1,3 +1,4 @@
+import { RouteAnimationParams } from './models/interfaces/route-animation-params.interface';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UserServiceInterface } from '@domain/contracts/services/user_service.interface';
@@ -22,7 +23,9 @@ export class AppComponent {
       await this.userService.setUpLoggedUser();
   }
 
-  public prepareRouteAnimations(outlet: RouterOutlet): string | false {
-    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
+  public prepareRouteAnimations(outlet: RouterOutlet): string | undefined {
+    return outlet &&
+      outlet.activatedRouteData &&
+      (outlet.activatedRouteData as RouteAnimationParams).animation;
   }
 }
