@@ -2,14 +2,21 @@
   <img src="assets/images/logo.png" />
 
   <form [formGroup]="form" (submit)="login()">
-    <label class="label">Email</label>
-    <input class="input" formControlName="email" />
+    <label for="email" class="label">Email</label>
+    <input
+      id="email"
+      class="input"
+      autocomplete="email"
+      formControlName="email"
+    />
 
     <label class="label">Senha</label>
     <div class="password-input">
       <input
+        id="password"
         class="input"
         formControlName="password"
+        autocomplete="password"
         [type]="isShowingPassword ? 'text' : 'password'"
       />
 

@@ -8,6 +8,7 @@ import { UserDatasourceInterface } from "@infra/contracts/datasources";
 import { UserDatasource } from "@infra/datasources/user/user_datasource";
 import { HttpService } from "@infra/modules/http/services/http_service";
 import { LoadingSpinnerModule } from "@infra/modules/loading/loading.module";
+import { RoutingModule } from "@infra/modules/router/router.module";
 import { UserRepository } from "@infra/repositories/user/user_repository";
 import { LoginRoutingModule } from "./login-routing.module";
 import { LoginComponent } from "./login.component";
@@ -18,6 +19,7 @@ import { LoginComponent } from "./login.component";
     LoginRoutingModule,
     ReactiveFormsModule,
     LoadingSpinnerModule,
+    RoutingModule,
   ],
   declarations: [
     LoginComponent,

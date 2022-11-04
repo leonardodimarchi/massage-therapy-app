@@ -1,13 +1,9 @@
-import { Injectable } from "@angular/core";
 import { UserServiceInterface, StorageServiceInterface, UserSubscriptionListener } from "@domain/contracts/services";
 import { JwtEntity } from "@domain/entities/auth/jwt_entity";
-import { UserEntity } from "@domain/entities/user/user_entity";
+import { UserEntity, UserEntityProps } from "@domain/entities/user/user_entity";
 import { storageKeys } from "@env/storage_keys";
 import { BehaviorSubject, Unsubscribable } from "rxjs";
 
-@Injectable({
-  providedIn: 'root'
-})
 export class UserService implements UserServiceInterface {
 
   constructor(
@@ -34,14 +30,19 @@ export class UserService implements UserServiceInterface {
   }
 
   async isLogged(): Promise<boolean> {
-    const user = await this.storageService.get<UserEntity>(storageKeys.loggedUser);
+    const user = await this.storageService.get<{ props: UserEntityProps }>(storageKeys.loggedUser);
 
     return !!user;
   }
 
   async setUpLoggedUser(): Promise<void> {
-    const user = await this.storageService.get<UserEntity>(storageKeys.loggedUser);
+    const user = await this.storageService.get<{ props: UserEntityProps }>(storageKeys.loggedUser);
 
-    this.loggedUserSubject.next(user);
+    this.loggedUserSubject.next(user?.props ? new UserEntity(user.props) : null);
+  }
+
+  async clearLoggedUser(): Promise<void> {
+    await this.storageService.clearAll();
+    this.loggedUserSubject.next(null);
   }
 }

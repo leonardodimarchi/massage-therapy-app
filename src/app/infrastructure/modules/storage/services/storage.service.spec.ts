@@ -1,5 +1,3 @@
-import { TestBed } from '@angular/core/testing';
-
 import { StorageService } from '@infra/modules/storage/services/storage.service';
 
 describe('StorageService', () => {
@@ -7,8 +5,7 @@ describe('StorageService', () => {
   let localStorageSpy: jasmine.SpyObj<typeof localStorage>;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(StorageService);
+    service = new StorageService();
 
     localStorageSpy = jasmine.createSpyObj('localStorage', ['setItem', 'getItem']);
 
