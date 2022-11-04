@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { UserServiceInterface } from '@domain/contracts/services/user_service.interface';
 
 @Component({
@@ -19,5 +20,9 @@ export class AppComponent {
 
     if (isLogged)
       await this.userService.setUpLoggedUser();
+  }
+
+  public prepareRouteAnimations(outlet: RouterOutlet): string | false {
+    return outlet && outlet.activatedRouteData && outlet.activatedRouteData['animation'];
   }
 }
