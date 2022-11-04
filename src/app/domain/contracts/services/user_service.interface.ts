@@ -14,4 +14,5 @@ export abstract class UserServiceInterface {
     abstract getJwt(): Promise<JwtEntity | null>;
     abstract isLogged(): Promise<boolean>;
     abstract setUpLoggedUser(): Promise<void>;
+    abstract clearLoggedUser(): Promise<void>;
 }

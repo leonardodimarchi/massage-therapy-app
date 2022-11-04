@@ -21,7 +21,6 @@ describe('UserEntity', () => {
     });
 
     expect(user.id).toBe(id);
-    expect(user.id).toBe(id);
     expect(user.createdAt).toBe(createdAt);
     expect(user.updatedAt).toBe(updatedAt);
     expect(user.birthDate).toBe(birthDate);

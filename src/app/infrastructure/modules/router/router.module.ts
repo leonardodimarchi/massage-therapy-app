@@ -11,4 +11,4 @@ import { RouterService } from "./services/router.service";
     { provide: RouterServiceInterface, useClass: RouterService },
   ]
 })
-export class StorageModule {}
+export class RoutingModule {}

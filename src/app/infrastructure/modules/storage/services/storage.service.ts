@@ -2,11 +2,11 @@ import { StorageServiceInterface } from '@domain/contracts/services/storage_serv
 
 export class StorageService implements StorageServiceInterface {
 
-  public async set(key: string, value: any): Promise<void> {
+  async set(key: string, value: any): Promise<void> {
     localStorage.setItem(key, JSON.stringify(value));
   }
 
-  public async get<ReturnType = any>(key: string): Promise<ReturnType | null> {
+  async get<ReturnType = any>(key: string): Promise<ReturnType | null> {
     const item = localStorage.getItem(key);
 
     if (item)
@@ -14,4 +14,13 @@ export class StorageService implements StorageServiceInterface {
 
     return null;
   }
+
+  async remove(key: string): Promise<void> {
+    localStorage.removeItem(key);
+  }
+
+  async clearAll(): Promise<void> {
+    localStorage.clear();
+  }
+
 }

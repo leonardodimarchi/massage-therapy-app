@@ -1,7 +1,6 @@
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { NgModule, ModuleWithProviders } from "@angular/core";
 import { UserServiceInterface } from "@domain/contracts/services";
-import { UserModule } from "@infra/modules/user/user.module";
 import { HttpConfig } from "@infra/modules/http/contracts/http_config.interface";
 import { UserTokenInterceptor } from "@infra/modules/http/interceptors/user-token.interceptor";
 import { HttpService } from "@infra/modules/http/services/http_service";
@@ -10,7 +9,6 @@ import { HTTP_MODULE_CONFIG } from "@infra/modules/http/tokens/http_config_injec
 @NgModule({
   imports: [
     HttpClientModule,
-    UserModule,
   ],
   providers: [
     HttpService,

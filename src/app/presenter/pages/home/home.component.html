@@ -1,7 +1,7 @@
 <div class="page">
   <img src="assets/images/logo.png">
 
-  <h1>Olá, Luiz!</h1>
+  <h1>Olá, {{ currentUser?.name }}!</h1>
 
   <div class="page--menu-buttons">
     <app-menu-button
@@ -18,5 +18,5 @@
     </app-menu-button>
   </div>
 
-  <span>Sair</span>
+  <span (click)="logout()">Sair</span>
 </div>
