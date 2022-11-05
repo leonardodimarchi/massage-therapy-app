@@ -1,4 +1,4 @@
-export type RouteAnimationTypes = 'fade' | 'fromLeft' | 'fromRight';
+export type RouteAnimationTypes = 'fromLeft' | 'fromRight';
 
 export interface RouteAnimationParams {
   animation?: RouteAnimationTypes;

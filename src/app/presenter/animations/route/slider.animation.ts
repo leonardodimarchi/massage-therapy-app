@@ -3,10 +3,10 @@ import { trigger, transition, query, style, group, animate } from "@angular/anim
 // TODO: Test and clean
 export const sliderRouteAnimation =
   trigger('routeAnimations', [
-    transition('* => fromRight', slideTo('left') ),
-    transition('* => fromLeft', slideTo('right') ),
-    transition('fromLeft => *', slideTo('left') ),
-    transition('fromRight => *', slideTo('right') )
+    transition('* => fromLeft', slideTo('left') ),
+    transition('* => fromRight', slideTo('right') ),
+    transition('fromRight => *', slideTo('left') ),
+    transition('fromLeft => *', slideTo('right') )
   ]);
 
 function slideTo(direction: string) {
@@ -17,18 +17,26 @@ function slideTo(direction: string) {
         position: 'absolute',
         top: 0,
         [direction]: 0,
-        width: '100%'
+        width: '100%',
       })
     ], optional),
     query(':enter', [
-      style({ [direction]: '-100%'})
+      style({
+        [direction]: '-100%',
+        opacity: 0,
+      })
     ]),
     group([
       query(':leave', [
-        animate('600ms ease', style({ [direction]: '100%'}))
+        animate('500ms ease', style({
+          [direction]: '100%',
+        }))
       ], optional),
       query(':enter', [
-        animate('600ms ease', style({ [direction]: '0%'}))
+        animate('500ms ease', style({
+          [direction]: '0%',
+          opacity: 1,
+        })),
       ])
     ]),
     // Normalize the page style... Might not be necessary
