@@ -1,6 +1,6 @@
 import { LogoutUsecase } from '@domain/usecases/user/logout_usecase';
 import { mockedUserEntity } from '@mocks/user/entities/user_entity_mock';
-import { UserServiceInterface } from '@domain/contracts/services';
+import { Unsubscribable, UserServiceInterface } from '@domain/contracts/services';
 import { HomeComponent } from './home.component';
 import { RouterServiceInterface } from '@infra/modules/router/contracts/router-service.interface';
 
@@ -42,6 +42,15 @@ describe('HomeComponent', () => {
         (component as any).userListener(null);
 
         expect(component.currentUser).toBeNull();
+      });
+
+      it('should unsubscribe at page destroy', () => {
+        const subscription: jasmine.SpyObj<Unsubscribable> = jasmine.createSpyObj('Unsubscribable', ['unsubscribe']);
+        (component as any).userSubscription = subscription;
+
+        component.ngOnDestroy();
+
+        expect(subscription.unsubscribe).toHaveBeenCalledTimes(1);
       });
     })
   });

@@ -1,7 +1,7 @@
 import { LogoutUsecase } from '@domain/usecases/user/logout_usecase';
 import { UserEntity } from '@domain/entities/user/user_entity';
-import { UserServiceInterface } from '@domain/contracts/services';
-import { Component } from "@angular/core";
+import { Unsubscribable, UserServiceInterface } from '@domain/contracts/services';
+import { Component, OnDestroy } from "@angular/core";
 import { RouterServiceInterface } from '@infra/modules/router/contracts/router-service.interface';
 
 @Component({
@@ -9,17 +9,23 @@ import { RouterServiceInterface } from '@infra/modules/router/contracts/router-s
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements OnDestroy {
 
   constructor(
     private readonly userService: UserServiceInterface,
     private readonly routerService: RouterServiceInterface,
     private readonly logoutUsecase: LogoutUsecase,
   ) {
-    this.userService.subscribeLoggedUserForChanges(this.userListener.bind(this));
+    this.userSubscription = this.userService.subscribeLoggedUserForChanges(this.userListener.bind(this));
   }
 
   public currentUser: UserEntity | null = null;
+
+  private userSubscription: Unsubscribable;
+
+  public ngOnDestroy(): void {
+    this.userSubscription.unsubscribe();
+  }
 
   public async logout(): Promise<void> {
     await this.logoutUsecase.call();
