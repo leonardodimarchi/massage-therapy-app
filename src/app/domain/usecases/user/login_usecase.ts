@@ -2,6 +2,7 @@ import { UserRepositoryInterface } from "@domain/contracts/repositories/user_rep
 import { UserServiceInterface } from "@domain/contracts/services/user_service.interface";
 import { UserValidators } from "@domain/validators/user/user_validators";
 import { UseCase } from "@domain/usecases/usecase";
+import { ValidationError } from "@domain/errors/validation_error";
 
 export interface LoginUsecaseInput {
   email: string;
@@ -21,10 +22,10 @@ export class LoginUsecase implements UseCase<LoginUsecaseInput, LoginUsecaseOutp
     const isValidPassword = UserValidators.isValidPassword(params.password);
 
     if (!isValidEmail)
-      throw new Error('Por favor, enviar um e-mail válido.');
+      throw new ValidationError('Por favor, enviar um e-mail válido.');
 
     if (!isValidPassword)
-      throw new Error('Por favor, enviar uma senha válida.');
+      throw new ValidationError('Por favor, enviar uma senha válida.');
 
     params.email = params.email.trim();
     params.password = params.password.trim();
