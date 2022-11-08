@@ -1,6 +1,9 @@
-import { trigger, transition, query, style, group, animate } from "@angular/animations";
+import { trigger, transition, query, style, group, animate, AnimationQueryOptions, AnimationGroupMetadata, AnimationQueryMetadata } from "@angular/animations";
 
-// TODO: Test and clean
+export type SliderRouteAnimationTypes = 'fromLeft' | 'fromRight';
+
+type SliderDirections = 'left' | 'right';
+
 export const sliderRouteAnimation =
   trigger('routeAnimations', [
     transition('* => fromLeft', slideTo('left') ),
@@ -9,8 +12,11 @@ export const sliderRouteAnimation =
     transition('fromLeft => *', slideTo('right') )
   ]);
 
-function slideTo(direction: string) {
-  const optional = { optional: true };
+function slideTo(direction: SliderDirections): (AnimationQueryMetadata | AnimationGroupMetadata)[] {
+  const queryOptions: AnimationQueryOptions = {
+    optional: true,
+  };
+
   return [
     query(':enter, :leave', [
       style({
@@ -19,7 +25,7 @@ function slideTo(direction: string) {
         [direction]: 0,
         width: '100%',
       })
-    ], optional),
+    ], queryOptions),
     query(':enter', [
       style({
         [direction]: '-100%',
@@ -31,7 +37,7 @@ function slideTo(direction: string) {
         animate('500ms ease', style({
           [direction]: '100%',
         }))
-      ], optional),
+      ], queryOptions),
       query(':enter', [
         animate('500ms ease', style({
           [direction]: '0%',
@@ -39,10 +45,5 @@ function slideTo(direction: string) {
         })),
       ])
     ]),
-    // Normalize the page style... Might not be necessary
-
-    // Required only if you have child animations on the page
-    // query(':leave', animateChild()),
-    // query(':enter', animateChild()),
   ];
 }

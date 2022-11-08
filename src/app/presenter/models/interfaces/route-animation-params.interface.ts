@@ -1,5 +1,5 @@
-export type RouteAnimationTypes = 'fromLeft' | 'fromRight';
+import { SliderRouteAnimationTypes } from "@presenter/animations/route/slider.animation";
 
 export interface RouteAnimationParams {
-  animation?: RouteAnimationTypes;
+  animation?: SliderRouteAnimationTypes;
 }
