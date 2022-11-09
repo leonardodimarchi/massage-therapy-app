@@ -12,7 +12,7 @@ export class UserRepository implements UserRepositoryInterface {
   async login(params: LoginParams): Promise<LoginEntity> {
     try {
       return await this.datasource.login(params);
-    } catch (error) {
+    } catch (error: unknown) {
       HttpErrorHandler.handle(error);
     }
   }

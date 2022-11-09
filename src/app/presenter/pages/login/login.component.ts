@@ -1,8 +1,10 @@
+import { BadRequestError } from '@domain/errors';
 import { ToastServiceInterface } from "@infra/modules/toast/contracts/toast-service.interface";
 import { Component } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { LoginUsecase } from "@domain/usecases/user/login_usecase";
 import { RouterServiceInterface } from "@infra/modules/router/contracts/router-service.interface";
+import { ValidationError } from '@domain/errors/validation_error';
 
 interface LoginPayloadForm {
   email: FormControl<string>,
@@ -51,10 +53,21 @@ export class LoginComponent {
       });
 
       await this.routerService.navigate('home');
-    } catch (error: any) {
-      this.toastService.showError({
-        message: error.message,
-      })
+    } catch (error: unknown) {
+      const isBadRequestError = error instanceof BadRequestError;
+      const isValidationError = error instanceof ValidationError;
+
+      if (isBadRequestError || isValidationError) {
+        return this.toastService.showWarning({
+          message: error.message,
+        });
+      }
+
+      if (error instanceof Error) {
+        this.toastService.showError({
+          message: error.message,
+        });
+      }
     } finally {
       this.isLoading = false;
     }
