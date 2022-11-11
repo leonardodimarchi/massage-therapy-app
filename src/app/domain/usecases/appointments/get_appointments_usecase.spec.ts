@@ -6,4 +6,8 @@ describe('GetAppointmentsUsecase', () => {
   beforeEach(() => {
     usecase = new GetAppointmentsUsecase();
   });
+
+  it('should instantiate the usecase', () => {
+    expect(usecase).toBeDefined();
+  })
 });
