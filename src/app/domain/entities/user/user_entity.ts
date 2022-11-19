@@ -1,4 +1,4 @@
-import { BaseEntityProps } from "@domain/entities/base_entity";
+import { BaseEntity, BaseEntityProps } from "@domain/entities/base_entity";
 
 export interface UserEntityProps extends BaseEntityProps {
   email: string;
@@ -7,24 +7,10 @@ export interface UserEntityProps extends BaseEntityProps {
   birthDate: Date;
 }
 
-export class UserEntity {
+export class UserEntity extends BaseEntity<UserEntityProps> {
 
   constructor(props: UserEntityProps) {
-    this.props = props;
-  }
-
-  private props: UserEntityProps;
-
-  public set id(id: number) {
-    this.props.id = id;
-  }
-
-  public set createdAt(createdAt: Date) {
-    this.props.createdAt = createdAt;
-  }
-
-  public set updatedAt(updatedAt: Date) {
-    this.props.updatedAt = updatedAt;
+    super(props);
   }
 
   public set email(email: string) {
@@ -41,18 +27,6 @@ export class UserEntity {
 
   public set birthDate(birthDate: Date) {
     this.props.birthDate = birthDate;
-  }
-
-  public get id(): number {
-    return this.props.id;
-  }
-
-  public get createdAt(): Date {
-    return this.props.createdAt;
-  }
-
-  public get updatedAt(): Date {
-    return this.props.updatedAt;
   }
 
   public get email(): string {

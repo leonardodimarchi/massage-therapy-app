@@ -9,5 +9,5 @@ describe('GetAppointmentsUsecase', () => {
 
   it('should instantiate the usecase', () => {
     expect(usecase).toBeDefined();
-  })
+  });
 });
