@@ -1,15 +1,15 @@
 import { AppointmentEntity } from '@domain/entities/appointment/appointment_entity';
 import { PaginatedItems } from '@domain/models/interfaces/paginated-items.interface';
 import { mockedAppointmentEntity } from './../../../../test/mocks/appointment/entities/appointment_entity_mock';
-import { AppointmentRepository } from "@domain/contracts/repositories";
+import { AppointmentRepositoryInterface } from "@domain/contracts/repositories";
 import { GetUserAppointmentsUsecase } from "./get_user_appointments_usecase";
 
 describe('GetUserAppointmentsUsecase', () => {
   let usecase: GetUserAppointmentsUsecase;
-  let repository: jasmine.SpyObj<AppointmentRepository>;
+  let repository: jasmine.SpyObj<AppointmentRepositoryInterface>;
 
   beforeEach(() => {
-    repository = jasmine.createSpyObj('AppointmentRepository', ['getUserAppointments'])
+    repository = jasmine.createSpyObj('AppointmentRepositoryInterface', ['getUserAppointments'])
     usecase = new GetUserAppointmentsUsecase(repository);
   });
 

@@ -1,4 +1,4 @@
-import { AppointmentRepository } from '@domain/contracts/repositories';
+import { AppointmentRepositoryInterface } from '@domain/contracts/repositories';
 import { AppointmentEntity } from '@domain/entities/appointment/appointment_entity';
 import { PaginatedItems } from "@domain/models/interfaces/paginated-items.interface";
 import { UseCase } from "@domain/usecases/usecase";
@@ -12,7 +12,7 @@ export type GetUserAppointmentsUsecaseOutput = PaginatedItems<AppointmentEntity>
 
 export class GetUserAppointmentsUsecase implements UseCase<GetUserAppointmentsUsecaseInput, GetUserAppointmentsUsecaseOutput> {
 
-  constructor(private readonly repository: AppointmentRepository) { }
+  constructor(private readonly repository: AppointmentRepositoryInterface) { }
 
   async call({ page, limit }: GetUserAppointmentsUsecaseInput): Promise<GetUserAppointmentsUsecaseOutput> {
     return await this.repository.getUserAppointments({ page, limit });
