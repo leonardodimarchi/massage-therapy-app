@@ -1,9 +1,9 @@
-import { AppointmentStatusEnum } from '@domain/models/appointment/appointment-status.enum';
-import { AppointmentEntity } from '@domain/entities/appointment/appointment_entity';
+import { AppointmentDto } from '@infra/models/appointment/dto/appointment_dto';
+import { AppointmentStatusEnum } from "@domain/models/appointment/appointment-status.enum";
 
 const id = 1;
-const createdAt = new Date(2022, 10, 5, 2, 30);
-const updatedAt = new Date(2022, 10, 5, 2, 30);
+const createdAt = '2022-11-05T05:30:00.000Z';
+const updatedAt = '2022-11-05T05:30:00.000Z';
 
 const userId = 2;
 
@@ -17,7 +17,7 @@ const isUnderMedicalTreatment = false;
 const isPregnant = false;
 const pregnantWeeks = 0;
 
-export const mockedAppointmentEntity = new AppointmentEntity({
+export const mockedAppointmentDto: AppointmentDto = {
   id,
   createdAt,
   updatedAt,
@@ -30,4 +30,5 @@ export const mockedAppointmentEntity = new AppointmentEntity({
   isUnderMedicalTreatment,
   isPregnant,
   pregnantWeeks,
-})
+}
+

@@ -41,5 +41,23 @@ describe('AppointmentDatasource', () => {
 
         expect(httpService.get).toHaveBeenCalledOnceWith(url);
       });
-    })
+
+      it('should return the DTO', async () => {
+        const fetchResult: PaginatedItemsDto<AppointmentDto> = {
+          count: 1,
+          page: 1,
+          pageCount: 1,
+          total: 1,
+          items: [],
+        };
+        httpService.get.and.resolveTo(fetchResult);
+
+        const result = await datasource.getUserAppointments({
+          page: 1,
+          limit: 5,
+        });
+
+        expect(result).toEqual(fetchResult);
+      });
+    });
 });
