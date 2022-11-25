@@ -23,7 +23,7 @@ export abstract class BaseEntity<TProps extends BaseEntityProps> {
   public set updatedAt(updatedAt: Date) {
     this.props.updatedAt = updatedAt;
   }
-  
+
   public get id(): number {
     return this.props.id;
   }

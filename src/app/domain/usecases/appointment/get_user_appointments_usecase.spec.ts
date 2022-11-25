@@ -1,5 +1,5 @@
+import { PaginatedItemsEntity } from '@domain/entities/shared/paginated_items_entity';
 import { AppointmentEntity } from '@domain/entities/appointment/appointment_entity';
-import { PaginatedItems } from '@domain/models/interfaces/paginated-items.interface';
 import { mockedAppointmentEntity } from './../../../../test/mocks/appointment/entities/appointment_entity_mock';
 import { AppointmentRepositoryInterface } from "@domain/contracts/repositories";
 import { GetUserAppointmentsUsecase } from "./get_user_appointments_usecase";
@@ -18,13 +18,13 @@ describe('GetUserAppointmentsUsecase', () => {
   });
 
   it('should call the repository and return its result', async () => {
-    const paginatedItems: PaginatedItems<AppointmentEntity> = {
+    const paginatedItems: PaginatedItemsEntity<AppointmentEntity> = new PaginatedItemsEntity({
       page: 1,
       pageCount: 1,
       total: 1,
       count: 1,
       items: [mockedAppointmentEntity],
-    };
+    });
 
     repository.getUserAppointments.and.resolveTo(paginatedItems)
 

@@ -1,8 +1,8 @@
+import { PaginatedItemsEntity } from '@domain/entities/shared/paginated_items_entity';
 import { AppointmentEntity } from './../../entities/appointment/appointment_entity';
-import { PaginatedItems } from './../../models/interfaces/paginated-items.interface';
 
 export abstract class AppointmentRepositoryInterface {
-  abstract getUserAppointments(params: GetUserAppointmentsParams): Promise<PaginatedItems<AppointmentEntity>>;
+  abstract getUserAppointments(params: GetUserAppointmentsParams): Promise<PaginatedItemsEntity<AppointmentEntity>>;
 }
 
 export interface GetUserAppointmentsParams {

@@ -1,4 +1,4 @@
-import { BaseEntity, BaseEntityProps } from "@domain/entities/base_entity";
+import { BaseEntity, BaseEntityProps } from "@domain/entities/shared/base_entity";
 import { AppointmentStatusEnum } from "@domain/models/appointment/appointment-status.enum";
 
 export interface AppointmentEntityProps extends BaseEntityProps {

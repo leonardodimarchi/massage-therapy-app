@@ -1,6 +1,6 @@
 import { AppointmentRepositoryInterface } from '@domain/contracts/repositories';
 import { AppointmentEntity } from '@domain/entities/appointment/appointment_entity';
-import { PaginatedItems } from "@domain/models/interfaces/paginated-items.interface";
+import { PaginatedItemsEntity } from '@domain/entities/shared/paginated_items_entity';
 import { UseCase } from "@domain/usecases/usecase";
 
 export type GetUserAppointmentsUsecaseInput = {
@@ -8,7 +8,7 @@ export type GetUserAppointmentsUsecaseInput = {
   limit: number;
 };
 
-export type GetUserAppointmentsUsecaseOutput = PaginatedItems<AppointmentEntity>;
+export type GetUserAppointmentsUsecaseOutput = PaginatedItemsEntity<AppointmentEntity>;
 
 export class GetUserAppointmentsUsecase implements UseCase<GetUserAppointmentsUsecaseInput, GetUserAppointmentsUsecaseOutput> {
 

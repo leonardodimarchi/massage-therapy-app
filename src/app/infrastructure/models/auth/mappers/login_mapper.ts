@@ -4,12 +4,10 @@ import { UserMapper } from "@infra/models/user/mappers/user_mapper";
 import { LoginDto } from "@infra/models/auth/dto/login_dto";
 import { JwtMapper } from "@infra/models/auth/mappers/jwt_mapper";
 
-export class LoginMapper extends Mapper<LoginEntity> {
+export class LoginMapper implements Mapper<LoginEntity> {
     private props: LoginDto;
 
     constructor(props: LoginDto) {
-        super();
-
         this.props = props;
     }
 
