@@ -32,7 +32,7 @@ The infrastructure layer is responsible for implementing the interfaces defined 
     - Here, we'll have the interfaces that our infrastructure layer need. For example, our datasources interfaces, so that the repositories can depend on them and not in the actual implementation
 
 - Datasources
-    - A datasource will communicate directly with the external resource. In our case, the datasource will call an API with the HttpService.
+    - A datasource will communicate directly with a external resource. In our case, the datasource will call an API with the HttpService.
         
 - Models
     - Here, we'll have the DTO's and Mapper objects for each entity
