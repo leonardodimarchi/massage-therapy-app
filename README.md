@@ -32,7 +32,7 @@ The infrastructure layer is responsible for implementing the interfaces defined 
     - Here, we'll have the interfaces that our infrastructure layer need. For example, our datasources interfaces, so that the repositories can depend on them and not in the actual implementation
 
 - Datasources
-    - A datasource will communicate directly with the external resource and map the result to something that our app will understand. In our case, the datasource will call an API with the HttpService and, with a Mapper class, map the DTO (Data Transfer Object) to the actual entity if that is the case.
+    - A datasource will communicate directly with the external resource. In our case, the datasource will call an API with the HttpService.
         
 - Models
     - Here, we'll have the DTO's and Mapper objects for each entity
@@ -41,7 +41,7 @@ The infrastructure layer is responsible for implementing the interfaces defined 
     - Will implement all the utilities and specific services such as the StorageService, HttpService, ToastService, etc.
 
 - Repositories
-    - The repositories are responsibles for calling the datasources and handle the errors that may exist. They are called by the usecases (at the domain layer) 
+    - The repositories are responsibles for calling the data sources, mapping the external DTOs to our application's entities, and handling any errors that may exist. They are called by the usecases (at the domain layer) 
 
 ### Presenter
 The presenter layer is our last one. It will have all the UI part of the APP. The Angular framework will appear here (and just a bit at the infrastructure layer, cause we're using the Angular HttpClient).
