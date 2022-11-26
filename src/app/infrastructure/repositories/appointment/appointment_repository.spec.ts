@@ -75,5 +75,5 @@ describe('AppointmentRepository', () => {
     });
 
     expect(errorHandlerSpy).toHaveBeenCalledOnceWith(error);
-  })
+  });
 });
