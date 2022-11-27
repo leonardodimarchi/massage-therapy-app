@@ -15,6 +15,11 @@ const routeData: { [key: string]: RouteData } = {
     redirectTo: 'login',
     animation: 'fromRight',
   },
+  appointments: {
+    isProtectedRoute: true,
+    redirectTo: 'login',
+    animation: 'fromRight',
+  },
 }
 
 const routes: Routes = [
@@ -29,6 +34,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule),
     canActivate: [UserAccessGuard],
     data: routeData['home'],
+  },
+  {
+    path: 'appointments',
+    loadChildren: () => import('./pages/appointments/appointments.module').then(m => m.AppointmentsModule),
+    canActivate: [UserAccessGuard],
+    data: routeData['appointments'],
   },
   {
     path: '**',

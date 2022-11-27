@@ -1,0 +1,26 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  height: 100vh;
+  width: 100vw;
+
+  padding: 0 3rem {
+    top: 6rem;
+  };
+
+  > img {
+    width: 35vw;
+    min-width: 6rem;
+    height: auto;
+
+    margin-bottom: 2.5rem;
+  }
+
+  > h1 {
+    font-size: 1.5rem;
+
+    margin-bottom: 2.5rem;
+  }
+}
