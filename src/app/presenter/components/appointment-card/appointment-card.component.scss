@@ -1,0 +1,41 @@
+:host {
+  width: 100%;
+}
+
+.appointment-card {
+  display: flex;
+  align-items: center;
+
+  height: 5rem;
+  width: 100%;
+
+  padding: 1.5rem;
+
+  &--icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    aspect-ratio: 1 / 1;
+
+    padding: 1rem;
+
+    > img {
+      height: 100%;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  &--content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    &--symptoms {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  }
+}
