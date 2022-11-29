@@ -1,3 +1,4 @@
+import { AppointmentCardModule } from './../../components/appointment-card/appointment-card.module';
 import { HttpService } from './../../../infrastructure/modules/http/services/http_service';
 import { AppointmentDatasource } from './../../../infrastructure/datasources/appointment/appointment_datasource';
 import { GetUserAppointmentsUsecase } from './../../../domain/usecases/appointment/get_user_appointments_usecase';
@@ -14,6 +15,7 @@ import { HttpServiceInterface } from '@domain/contracts/services/http_service.in
   imports: [
     CommonModule,
     AppointmentsRoutingModule,
+    AppointmentCardModule,
   ],
   declarations: [
     AppointmentsComponent,
@@ -24,6 +26,7 @@ import { HttpServiceInterface } from '@domain/contracts/services/http_service.in
       useFactory: (repository: AppointmentRepositoryInterface) => {
         return new GetUserAppointmentsUsecase(repository);
       },
+      deps: [AppointmentRepositoryInterface],
     },
     {
       provide: AppointmentRepositoryInterface,

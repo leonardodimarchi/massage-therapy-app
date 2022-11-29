@@ -2,4 +2,10 @@
   <img src="assets/images/logo.png">
 
   <h1>Agendamentos</h1>
+
+  <div class="page--list">
+    <ng-container *ngFor="let appointment of []">
+      <app-appointment-card [appointment]="appointment"></app-appointment-card>
+    </ng-container>
+  </div>
 </div>
