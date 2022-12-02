@@ -3,13 +3,19 @@
 }
 
 .appointment-card {
+  --shadow-color: rgba(145, 149, 255, 0.2);
+  --accent-color: var(--color-purple);
+
   display: flex;
   align-items: center;
 
   height: 5rem;
   width: 100%;
 
-  padding: 1.5rem;
+  padding: 1rem;
+
+  border-radius: 10px;
+  box-shadow: 4px 8px 24px var(--shadow-color);
 
   &--icon {
     display: flex;
@@ -20,6 +26,8 @@
     aspect-ratio: 1 / 1;
 
     padding: 1rem;
+
+    background-color: var(--accent-color);
 
     > img {
       height: 100%;
@@ -37,5 +45,25 @@
       align-items: center;
       gap: 0.5rem;
     }
+  }
+
+  &.completed {
+    --shadow-color: rgba(3, 209, 86, 0.2);
+    --accent-color: var(--color-green);
+  }
+
+  &.scheduled {
+    --shadow-color: rgba(255, 127, 173, 0.2);
+    --accent-color: var(--color-purple);
+  }
+
+  &.pending {
+    --shadow-color: rgba(255, 195, 105, 0.3);
+    --accent-color: var(--color-yellow);
+  }
+
+  &.canceled {
+    --shadow-color: rgba(145, 149, 255, 0.2);
+    --accent-color: var(--color-red);
   }
 }

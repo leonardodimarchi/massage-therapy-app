@@ -1,4 +1,9 @@
-<div class="appointment-card">
+<div
+  class="appointment-card"
+  [class.completed]="isCompleted"
+  [class.scheduled]="isScheduled"
+  [class.pending]="isPending"
+  [class.canceled]="isCanceled">
   <div class="appointment-card--icon">
     <img />
   </div>

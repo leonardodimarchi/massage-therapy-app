@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AppointmentEntity } from '@domain/entities/appointment/appointment_entity';
+import { AppointmentStatusEnum } from '@domain/models/appointment/appointment-status.enum';
 
 @Component({
   selector: 'app-appointment-card',
@@ -10,5 +11,21 @@ export class AppointmentCardComponent {
 
   @Input()
   public appointment!: AppointmentEntity;
+
+  public get isCompleted(): boolean {
+    return this.appointment.status === AppointmentStatusEnum.COMPLETED;
+  }
+
+  public get isScheduled(): boolean {
+    return this.appointment.status === AppointmentStatusEnum.SCHEDULED;
+  }
+
+  public get isPending(): boolean {
+    return this.appointment.status === AppointmentStatusEnum.PENDING;
+  }
+
+  public get isCanceled(): boolean {
+    return this.appointment.status === AppointmentStatusEnum.REPROVED;
+  }
 
 }
