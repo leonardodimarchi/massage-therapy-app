@@ -25,8 +25,9 @@
     height: 100%;
     aspect-ratio: 1 / 1;
 
-    padding: 1rem;
+    padding: 0.5rem;
 
+    border-radius: 10px;
     background-color: var(--accent-color);
 
     > img {
@@ -53,7 +54,7 @@
   }
 
   &.scheduled {
-    --shadow-color: rgba(255, 127, 173, 0.2);
+    --shadow-color: rgba(145, 149, 255, 0.2);
     --accent-color: var(--color-purple);
   }
 
@@ -63,7 +64,7 @@
   }
 
   &.canceled {
-    --shadow-color: rgba(145, 149, 255, 0.2);
-    --accent-color: var(--color-red);
+    --shadow-color: rgba(255, 127, 173, 0.2);
+    --accent-color: var(--color-pink);
   }
 }

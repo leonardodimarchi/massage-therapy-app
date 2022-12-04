@@ -5,11 +5,11 @@
   [class.pending]="isPending"
   [class.canceled]="isCanceled">
   <div class="appointment-card--icon">
-    <img />
+    <img [src]="iconUrl" />
   </div>
 
   <div class="appointment-card--content">
-    <h3></h3>
+    <h3>{{ status }}</h3>
     <div class="appointment-card--content--symptoms">
       <!-- Pill Components -->
       <div></div>

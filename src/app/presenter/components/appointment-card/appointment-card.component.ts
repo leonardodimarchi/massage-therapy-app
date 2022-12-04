@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AppointmentEntity } from '@domain/entities/appointment/appointment_entity';
-import { AppointmentStatusEnum } from '@domain/models/appointment/appointment-status.enum';
+import { AppointmentStatusEnum, appointmentStatusIcons, appointmentStatusToString } from '@domain/models/appointment/appointment-status.enum';
 
 @Component({
   selector: 'app-appointment-card',
@@ -26,6 +26,14 @@ export class AppointmentCardComponent {
 
   public get isCanceled(): boolean {
     return this.appointment.status === AppointmentStatusEnum.REPROVED;
+  }
+
+  public get status(): string {
+    return appointmentStatusToString[this.appointment.status];
+  }
+
+  public get iconUrl(): string {
+    return appointmentStatusIcons[this.appointment.status];
   }
 
 }
