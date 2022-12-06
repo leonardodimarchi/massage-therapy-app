@@ -36,4 +36,8 @@ export class AppointmentCardComponent {
     return appointmentStatusIcons[this.appointment.status];
   }
 
+  public get symptoms(): string[] {
+    return this.appointment.symptoms.split(',');
+  }
+
 }
