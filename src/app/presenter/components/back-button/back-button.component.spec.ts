@@ -1,23 +1,25 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterServiceInterface } from '@infra/modules/router/contracts/router-service.interface';
 import { BackButtonComponent } from './back-button.component';
 
 describe('BackButtonComponent', () => {
   let component: BackButtonComponent;
-  let fixture: ComponentFixture<BackButtonComponent>;
+
+  let routerService: jasmine.SpyObj<RouterServiceInterface>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ BackButtonComponent ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(BackButtonComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    routerService = jasmine.createSpyObj('RouterServiceInterface', ['goBack']);
+    component = new BackButtonComponent(routerService);
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('GoBack', () => {
+    it('should call router service goBack method', async () => {
+      await component.goBack();
+
+      expect(routerService.goBack).toHaveBeenCalledTimes(1);
+    });
   });
 });
