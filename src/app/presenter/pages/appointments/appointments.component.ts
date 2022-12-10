@@ -16,15 +16,18 @@ export class AppointmentsComponent {
 
   public appointments: PaginatedItemsEntity<AppointmentEntity> = new PaginatedItemsEntity({
     page: 0,
-    pageCount: 0,
+    pageCount: 1,
     total: 0,
     count: 0,
     items: [],
   });
-  
+
   public itemsPerPage: number = 0;
 
   public async loadAppointments(): Promise<void> {
+    if (this.appointments.page === this.appointments.pageCount)
+      return;
+
     this.appointments = await this.getUserAppointmentsUsecase.call({
       limit: this.itemsPerPage,
       page: this.appointments.page + 1,

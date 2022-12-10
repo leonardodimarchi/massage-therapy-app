@@ -27,11 +27,11 @@ describe('AppointmentsComponent', () => {
     });
 
     const mockedInitialPaginatedAppointments: PaginatedItemsEntity<AppointmentEntity> = new PaginatedItemsEntity<AppointmentEntity>({
-      count: 1,
+      count: 0,
       items: [],
-      page: 1,
+      page: 0,
       pageCount: 1,
-      total: 1,
+      total: 0,
     });
 
     it('should call the usecase and set the result', async () => {
@@ -51,7 +51,7 @@ describe('AppointmentsComponent', () => {
       component.appointments = new PaginatedItemsEntity<AppointmentEntity>({
         count: 0,
         page: currentPage,
-        pageCount: 1,
+        pageCount: 2,
         total: 0,
         items: [],
       });
@@ -72,7 +72,7 @@ describe('AppointmentsComponent', () => {
       component.appointments = new PaginatedItemsEntity<AppointmentEntity>({
         count: 0,
         page: currentPage,
-        pageCount: 1,
+        pageCount: 3,
         total: 0,
         items: [],
       });
@@ -84,6 +84,42 @@ describe('AppointmentsComponent', () => {
         limit: itemsPerPage,
         page: currentPage + 1,
       });
+    });
+
+    it('should not call if the current page is 1 and the maximum page count is 1 too', async () => {
+      const itemsPerPage = 8;
+      const currentPage = 1;
+
+      component.appointments = new PaginatedItemsEntity<AppointmentEntity>({
+        count: 0,
+        page: currentPage,
+        pageCount: 1,
+        total: 0,
+        items: [],
+      });
+      component.itemsPerPage = itemsPerPage;
+
+      await component.loadAppointments();
+
+      expect(getUserAppointmentsUsecase.call).not.toHaveBeenCalled();
+    });
+
+    it('should not call if the current page is 2 and the maximum page count is 2 too', async () => {
+      const itemsPerPage = 8;
+      const currentPage = 2;
+
+      component.appointments = new PaginatedItemsEntity<AppointmentEntity>({
+        count: 0,
+        page: currentPage,
+        pageCount: 2,
+        total: 0,
+        items: [],
+      });
+      component.itemsPerPage = itemsPerPage;
+
+      await component.loadAppointments();
+
+      expect(getUserAppointmentsUsecase.call).not.toHaveBeenCalled();
     });
   });
 });
