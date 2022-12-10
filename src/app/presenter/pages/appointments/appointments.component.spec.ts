@@ -2,15 +2,18 @@ import { AppointmentEntity } from './../../../domain/entities/appointment/appoin
 import { PaginatedItemsEntity } from "@domain/entities/shared/paginated_items_entity";
 import { GetUserAppointmentsUsecase } from "@domain/usecases/appointment/get_user_appointments_usecase";
 import { AppointmentsComponent } from "./appointments.component";
+import { ToastServiceInterface } from '@infra/modules/toast/contracts/toast-service.interface';
 
 describe('AppointmentsComponent', () => {
   let component: AppointmentsComponent;
 
   let getUserAppointmentsUsecase: jasmine.SpyObj<GetUserAppointmentsUsecase>;
+  let toastService: jasmine.SpyObj<ToastServiceInterface>;
 
   beforeEach(async () => {
     getUserAppointmentsUsecase = jasmine.createSpyObj('GetUserAppointmentsUsecase', ['call']);
-    component = new AppointmentsComponent(getUserAppointmentsUsecase);
+    toastService = jasmine.createSpyObj('ToastServiceInterface', ['showError']);
+    component = new AppointmentsComponent(getUserAppointmentsUsecase, toastService);
   });
 
   it('should create', () => {
@@ -151,7 +154,7 @@ describe('AppointmentsComponent', () => {
       expect(component.isLoading).toBeFalse();
     });
 
-    it('should set the loading as false even if the usecase throws and error', async () => {
+    it('should show a toast error if the usecase throws any', async () => {
       component.appointments = mockedInitialPaginatedAppointments;
       component.itemsPerPage = 5;
 
@@ -159,7 +162,7 @@ describe('AppointmentsComponent', () => {
 
       await component.loadAppointments();
 
-      expect(component.isLoading).toBeFalse();
+      expect(toastService.showError).toHaveBeenCalledOnceWith({ message: 'mocked error' });
     });
   });
 });

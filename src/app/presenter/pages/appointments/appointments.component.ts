@@ -2,6 +2,7 @@ import { AppointmentEntity } from './../../../domain/entities/appointment/appoin
 import { GetUserAppointmentsUsecase } from './../../../domain/usecases/appointment/get_user_appointments_usecase';
 import { Component } from "@angular/core";
 import { PaginatedItemsEntity } from '@domain/entities/shared/paginated_items_entity';
+import { ToastServiceInterface } from '@infra/modules/toast/contracts/toast-service.interface';
 
 @Component({
   selector: 'app-appointments',
@@ -12,6 +13,7 @@ export class AppointmentsComponent {
 
   constructor(
     private readonly getUserAppointmentsUsecase: GetUserAppointmentsUsecase,
+    private readonly toastService: ToastServiceInterface,
   ) { }
 
   public appointments: PaginatedItemsEntity<AppointmentEntity> = new PaginatedItemsEntity({
@@ -37,8 +39,9 @@ export class AppointmentsComponent {
         limit: this.itemsPerPage,
         page: this.appointments.page + 1,
       });
-    } catch (e) {
-      
+    } catch (error: unknown) {
+      if (error instanceof Error)
+        this.toastService.showError({ message: error.message });
     } finally {
       this.isLoading = false;
     }
