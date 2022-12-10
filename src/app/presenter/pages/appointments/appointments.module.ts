@@ -1,3 +1,4 @@
+import { InfiniteScrollModule } from './../../components/infinite-scroll/infinite-scroll.module';
 import { AppointmentCardModule } from './../../components/appointment-card/appointment-card.module';
 import { HttpService } from './../../../infrastructure/modules/http/services/http_service';
 import { AppointmentDatasource } from './../../../infrastructure/datasources/appointment/appointment_datasource';
@@ -16,6 +17,7 @@ import { HttpServiceInterface } from '@domain/contracts/services/http_service.in
     CommonModule,
     AppointmentsRoutingModule,
     AppointmentCardModule,
+    InfiniteScrollModule,
   ],
   declarations: [
     AppointmentsComponent,

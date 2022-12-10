@@ -3,9 +3,13 @@
 
   <h1>Agendamentos</h1>
 
-  <div class="page--list">
-    <ng-container *ngFor="let appointment of []">
-      <app-appointment-card [appointment]="appointment"></app-appointment-card>
+  <app-infinite-scroll [infiniteScrollOptions]="infiniteScrollOptions" (scrollEnd)="loadAppointments()">
+    <ng-container items>
+      <div class="page--list">
+        <ng-container *ngFor="let appointment of appointments.items">
+          <app-appointment-card [appointment]="appointment"></app-appointment-card>
+        </ng-container>
+      </div>
     </ng-container>
-  </div>
+  </app-infinite-scroll>
 </div>

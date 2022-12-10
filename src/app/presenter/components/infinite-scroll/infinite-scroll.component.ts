@@ -3,7 +3,7 @@ import { AfterViewInit, ElementRef, EventEmitter, Input, Output } from '@angular
 import { Component, ViewChild } from '@angular/core';
 import { Subject, Subscription, throttleTime } from 'rxjs';
 
-interface InfiniteScrollOptions {
+export interface InfiniteScrollOptions {
   throttleTimeInMs: number;
   thresholdInPercentage: number;
 }

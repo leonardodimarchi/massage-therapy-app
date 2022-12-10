@@ -1,3 +1,4 @@
+import { mockedAppointmentEntity } from './../../../../test/mocks/appointment/entities/appointment_entity_mock';
 import { AppointmentEntity } from './../../../domain/entities/appointment/appointment_entity';
 import { PaginatedItemsEntity } from "@domain/entities/shared/paginated_items_entity";
 import { GetUserAppointmentsUsecase } from "@domain/usecases/appointment/get_user_appointments_usecase";
@@ -165,13 +166,33 @@ describe('AppointmentsComponent', () => {
       expect(toastService.showError).toHaveBeenCalledOnceWith({ message: 'mocked error' });
     });
 
-    it('should be called at the page start', async () => {
-      component.appointments = mockedInitialPaginatedAppointments;
+    it('should append the new items to the current item list', async () => {
+      component.appointments = new PaginatedItemsEntity<AppointmentEntity>({
+        count: 0,
+        items: [mockedAppointmentEntity, mockedAppointmentEntity],
+        page: 0,
+        pageCount: 1,
+        total: 0,
+      });
       component.itemsPerPage = 5;
 
-      await component.ngOnInit();
+      getUserAppointmentsUsecase.call.and.resolveTo(new PaginatedItemsEntity<AppointmentEntity>({
+        count: 5,
+        items: [
+          mockedAppointmentEntity,
+          mockedAppointmentEntity,
+          mockedAppointmentEntity,
+          mockedAppointmentEntity,
+          mockedAppointmentEntity,
+        ],
+        page: 2,
+        pageCount: 3,
+        total: 8,
+      }));
 
-      expect(getUserAppointmentsUsecase.call).toHaveBeenCalledTimes(1);
+      await component.loadAppointments();
+
+      expect(component.appointments.items.length).toBe(7);
     });
   });
 });

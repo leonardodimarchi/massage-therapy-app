@@ -3,13 +3,14 @@ import { GetUserAppointmentsUsecase } from './../../../domain/usecases/appointme
 import { Component, OnInit } from "@angular/core";
 import { PaginatedItemsEntity } from '@domain/entities/shared/paginated_items_entity';
 import { ToastServiceInterface } from '@infra/modules/toast/contracts/toast-service.interface';
+import { InfiniteScrollOptions } from '@presenter/components/infinite-scroll/infinite-scroll.component';
 
 @Component({
   selector: 'app-appointments',
   templateUrl: './appointments.component.html',
   styleUrls: ['./appointments.component.scss']
 })
-export class AppointmentsComponent implements OnInit {
+export class AppointmentsComponent {
 
   constructor(
     private readonly getUserAppointmentsUsecase: GetUserAppointmentsUsecase,
@@ -26,11 +27,12 @@ export class AppointmentsComponent implements OnInit {
 
   public itemsPerPage: number = 8;
 
-  public isLoading: boolean = false;
-
-  public async ngOnInit(): Promise<void> {
-    return await this.loadAppointments();
+  public infiniteScrollOptions: InfiniteScrollOptions = {
+    thresholdInPercentage: .5,
+    throttleTimeInMs: 100,
   }
+
+  public isLoading: boolean = false;
 
   public async loadAppointments(): Promise<void> {
     if (this.appointments.page === this.appointments.pageCount)
@@ -39,10 +41,16 @@ export class AppointmentsComponent implements OnInit {
     this.isLoading = true;
 
     try {
-      this.appointments = await this.getUserAppointmentsUsecase.call({
+      const result = await this.getUserAppointmentsUsecase.call({
         limit: this.itemsPerPage,
         page: this.appointments.page + 1,
       });
+
+      this.appointments.count = result.count;
+      this.appointments.page= result.page;
+      this.appointments.pageCount = result.pageCount;
+      this.appointments.total = result.total;
+      this.appointments.items = [...this.appointments.items, ...result.items];
     } catch (error: unknown) {
       if (error instanceof Error)
         this.toastService.showError({ message: error.message });
