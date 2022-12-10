@@ -10,7 +10,20 @@ import { AppointmentStatusEnum, appointmentStatusIcons, appointmentStatusToStrin
 export class AppointmentCardComponent {
 
   @Input()
-  public appointment!: AppointmentEntity;
+  public appointment: AppointmentEntity = new AppointmentEntity({
+    id: 1,
+    createdAt: new Date(2022, 10, 5, 2, 30),
+    updatedAt: new Date(2022, 10, 5, 2, 30),
+    userId: 1,
+    complaint: 'complaint',
+    symptoms: 'symptoms',
+    startsAt: new Date(),
+    endsAt: new Date(),
+    status: AppointmentStatusEnum.PENDING,
+    isUnderMedicalTreatment: false,
+    isPregnant: false,
+    pregnantWeeks: 0,
+  });
 
   public get isCompleted(): boolean {
     return this.appointment.status === AppointmentStatusEnum.COMPLETED;
