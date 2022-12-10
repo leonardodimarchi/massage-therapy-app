@@ -164,5 +164,14 @@ describe('AppointmentsComponent', () => {
 
       expect(toastService.showError).toHaveBeenCalledOnceWith({ message: 'mocked error' });
     });
+
+    it('should be called at the page start', async () => {
+      component.appointments = mockedInitialPaginatedAppointments;
+      component.itemsPerPage = 5;
+
+      await component.ngOnInit();
+
+      expect(getUserAppointmentsUsecase.call).toHaveBeenCalledTimes(1);
+    });
   });
 });

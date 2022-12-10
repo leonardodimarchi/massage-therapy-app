@@ -1,6 +1,6 @@
 import { AppointmentEntity } from './../../../domain/entities/appointment/appointment_entity';
 import { GetUserAppointmentsUsecase } from './../../../domain/usecases/appointment/get_user_appointments_usecase';
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { PaginatedItemsEntity } from '@domain/entities/shared/paginated_items_entity';
 import { ToastServiceInterface } from '@infra/modules/toast/contracts/toast-service.interface';
 
@@ -9,7 +9,7 @@ import { ToastServiceInterface } from '@infra/modules/toast/contracts/toast-serv
   templateUrl: './appointments.component.html',
   styleUrls: ['./appointments.component.scss']
 })
-export class AppointmentsComponent {
+export class AppointmentsComponent implements OnInit {
 
   constructor(
     private readonly getUserAppointmentsUsecase: GetUserAppointmentsUsecase,
@@ -27,6 +27,10 @@ export class AppointmentsComponent {
   public itemsPerPage: number = 8;
 
   public isLoading: boolean = false;
+
+  public async ngOnInit(): Promise<void> {
+    return await this.loadAppointments();
+  }
 
   public async loadAppointments(): Promise<void> {
     if (this.appointments.page === this.appointments.pageCount)
