@@ -22,15 +22,25 @@ export class AppointmentsComponent {
     items: [],
   });
 
-  public itemsPerPage: number = 0;
+  public itemsPerPage: number = 8;
+
+  public isLoading: boolean = false;
 
   public async loadAppointments(): Promise<void> {
     if (this.appointments.page === this.appointments.pageCount)
       return;
 
-    this.appointments = await this.getUserAppointmentsUsecase.call({
-      limit: this.itemsPerPage,
-      page: this.appointments.page + 1,
-    });
+    this.isLoading = true;
+
+    try {
+      this.appointments = await this.getUserAppointmentsUsecase.call({
+        limit: this.itemsPerPage,
+        page: this.appointments.page + 1,
+      });
+    } catch (e) {
+      
+    } finally {
+      this.isLoading = false;
+    }
   }
 }

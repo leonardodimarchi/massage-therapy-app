@@ -121,5 +121,34 @@ describe('AppointmentsComponent', () => {
 
       expect(getUserAppointmentsUsecase.call).not.toHaveBeenCalled();
     });
+
+    it('should set the loading as true while getting the appointments', async () => {
+      component.appointments = mockedInitialPaginatedAppointments;
+      component.itemsPerPage = 5;
+
+      component.loadAppointments();
+
+      expect(component.isLoading).toBeTrue();
+    });
+
+    it('should set the loading as false after getting the appointments', async () => {
+      component.appointments = mockedInitialPaginatedAppointments;
+      component.itemsPerPage = 5;
+
+      await component.loadAppointments();
+
+      expect(component.isLoading).toBeFalse();
+    });
+
+    it('should set the loading as false even if the usecase throws and error', async () => {
+      component.appointments = mockedInitialPaginatedAppointments;
+      component.itemsPerPage = 5;
+
+      getUserAppointmentsUsecase.call.and.throwError('mocked error');
+
+      await component.loadAppointments();
+
+      expect(component.isLoading).toBeFalse();
+    });
   });
 });
