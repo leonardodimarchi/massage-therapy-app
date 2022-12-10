@@ -150,5 +150,16 @@ describe('AppointmentsComponent', () => {
 
       expect(component.isLoading).toBeFalse();
     });
+
+    it('should set the loading as false even if the usecase throws and error', async () => {
+      component.appointments = mockedInitialPaginatedAppointments;
+      component.itemsPerPage = 5;
+
+      getUserAppointmentsUsecase.call.and.throwError('mocked error');
+
+      await component.loadAppointments();
+
+      expect(component.isLoading).toBeFalse();
+    });
   });
 });
