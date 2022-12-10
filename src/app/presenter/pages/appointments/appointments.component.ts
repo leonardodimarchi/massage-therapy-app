@@ -1,7 +1,7 @@
-import { PaginatedItemsEntity } from './../../../domain/entities/shared/paginated_items_entity';
 import { AppointmentEntity } from './../../../domain/entities/appointment/appointment_entity';
 import { GetUserAppointmentsUsecase } from './../../../domain/usecases/appointment/get_user_appointments_usecase';
 import { Component } from "@angular/core";
+import { PaginatedItemsEntity } from '@domain/entities/shared/paginated_items_entity';
 
 @Component({
   selector: 'app-appointments',
@@ -13,4 +13,21 @@ export class AppointmentsComponent {
   constructor(
     private readonly getUserAppointmentsUsecase: GetUserAppointmentsUsecase,
   ) { }
+
+  public appointments: PaginatedItemsEntity<AppointmentEntity> = new PaginatedItemsEntity({
+    page: 0,
+    pageCount: 0,
+    total: 0,
+    count: 0,
+    items: [],
+  });
+  
+  public itemsPerPage: number = 0;
+
+  public async loadAppointments(): Promise<void> {
+    this.appointments = await this.getUserAppointmentsUsecase.call({
+      limit: this.itemsPerPage,
+      page: this.appointments.page + 1,
+    });
+  }
 }
