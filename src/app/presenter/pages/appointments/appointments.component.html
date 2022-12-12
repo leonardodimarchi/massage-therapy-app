@@ -11,5 +11,18 @@
         </ng-container>
       </div>
     </ng-container>
+
+    <ng-container empty *ngIf="!appointments.items.length && !isLoading">
+      <div class="page--empty">
+        <img src="assets/icons/tea.svg">
+      
+        <p>
+          Tudo tranquilo por aqui!
+          <br>
+          <br>
+          Agende um atendimento clicando no botão abaixo =)
+        </p>
+      </div>
+    </ng-container>
   </app-infinite-scroll>
 </div>

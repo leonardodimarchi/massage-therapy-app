@@ -26,4 +26,22 @@
 
     width: 100%;
   }
+
+  &--empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+
+    padding: 0 1.5rem;
+
+    > img {
+      width: 5rem;
+    }
+
+    > p {
+      font-size: 1.1rem;
+      text-align: center;
+    }
+  }
 }
