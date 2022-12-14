@@ -1,6 +1,6 @@
 import { AppointmentEntity } from './../../../domain/entities/appointment/appointment_entity';
 import { GetUserAppointmentsUsecase } from './../../../domain/usecases/appointment/get_user_appointments_usecase';
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { PaginatedItemsEntity } from '@domain/entities/shared/paginated_items_entity';
 import { ToastServiceInterface } from '@infra/modules/toast/contracts/toast-service.interface';
 import { InfiniteScrollOptions } from '@presenter/components/infinite-scroll/infinite-scroll.component';

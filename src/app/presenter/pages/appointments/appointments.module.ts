@@ -11,6 +11,7 @@ import { AppointmentRepositoryInterface } from '@domain/contracts/repositories';
 import { AppointmentDatasourceInterface } from '@infra/contracts/datasources';
 import { AppointmentRepository } from '@infra/repositories/appointment/appointment_repository';
 import { HttpServiceInterface } from '@domain/contracts/services/http_service.interface';
+import { LoadingSpinnerModule } from '@infra/modules/loading/loading.module';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { HttpServiceInterface } from '@domain/contracts/services/http_service.in
     AppointmentsRoutingModule,
     AppointmentCardModule,
     InfiniteScrollModule,
+    LoadingSpinnerModule,
   ],
   declarations: [
     AppointmentsComponent,
