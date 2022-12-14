@@ -5,6 +5,7 @@
   align-items: center;
 
   padding: 3rem;
+  padding-bottom: var(--page-action-height);
 
   > img {
     width: 35vw;
@@ -47,12 +48,11 @@
   }
 
   &--loading {
-    position: absolute;
-    bottom: -2rem;
-    left: 0;
-
     display: flex;
-    width: 100%;
     justify-content: center;
+
+    width: 100%;
+
+    padding-top: 1.5rem;
   }
 }

@@ -2,6 +2,7 @@
 @import 'styles/input.scss';
 @import 'styles/colors.scss';
 @import 'styles/keyframes.scss';
+@import 'styles/variables.scss';
 @import '../infrastructure/modules/modules.scss';
 
 * {
@@ -13,8 +14,28 @@
   font-family: 'Urbanist', sans-serif;
 }
 
-
 .position-static {
   position: static !important;
 }
 
+.page-action {
+  position: fixed;
+  bottom: 0;
+  z-index: 1000000;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100%;
+
+  padding: 0 4rem;
+  height: var(--page-action-height);
+
+  pointer-events: none;
+  background: linear-gradient(0deg, rgb(255 255 255) 40%, rgba(0, 212, 255, 0) 100%);
+
+  > * {
+    pointer-events: auto;
+  }
+}
