@@ -13,7 +13,6 @@ const routeData: { [key: string]: RouteData } = {
   home: {
     isProtectedRoute: true,
     redirectTo: 'login',
-    animation: 'fromRight',
   },
   appointments: {
     isProtectedRoute: true,
