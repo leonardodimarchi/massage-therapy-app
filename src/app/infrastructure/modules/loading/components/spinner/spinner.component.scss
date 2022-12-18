@@ -71,6 +71,20 @@
       }
     }
 
+    &.size-huge {
+      .spin-circle {
+        height: 4rem;
+        width: 4rem;
+        border-width: 16px;
+
+        animation-duration: 2s;
+      }
+
+      .message {
+        font-size: 1.8rem;
+      }
+    }
+
     &.status-basic {
       .spin-circle {
         border-color: white;
@@ -78,6 +92,16 @@
 
       .message {
         color: white;
+      }
+    }
+
+    &.status-accent {
+      .spin-circle {
+        border-color: var(--color-pink);
+      }
+
+      .message {
+        color: var(--color-pink);
       }
     }
 

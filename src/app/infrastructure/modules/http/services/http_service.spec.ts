@@ -14,12 +14,29 @@ describe('HttpService', () => {
     }
 
     beforeEach(() => {
-        httpClient = jasmine.createSpyObj('HttpClient', ['post']);
+        httpClient = jasmine.createSpyObj('HttpClient', ['post', 'get']);
         service = new HttpService(httpClient, httpConfig);
 
         emitter = new EventEmitter();
         httpClient.post.and.returnValue(emitter);
+        httpClient.get.and.returnValue(emitter);
     });
+
+    describe('Get', () => {
+      it('should call the client get method', fakeAsync(() => {
+          const url = 'mocked_url';
+          const expectedUrl = httpConfig.baseUrl + url;
+
+          service.get(url);
+
+          emitter.next({});
+          emitter.complete();
+
+          tick();
+
+          expect(httpClient.get).toHaveBeenCalledOnceWith(expectedUrl);
+      }));
+  });
 
     describe('Post', () => {
         it('should call the client post method', fakeAsync(() => {

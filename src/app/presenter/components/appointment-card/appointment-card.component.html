@@ -1,0 +1,23 @@
+<div
+  class="appointment-card"
+  [class.completed]="isCompleted"
+  [class.scheduled]="isScheduled"
+  [class.pending]="isPending"
+  [class.canceled]="isCanceled">
+  <div class="appointment-card--icon">
+    <img [src]="iconUrl" />
+  </div>
+
+  <div class="appointment-card--content">
+    <h3>{{ status }}</h3>
+    <div class="appointment-card--content--symptoms">
+      <ng-container *ngFor="let symptom of symptoms">
+        <app-pill [text]="symptom"></app-pill>
+      </ng-container>
+    </div>
+    <span>
+      {{ appointment.startsAt | date:'dd/MM/yyyy HH:mm\'h\'' }} até {{ appointment.endsAt | date:'HH:mm\'h\'' }}
+    </span>
+    <p></p>
+  </div>
+</div>

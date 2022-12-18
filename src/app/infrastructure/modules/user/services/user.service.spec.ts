@@ -1,7 +1,9 @@
+import { UserEntity } from '@domain/entities/user/user_entity';
+import { JwtEntity, JwtEntityProps } from './../../../../domain/entities/auth/jwt_entity';
 import { StorageServiceInterface } from "@domain/contracts/services";
 import { storageKeys } from "@env/storage_keys";
 import { mockedJwtEntity } from "@mocks/jwt/jwt_entity_mock";
-import { mockedUserEntity } from "@mocks/user/entities/user_entity_mock";
+import { mockedUserEntity, mockedUserEntityProps } from "@mocks/user/entities/user_entity_mock";
 import { UserService } from "@infra/modules/user/services/user.service";
 
 describe('UserService', () => {
@@ -52,19 +54,28 @@ describe('UserService', () => {
 
     describe('getJwt', () => {
       it('should get the jwt token', async () => {
-        storageServiceSpy.get.and.resolveTo(mockedJwtEntity);
+        const accessToken = 'mockedToken';
+        storageServiceSpy.get.and.resolveTo({
+          props: {
+            accessToken,
+          } as JwtEntityProps,
+        });
 
         const result = await service.getJwt();
 
         expect(storageServiceSpy.get).toHaveBeenCalledOnceWith(storageKeys.userToken);
-        expect(result).toEqual(mockedJwtEntity);
+
+        expect(result?.accessToken).toEqual(accessToken);
+        expect(result).toBeInstanceOf(JwtEntity);
       });
     });
   });
 
   describe('isLogged', () => {
     it('should get the user from storage and return true if it exists', async () => {
-      storageServiceSpy.get.and.resolveTo(mockedUserEntity);
+      storageServiceSpy.get.and.resolveTo({
+        props: mockedUserEntityProps,
+      });
 
       const result = await service.isLogged();
 
@@ -84,11 +95,14 @@ describe('UserService', () => {
 
   describe('setUpLoggedUser', () => {
     it('should set the subject if there is an user at the storage', async () => {
-      storageServiceSpy.get.and.resolveTo(mockedUserEntity);
+      storageServiceSpy.get.and.resolveTo({
+        props: mockedUserEntityProps
+      });
 
       await service.setUpLoggedUser();
 
       expect((service as any).loggedUserSubject.getValue()).toEqual(mockedUserEntity);
+      expect((service as any).loggedUserSubject.getValue()).toBeInstanceOf(UserEntity);
     });
   });
 });

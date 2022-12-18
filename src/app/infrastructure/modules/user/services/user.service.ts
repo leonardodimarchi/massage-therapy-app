@@ -26,7 +26,12 @@ export class UserService implements UserServiceInterface {
   }
 
   async getJwt(): Promise<JwtEntity | null> {
-    return await this.storageService.get<JwtEntity>(storageKeys.userToken);
+    const jwtProps = await this.storageService.get<{ props: JwtEntity }>(storageKeys.userToken);
+
+    if (!jwtProps)
+      return null;
+
+    return new JwtEntity(jwtProps.props);
   }
 
   async isLogged(): Promise<boolean> {

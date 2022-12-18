@@ -1,6 +1,6 @@
 import { LoginParams } from "@domain/contracts/repositories";
-import { LoginEntity } from "@domain/entities/auth/login_entity";
+import { LoginDto } from "@infra/models/auth/dto/login_dto";
 
-export interface UserDatasourceInterface {
-  login(params: LoginParams): Promise<LoginEntity>;
+export abstract class UserDatasourceInterface {
+  abstract login(params: LoginParams): Promise<LoginDto>;
 }

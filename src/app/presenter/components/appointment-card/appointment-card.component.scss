@@ -1,0 +1,103 @@
+:host {
+  width: 100%;
+}
+
+.appointment-card {
+  --shadow-color: rgba(145, 149, 255, 0.2);
+  --accent-color: var(--color-purple);
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  height: 5rem;
+  width: 100%;
+
+  padding: 0.8rem;
+
+  border-radius: 10px;
+  box-shadow: 4px 8px 24px var(--shadow-color);
+
+  &--icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    height: 100%;
+    aspect-ratio: 1 / 1;
+
+    padding: 0.5rem;
+
+    border-radius: 10px;
+    background-color: var(--accent-color);
+
+    > img {
+      height: 100%;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  &--content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+
+    height: 100%;
+    width: 100%;
+
+    overflow: hidden;
+
+    > h3 {
+      font-size: 0.9rem;
+      font-weight: normal;
+      font-family: Inter, Urbanist, sans-serif;
+    }
+
+    &--symptoms {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      min-height: 0.8rem;
+      overflow-x: auto;
+
+      mask-image: linear-gradient(90deg, transparent 0%, rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 1) 90%, transparent 95%);
+
+      &::-webkit-scrollbar {
+        height: 0;
+      }
+    }
+
+    > span {
+      font-size: 0.8rem;
+      font-weight: normal;
+      font-family: Inter, Urbanist, sans-serif;
+
+      margin-top: auto;
+
+      @media(max-width: 365px) {
+        font-size: 0.7rem;
+      }
+    }
+  }
+
+  &.completed {
+    --shadow-color: rgba(3, 209, 86, 0.2);
+    --accent-color: var(--color-green);
+  }
+
+  &.scheduled {
+    --shadow-color: rgba(145, 149, 255, 0.2);
+    --accent-color: var(--color-purple);
+  }
+
+  &.pending {
+    --shadow-color: rgba(255, 195, 105, 0.3);
+    --accent-color: var(--color-yellow);
+  }
+
+  &.canceled {
+    --shadow-color: rgba(255, 127, 173, 0.2);
+    --accent-color: var(--color-pink);
+  }
+}

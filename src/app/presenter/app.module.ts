@@ -22,7 +22,6 @@ import { AppComponent } from "@presenter/app.component";
       baseUrl: environment.apiBaseUrl,
     }),
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

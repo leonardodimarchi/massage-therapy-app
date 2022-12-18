@@ -1,0 +1,17 @@
+.pill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: fit-content;
+
+  padding: 0px 10px;
+  background: var(--color-gray);
+  border-radius: 30px;
+
+  > p {
+    font-size: 0.7rem;
+    font-family: Inter, Urbanist, sans-serif;
+    white-space: nowrap;
+  }
+}

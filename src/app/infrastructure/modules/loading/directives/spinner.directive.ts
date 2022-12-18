@@ -14,10 +14,10 @@ export class SpinnerDirective implements OnInit {
   public spinnerMessage?: string;
 
   @Input('loadingSpinnerStatus')
-  public spinnerStatus: 'basic' | 'danger' | 'error' = 'basic';
+  public spinnerStatus: 'basic' | 'danger' | 'error' | 'accent' = 'basic';
 
   @Input('loadingSpinnerSize')
-  public size: 'small' | 'large' | 'medium' = 'medium';
+  public size: 'small' | 'large' | 'medium' | 'huge' = 'medium';
 
   @Input('loadingSpinnerPosition')
   public position: 'center' | 'left' | 'right' = 'center';
@@ -86,7 +86,11 @@ export class SpinnerDirective implements OnInit {
     if (this.position)
       spinner.position = this.position;
 
-    if (this.hasBackdrop)
+    if (this.hasBackdrop !== null && this.hasBackdrop !== undefined)
       spinner.hasBackdrop = this.hasBackdrop;
+
+    const hasNoChildren = !this.directive.nativeElement?.hasChildNodes();
+
+    spinner.isBlockSpinner = hasNoChildren;
   }
 }

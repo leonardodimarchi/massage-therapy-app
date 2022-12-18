@@ -6,6 +6,7 @@
     <input
       id="email"
       class="input"
+      type="email"
       autocomplete="email"
       formControlName="email"
     />
@@ -23,12 +24,12 @@
       <img
         *ngIf="isShowingPassword"
         (click)="isShowingPassword = false"
-        src="assets/images/eye-off-outline.svg"
+        src="assets/icons/eye-off-outline.svg"
       />
       <img
         *ngIf="!isShowingPassword"
         (click)="isShowingPassword = true"
-        src="assets/images/eye-outline.svg"
+        src="assets/icons/eye-outline.svg"
       />
     </div>
 

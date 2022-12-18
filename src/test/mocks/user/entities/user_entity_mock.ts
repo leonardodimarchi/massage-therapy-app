@@ -1,3 +1,4 @@
+import { UserEntityProps } from './../../../../app/domain/entities/user/user_entity';
 import { UserEntity } from '@domain/entities/user/user_entity';
 
 const id = 1;
@@ -17,3 +18,13 @@ export const mockedUserEntity: UserEntity = new UserEntity({
   name,
   phone,
 });
+
+export const mockedUserEntityProps: UserEntityProps = {
+  id,
+  createdAt,
+  updatedAt,
+  birthDate,
+  email,
+  name,
+  phone,
+};
