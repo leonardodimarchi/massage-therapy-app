@@ -16,6 +16,14 @@ export class HttpService implements HttpServiceInterface {
     protected readonly config?: HttpConfig,
   ) {}
 
+  async get<ReturnType>(url: string): Promise<ReturnType> {
+    const finalUrl = this.config?.baseUrl + url;
+
+    return await lastValueFrom<ReturnType>(
+      this.httpClient.get<ReturnType>(finalUrl)
+    );
+  }
+
   async post<ReturnType>(url: string, payload: object): Promise<ReturnType> {
     const finalUrl = this.config?.baseUrl + url;
 

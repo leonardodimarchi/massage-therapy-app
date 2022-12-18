@@ -1,0 +1,49 @@
+<div class="page">
+  <app-back-button></app-back-button>
+
+  <img src="assets/images/logo.png" />
+
+  <h1>Agendamentos</h1>
+
+  <app-infinite-scroll
+    [infiniteScrollOptions]="infiniteScrollOptions"
+    (scrollEnd)="loadAppointments()"
+  >
+    <ng-container items>
+      <div class="page--list">
+        <ng-container *ngFor="let appointment of appointments.items">
+          <app-appointment-card
+            [appointment]="appointment"
+          ></app-appointment-card>
+        </ng-container>
+      </div>
+    </ng-container>
+
+    <ng-container empty *ngIf="!appointments.items.length && !isLoading">
+      <div class="page--empty">
+        <img src="assets/icons/tea.svg" />
+
+        <p>
+          Tudo tranquilo por aqui!
+          <br />
+          <br />
+          Agende um atendimento clicando no botão abaixo =)
+        </p>
+      </div>
+    </ng-container>
+
+    <ng-container loading *ngIf="isLoading">
+      <div
+        class="page--loading"
+        [loadingSpinner]="true"
+        [loadingSpinnerBackdrop]="false"
+        loadingSpinnerStatus="accent"
+        loadingSpinnerSize="huge"
+      ></div>
+    </ng-container>
+  </app-infinite-scroll>
+
+  <div class="page-action">
+    <button class="button">Agendar</button>
+  </div>
+</div>

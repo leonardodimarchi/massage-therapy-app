@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, HostBinding, Input } from "@angular/core";
 
 @Component({
   selector: 'loading-spinner',
@@ -8,13 +8,17 @@ import { Component, Input } from "@angular/core";
 export class SpinnerComponent {
 
   @Input()
+  @HostBinding('class.position-static')
+  public isBlockSpinner: boolean = false;
+
+  @Input()
   public message?: string;
 
   @Input()
-  public size: 'small' | 'medium' | 'large' = 'medium';
+  public size: 'small' | 'medium' | 'large' | 'huge' = 'medium';
 
   @Input()
-  public status: 'basic' | 'danger' | 'error' = 'basic';
+  public status: 'basic' | 'danger' | 'error' | 'accent' = 'basic';
 
   @Input()
   public position: 'center' | 'left' | 'right' = 'center';
@@ -34,8 +38,16 @@ export class SpinnerComponent {
     return this.size === 'large';
   }
 
+  get huge(): boolean {
+    return this.size === 'huge';
+  }
+
   get basic(): boolean {
     return this.status === 'basic';
+  }
+
+  get accent(): boolean {
+    return this.status === 'accent';
   }
 
   get danger(): boolean {

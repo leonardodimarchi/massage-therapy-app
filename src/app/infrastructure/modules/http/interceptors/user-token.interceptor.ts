@@ -28,7 +28,7 @@ export class UserTokenInterceptor implements HttpInterceptor {
           if (!result || !result.accessToken)
             return next.handle(req);
 
-          const authHeaders = req.headers.set('Authorization', result.accessToken);
+          const authHeaders = req.headers.set('Authorization', 'Bearer ' + result.accessToken);
 
           return next.handle(req.clone({ headers: authHeaders }));
         }),
