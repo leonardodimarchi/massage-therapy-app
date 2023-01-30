@@ -1,5 +1,5 @@
 import { BaseEntity, BaseEntityProps } from "@domain/entities/shared/base_entity";
-import { AppointmentStatusEnum } from "@domain/models/appointment/appointment-status.enum";
+import { AppointmentStatusEnum } from "@domain/models/appointment/appointment_status.enum";
 
 export interface AppointmentEntityProps extends BaseEntityProps {
   userId: number;

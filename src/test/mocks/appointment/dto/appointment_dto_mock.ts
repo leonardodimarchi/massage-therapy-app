@@ -1,5 +1,5 @@
 import { AppointmentDto } from '@infra/models/appointment/dto/appointment_dto';
-import { AppointmentStatusEnum } from "@domain/models/appointment/appointment-status.enum";
+import { AppointmentStatusEnum } from "@domain/models/appointment/appointment_status.enum";
 
 const id = 1;
 const createdAt = '2022-11-05T05:30:00.000Z';

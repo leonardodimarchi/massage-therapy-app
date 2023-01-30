@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { AppointmentEntity } from '@domain/entities/appointment/appointment_entity';
-import { AppointmentStatusEnum, appointmentStatusIcons, appointmentStatusToString } from '@domain/models/appointment/appointment-status.enum';
+import { AppointmentStatusEnum, appointmentStatusIcons, appointmentStatusToString } from '@domain/models/appointment/appointment_status.enum';
 
 @Component({
   selector: 'app-appointment-card',

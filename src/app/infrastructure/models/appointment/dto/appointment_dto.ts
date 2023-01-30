@@ -1,4 +1,4 @@
-import { AppointmentStatusEnum } from "@domain/models/appointment/appointment-status.enum";
+import { AppointmentStatusEnum } from "@domain/models/appointment/appointment_status.enum";
 import { BaseEntityDto } from "@infra/models/shared/dto/base_entity_dto";
 
 export interface AppointmentDto extends BaseEntityDto {
