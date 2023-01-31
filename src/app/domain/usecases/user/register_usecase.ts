@@ -20,14 +20,13 @@ export interface RegisterUseCaseInput {
 }
 
 export interface RegisterUseCaseOutput {
-    createdUser: UserEntity,
+    createdUser: UserEntity;
 }
 
 export class RegisterUsecase implements UseCase<RegisterUseCaseInput, RegisterUseCaseOutput> {
-
     constructor(
         private readonly repository: UserRepositoryInterface,
-    ) { }
+    ) {}
 
     public async call({
         email,
@@ -43,6 +42,21 @@ export class RegisterUsecase implements UseCase<RegisterUseCaseInput, RegisterUs
         neighborhood,
         houseNumber,
     }: RegisterUseCaseInput): Promise<RegisterUseCaseOutput> {
-      throw new Error('Method not implemented.')
+      const createdUser = await this.repository.register({
+        email,
+        name,
+        phone,
+        birthDate,
+        password,
+        gender,
+        diseaseHistory,
+        state,
+        city,
+        postalCode,
+        neighborhood,
+        houseNumber,
+      });
+
+      return { createdUser };
     }
 }
