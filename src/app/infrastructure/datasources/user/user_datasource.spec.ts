@@ -3,7 +3,7 @@ import { HttpServiceInterface } from "@domain/contracts/services";
 import { LoginDto } from "@infra/models/auth/dto/login_dto";
 import { ApiEndpoints } from "@infra/datasources/endpoints";
 import { UserDatasource } from "@infra/datasources/user/user_datasource";
-import { mockedUserModelProps } from "@mocks/user/dto/user_dto_mock";
+import { mockedUserDto } from "@mocks/user/dto/user_dto_mock";
 
 describe('UserDatasource', () => {
   let httpService: jasmine.SpyObj<HttpServiceInterface>;
@@ -21,7 +21,7 @@ describe('UserDatasource', () => {
           access_token: 'token',
         },
         user: {
-          ...mockedUserModelProps,
+          ...mockedUserDto,
         }
       }
       httpService.post.and.resolveTo(returnValue);
@@ -42,7 +42,7 @@ describe('UserDatasource', () => {
           access_token: 'token',
         },
         user: {
-          ...mockedUserModelProps,
+          ...mockedUserDto,
         }
       }
       httpService.post.and.resolveTo(returnValue);
