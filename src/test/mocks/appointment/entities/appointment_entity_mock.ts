@@ -1,4 +1,4 @@
-import { AppointmentStatusEnum } from '@domain/models/appointment/appointment-status.enum';
+import { AppointmentStatusEnum } from '@domain/models/appointment/appointment_status.enum';
 import { AppointmentEntity } from '@domain/entities/appointment/appointment_entity';
 
 const id = 1;

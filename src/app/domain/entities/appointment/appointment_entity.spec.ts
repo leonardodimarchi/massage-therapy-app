@@ -1,4 +1,4 @@
-import { AppointmentStatusEnum } from '@domain/models/appointment/appointment-status.enum';
+import { AppointmentStatusEnum } from '@domain/models/appointment/appointment_status.enum';
 import { AppointmentEntity } from './appointment_entity';
 describe('AppointmentEntity', () => {
   it('should create with correct properties', () => {
