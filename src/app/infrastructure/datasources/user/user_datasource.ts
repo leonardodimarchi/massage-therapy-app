@@ -6,16 +6,15 @@ import { ApiEndpoints } from "@infra/datasources/endpoints";
 import { UserDto } from "@infra/models/user/dto/user_dto";
 
 export class UserDatasource implements UserDatasourceInterface {
+  constructor(
+    private readonly httpService: HttpServiceInterface,
+  ) { }
 
-    constructor(
-        private readonly httpService: HttpServiceInterface,
-    ) { }
+  async login(params: LoginParams): Promise<LoginDto> {
+    return await this.httpService.post<LoginDto>(ApiEndpoints.Auth.login(), params);
+  }
 
-    async login(params: LoginParams): Promise<LoginDto> {
-      return await this.httpService.post<LoginDto>(ApiEndpoints.Auth.login(), params);
-    }
-
-    async register(params: RegisterParams): Promise<UserDto> {
-      throw new Error('Method not implemented yet.');
-    }
+  async register(params: RegisterParams): Promise<UserDto> {
+    return await this.httpService.post<UserDto>(ApiEndpoints.User.register(), params);
+  }
 }
