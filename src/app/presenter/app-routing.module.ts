@@ -10,6 +10,11 @@ const routeData: { [key: string]: RouteData } = {
     redirectTo: 'home',
     animation: 'fromLeft',
   },
+  register: {
+    isUnprotectedRoute: true,
+    redirectTo: 'home',
+    animation: 'fromRight',
+  },
   home: {
     isProtectedRoute: true,
     redirectTo: 'login',
@@ -27,6 +32,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
     canActivate: [UserAccessGuard],
     data: routeData['login'],
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule),
+    canActivate: [UserAccessGuard],
+    data: routeData['register'],
   },
   {
     path: 'home',
