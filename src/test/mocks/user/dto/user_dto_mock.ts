@@ -8,7 +8,7 @@ const email = 'myemail@email.com';
 const name = 'My name';
 const phone = '5515991849367';
 
-export const mockedUserModelProps: UserDto = {
+export const mockedUserDto: UserDto = {
     id,
     createdAt: createdAt.toISOString(),
     updatedAt: updatedAt.toISOString(),
