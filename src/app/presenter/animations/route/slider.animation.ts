@@ -36,6 +36,7 @@ function slideTo(direction: SliderDirections): (AnimationQueryMetadata | Animati
       query(':leave', [
         animate('500ms ease', style({
           [direction]: '100%',
+          opacity: 0,
         }))
       ], queryOptions),
       query(':enter', [

@@ -10,6 +10,7 @@ import { HttpService } from "@infra/modules/http/services/http_service";
 import { LoadingSpinnerModule } from "@infra/modules/loading/loading.module";
 import { RoutingModule } from "@infra/modules/router/router.module";
 import { UserRepository } from "@infra/repositories/user/user_repository";
+import { HeaderModule } from "@presenter/components/header/header.module";
 import { RegisterRoutingModule } from "./register-routing.module";
 import { RegisterComponent } from "./register.component";
 
@@ -20,6 +21,7 @@ import { RegisterComponent } from "./register.component";
     ReactiveFormsModule,
     LoadingSpinnerModule,
     RoutingModule,
+    HeaderModule,
   ],
   declarations: [
     RegisterComponent,
@@ -32,7 +34,7 @@ import { RegisterComponent } from "./register.component";
       },
       deps: [UserRepositoryInterface],
     },
-  
+
     {
       provide: UserRepositoryInterface,
       useFactory: (datasource: UserDatasourceInterface) => new UserRepository(datasource),

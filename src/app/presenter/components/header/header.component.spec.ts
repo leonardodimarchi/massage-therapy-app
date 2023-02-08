@@ -1,14 +1,14 @@
 import { RouterServiceInterface } from '@infra/modules/router/contracts/router-service.interface';
-import { BackButtonComponent } from './back-button.component';
+import { HeaderComponent } from './header.component';
 
-describe('BackButtonComponent', () => {
-  let component: BackButtonComponent;
+describe('Header', () => {
+  let component: HeaderComponent;
 
   let routerService: jasmine.SpyObj<RouterServiceInterface>;
 
   beforeEach(async () => {
     routerService = jasmine.createSpyObj('RouterServiceInterface', ['goBack']);
-    component = new BackButtonComponent(routerService);
+    component = new HeaderComponent(routerService);
   });
 
   it('should create', () => {
