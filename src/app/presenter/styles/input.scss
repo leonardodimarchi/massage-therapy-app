@@ -1,6 +1,15 @@
 .label {
   font-weight: bold;
   margin-bottom: 0.3rem;
+
+  &__required {
+    @extend .label;
+
+    &::after {
+      content: "*";
+      margin-left: 0.2rem;
+    }
+  }
 }
 
 .input {
@@ -12,4 +21,18 @@
   background: var(--color-gray);
   border: 0;
   border-radius: 10px;
+}
+
+.input-with-suffix {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  > img {
+    position: absolute;
+    right: 0.8rem;
+
+    width: 1.1rem;
+    height: auto;
+  }
 }

@@ -1,12 +1,14 @@
-import { FormArray, FormControl, FormGroup } from "@angular/forms";
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
-export type FormGroupFrom<Interface> = FormGroup<{
+type FormGroupControls<Interface extends object> = {
   [Key in keyof Interface]:
   Interface[Key] extends Array<infer ArrayValue>
-    ? FormArray<FormControl<ArrayValue>>
-    : Interface[Key] extends Date
-      ? FormControl<Interface[Key]>
-      : Interface[Key] extends object
-        ? FormGroupFrom<Interface[Key]>
-        : FormControl<Interface[Key]>
-}>;
+  ? FormArray<FormControl<ArrayValue>>
+  : Interface[Key] extends object
+  ? any
+  : Interface[Key] extends Date
+  ? FormControl<Interface[Key]>
+  : FormControl<NonNullable<Interface[Key]>>
+};
+
+export type FormGroupFrom<Interface extends object> = FormGroup<FormGroupControls<Interface>>;

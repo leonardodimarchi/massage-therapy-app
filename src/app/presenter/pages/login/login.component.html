@@ -1,7 +1,7 @@
 <div class="page">
   <img src="assets/images/logo.png" />
 
-  <form [formGroup]="form" (submit)="login()">
+  <form [formGroup]="form" (ngSubmit)="login()">
     <label for="email" class="label">Email</label>
     <input
       id="email"
@@ -12,7 +12,7 @@
     />
 
     <label class="label">Senha</label>
-    <div class="password-input">
+    <div class="input-with-suffix">
       <input
         id="password"
         class="input"
