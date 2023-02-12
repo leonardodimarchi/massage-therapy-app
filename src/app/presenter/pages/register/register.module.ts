@@ -1,3 +1,4 @@
+import { BasicInformationFormModule } from './components/basic-information-form/basic-information-form.module';
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
@@ -22,6 +23,7 @@ import { RegisterComponent } from "./register.component";
     LoadingSpinnerModule,
     RoutingModule,
     HeaderModule,
+    BasicInformationFormModule,
   ],
   declarations: [
     RegisterComponent,

@@ -1,90 +1,11 @@
 <div class="page">
   <app-header title="Criar perfil"></app-header>
 
-  <form [formGroup]="form">
-    <ng-container formGroupName="basicInformation">
-      <label for="email" class="label__required">Email</label>
-      <input
-        id="email"
-        class="input"
-        type="email"
-        autocomplete="email"
-        formControlName="email"
-      />
-
-      <label for="name" class="label__required">Nome</label>
-      <input
-        id="name"
-        class="input"
-        type="text"
-        autocomplete="name"
-        formControlName="name"
-      />
-
-      <label for="phone" class="label__required">Telefone</label>
-      <input
-        id="phone"
-        class="input"
-        type="tel"
-        autocomplete="tel"
-        formControlName="phone"
-      />
-
-      <label for="password" class="label__required">Senha</label>
-      <div class="input-with-suffix">
-        <input
-          id="password"
-          class="input"
-          [type]="isShowingPassword ? 'text' : 'password'"
-          autocomplete="new-password"
-          formControlName="password"
-        />
-
-        <img
-          *ngIf="isShowingPassword"
-          (click)="isShowingPassword = false"
-          src="assets/icons/eye-off-outline.svg"
-        />
-        <img
-          *ngIf="!isShowingPassword"
-          (click)="isShowingPassword = true"
-          src="assets/icons/eye-outline.svg"
-        />
-      </div>
-
-      <label for="passwordConfirmation" class="label__required">
-        Confirme sua senha
-      </label>
-      <div class="input-with-suffix">
-        <input
-          id="passwordConfirmation"
-          class="input"
-          [type]="isShowingConfirmationPassword ? 'text' : 'password'"
-          autocomplete="new-password"
-          formControlName="passwordConfirmation"
-        />
-
-        <img
-          *ngIf="isShowingConfirmationPassword"
-          (click)="isShowingConfirmationPassword = false"
-          src="assets/icons/eye-off-outline.svg"
-        />
-        <img
-          *ngIf="!isShowingConfirmationPassword"
-          (click)="isShowingConfirmationPassword = true"
-          src="assets/icons/eye-outline.svg"
-        />
-      </div>
+  <form [formGroup]="form" (ngSubmit)="nextStep()">
+    <ng-container *ngIf="isAtBasicInformation">
+      <app-basic-information-form
+        formGroupName="basicInformation"
+      ></app-basic-information-form>
     </ng-container>
-
-    <button
-      class="button"
-      type="submit"
-      [loadingSpinner]="isLoading"
-      [loadingSpinnerBackdrop]="false"
-      loadingSpinnerPosition="right"
-    >
-      Prosseguir
-    </button>
   </form>
 </div>

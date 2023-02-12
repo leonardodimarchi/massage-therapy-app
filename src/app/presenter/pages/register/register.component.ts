@@ -1,8 +1,9 @@
 import { Component } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { UserGenderEnum } from "@domain/models/user/user_gender.enum";
-import { FormGroupFrom } from "@presenter/models/interfaces/common/form-group-from";
-import { RegisterForm } from "@presenter/models/interfaces/pages/register/register-form";
+import { FormGroupFrom } from "@presenter/models/common/form-group-from";
+import { RegisterForm } from "@presenter/models/pages/register/register-form";
+import { RegisterStep } from "@presenter/models/pages/register/register-steps.enum";
 
 @Component({
   selector: 'app-register',
@@ -18,11 +19,25 @@ export class RegisterComponent {
 
   public form: FormGroupFrom<RegisterForm>;
 
+  public step: RegisterStep = RegisterStep.BASIC_INFORMATION;
+
   public isLoading: boolean = false;
 
-  public isShowingPassword: boolean = false;
+  public get isAtBasicInformation(): boolean {
+    return this.step === RegisterStep.BASIC_INFORMATION;
+  }
 
-  public isShowingConfirmationPassword: boolean = false;
+  public get isAtPersonalInformation(): boolean {
+    return this.step === RegisterStep.PERSONAL_INFORMATION;
+  }
+
+  public get isAtAddress(): boolean {
+    return this.step === RegisterStep.ADDRESS;
+  }
+
+  public nextStep(): void {
+    console.log(this.form.getRawValue());
+  }
 
   private createForm(): FormGroupFrom<RegisterForm> {
     return this.formBuilder.nonNullable.group({

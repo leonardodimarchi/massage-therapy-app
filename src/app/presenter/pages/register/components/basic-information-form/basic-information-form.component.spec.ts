@@ -1,0 +1,23 @@
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { BasicInformationFormComponent } from './basic-information-form.component';
+
+describe('BasicInformationFormComponent', () => {
+  let component: BasicInformationFormComponent;
+  let fixture: ComponentFixture<BasicInformationFormComponent>;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      declarations: [ BasicInformationFormComponent ]
+    })
+    .compileComponents();
+
+    fixture = TestBed.createComponent(BasicInformationFormComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

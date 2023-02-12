@@ -1,4 +1,4 @@
-import { RouteAnimationParams } from './models/interfaces/router/route-animation-params.interface';
+import { RouteAnimationParams } from './models/router/route-animation-params.interface';
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { UserServiceInterface } from '@domain/contracts/services/user_service.interface';

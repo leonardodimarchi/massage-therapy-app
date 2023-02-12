@@ -1,0 +1,14 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+
+  > input, > .input-with-suffix {
+    margin-bottom: 1.5rem;
+  }
+
+  > button {
+    margin-top: 3rem;
+  }
+}

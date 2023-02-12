@@ -2,7 +2,7 @@ import { UserAccessModule } from "@infra/guards/user-access/user-access.module";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { UserAccessGuard } from "@infra/guards/user-access/user-access.guard";
-import { RouteData } from "./models/interfaces/router/route-data.interface";
+import { RouteData } from "./models/router/route-data.interface";
 
 const routeData: { [key: string]: RouteData } = {
   login: {

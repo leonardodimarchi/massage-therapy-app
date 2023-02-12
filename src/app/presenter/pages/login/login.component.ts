@@ -1,12 +1,12 @@
 import { BadRequestError } from '@domain/errors';
 import { ToastServiceInterface } from "@infra/modules/toast/contracts/toast-service.interface";
 import { Component } from "@angular/core";
-import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
-import { LoginUsecase } from "@domain/usecases/user/login_usecase";
-import { RouterServiceInterface } from "@infra/modules/router/contracts/router-service.interface";
+import { FormBuilder } from '@angular/forms';
 import { ValidationError } from '@domain/errors/validation_error';
-import { FormGroupFrom } from '@presenter/models/interfaces/common/form-group-from';
-import { LoginForm } from '@presenter/models/interfaces/pages/login/login-form';
+import { LoginUsecase } from '@domain/usecases/user/login_usecase';
+import { RouterServiceInterface } from '@infra/modules/router/contracts/router-service.interface';
+import { FormGroupFrom } from '@presenter/models/common/form-group-from';
+import { LoginForm } from '@presenter/models/pages/login/login-form';
 
 @Component({
   selector: 'app-login',
