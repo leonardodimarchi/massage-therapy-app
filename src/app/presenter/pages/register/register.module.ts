@@ -1,3 +1,4 @@
+import { PersonalInformationFormModule } from './components/personal-information-form/personal-information-form.module';
 import { BasicInformationFormModule } from './components/basic-information-form/basic-information-form.module';
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
@@ -24,6 +25,7 @@ import { RegisterComponent } from "./register.component";
     RoutingModule,
     HeaderModule,
     BasicInformationFormModule,
+    PersonalInformationFormModule,
   ],
   declarations: [
     RegisterComponent,
