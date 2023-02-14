@@ -15,6 +15,7 @@ import { UserRepository } from "@infra/repositories/user/user_repository";
 import { HeaderModule } from "@presenter/components/header/header.module";
 import { RegisterRoutingModule } from "./register-routing.module";
 import { RegisterComponent } from "./register.component";
+import { AddressInformationFormModule } from './components/address-information-form/address-information-form.module';
 
 @NgModule({
   imports: [
@@ -26,6 +27,7 @@ import { RegisterComponent } from "./register.component";
     HeaderModule,
     BasicInformationFormModule,
     PersonalInformationFormModule,
+    AddressInformationFormModule,
   ],
   declarations: [
     RegisterComponent,

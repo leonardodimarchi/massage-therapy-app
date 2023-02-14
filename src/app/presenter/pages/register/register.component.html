@@ -13,5 +13,11 @@
         formGroupName="personalInformation"
       ></app-personal-information-form>
     </ng-container>
+
+    <ng-container *ngIf="isAtAddress">
+      <app-address-information-form
+        formGroupName="address"
+      ></app-address-information-form>
+    </ng-container>
   </form>
 </div>
