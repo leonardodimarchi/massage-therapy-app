@@ -1,5 +1,11 @@
 <div class="pill-select">
-  <div class="pill">
-    <p>Teste</p>
-  </div>
+  <ng-container *ngFor="let item of items">
+    <div
+      class="pill"
+      [class.active]="value === item.value"
+      (click)="select(item)"
+    >
+      <span>{{ item.label }}</span>
+    </div>
+  </ng-container>
 </div>

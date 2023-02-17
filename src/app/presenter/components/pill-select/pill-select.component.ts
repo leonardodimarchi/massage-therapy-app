@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 
-interface PillSelectItem<TValue = any> {
+export interface PillSelectItem<TValue> {
   label: string;
   value: TValue;
 }
@@ -10,10 +11,17 @@ interface PillSelectItem<TValue = any> {
   templateUrl: './pill-select.component.html',
   styleUrls: ['./pill-select.component.scss'],
 })
-export class PillSelectComponent {
+export class PillSelectComponent<TItem = any> {
   @Input()
-  public items: PillSelectItem[] = [];
+  public items: PillSelectItem<TItem>[] = [];
 
   @Input()
-  public value: any;
+  public value?: TItem;
+
+  @Output()
+  public valueChange: EventEmitter<TItem> = new EventEmitter<TItem>();
+
+  public select(item: PillSelectItem<TItem>): void {
+    this.valueChange.emit(item.value)
+  }
 }
