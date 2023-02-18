@@ -19,7 +19,7 @@ export class RegisterComponent {
 
   public form: FormGroupFrom<RegisterForm>;
 
-  public step: RegisterStep = RegisterStep.ADDRESS;
+  public step: RegisterStep = RegisterStep.PERSONAL_INFORMATION;
 
   public isLoading: boolean = false;
 

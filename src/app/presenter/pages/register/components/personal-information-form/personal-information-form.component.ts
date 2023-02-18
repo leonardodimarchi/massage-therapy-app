@@ -1,5 +1,7 @@
-import { EventEmitter, Input } from '@angular/core';
-import { Component, Output } from '@angular/core';
+import { UserGenderEnum } from './../../../../../domain/models/user/user_gender.enum';
+import { PillSelectItem } from './../../../../components/pill-select/pill-select.component';
+import { Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { ControlContainer, FormGroupDirective } from '@angular/forms';
 
 @Component({
@@ -11,4 +13,9 @@ import { ControlContainer, FormGroupDirective } from '@angular/forms';
 export class PersonalInformationFormComponent {
   @Input()
   public formGroupName: string = '';
+
+  public genders: PillSelectItem<UserGenderEnum>[] = [
+    { label: UserGenderEnum.getName(UserGenderEnum.MALE), value: UserGenderEnum.MALE },
+    { label: UserGenderEnum.getName(UserGenderEnum.FEMALE), value: UserGenderEnum.FEMALE },
+  ]
 }

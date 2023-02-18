@@ -18,12 +18,7 @@
 
   <!-- TODO: Radio buttons input -->
   <label for="gender" class="label__required">Sexo</label>
-  <input
-    id="gender"
-    class="input"
-    type="text"
-    formControlName="gender"
-  />
+  <app-pill-select [items]="genders" formControlName="gender"></app-pill-select>
 
   <button class="button" type="submit">Prosseguir</button>
 </ng-container>
