@@ -35,17 +35,22 @@ export class PillSelectComponent<TItem = any> implements ControlValueAccessor {
     this.propagateChange(this.value);
   }
 
-  writeValue(value: any) {
+
+  //#region ControlValueAccessor
+
+  public writeValue(value: TItem) {
     if (value !== undefined) {
       this.value = value;
     }
   }
 
-  propagateChange = (_: any) => {};
+  public propagateChange: (_: any) => void = (_: any) => {};
 
-  registerOnChange(fn: any) {
+  public registerOnChange(fn: (_: any) => void) {
     this.propagateChange = fn;
   }
 
-  registerOnTouched() {}
+  public registerOnTouched() {}
+
+  //#endregion
 }
