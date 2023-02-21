@@ -7,14 +7,12 @@
     formControlName="birthDate"
   />
 
-  <!-- TODO: Textarea -->
   <label for="diseaseHistory" class="label">Histórico de doenças, lesões e cirurgias</label>
-  <input
+  <textarea
     id="diseaseHistory"
-    class="input"
-    type="text"
+    class="textarea"
     formControlName="diseaseHistory"
-  />
+  ></textarea>
 
   <label for="gender" class="label__required">Sexo</label>
   <app-pill-select [items]="genders" formControlName="gender"></app-pill-select>
