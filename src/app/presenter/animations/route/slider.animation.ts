@@ -34,13 +34,13 @@ function slideTo(direction: SliderDirections): (AnimationQueryMetadata | Animati
     ]),
     group([
       query(':leave', [
-        animate('500ms ease', style({
+        animate('300ms ease', style({
           [direction]: '100%',
           opacity: 0,
         }))
       ], queryOptions),
       query(':enter', [
-        animate('500ms ease', style({
+        animate('300ms ease', style({
           [direction]: '0%',
           opacity: 1,
         })),
