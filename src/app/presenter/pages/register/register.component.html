@@ -4,7 +4,7 @@
   <form [formGroup]="form" (ngSubmit)="nextStep()">
     <ng-container *ngIf="isAtBasicInformation">
       <app-basic-information-form
-        formGroupName="basicInformation"
+        [formGroup]="form.controls.basicInformation"
       ></app-basic-information-form>
     </ng-container>
 

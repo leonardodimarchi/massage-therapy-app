@@ -1,16 +1,23 @@
-import { EventEmitter, Input } from '@angular/core';
-import { Component, Output } from '@angular/core';
-import { ControlContainer, FormGroupDirective } from '@angular/forms';
+import { OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { ControlContainer, FormGroup } from '@angular/forms';
 
 @Component({
-  selector: 'app-basic-information-form',
+  selector: '[formGroup] app-basic-information-form',
   templateUrl: './basic-information-form.component.html',
   styleUrls: ['./basic-information-form.component.scss'],
-  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class BasicInformationFormComponent {
-  @Input()
-  public formGroupName: string = '';
+export class BasicInformationFormComponent implements OnInit {
+
+  constructor(
+    private controlContainer: ControlContainer,
+  ) { }
+
+  public ngOnInit(): void {
+    this.form = this.controlContainer.control as FormGroup;
+  }
+
+  public form!: FormGroup;
 
   public isShowingPassword: boolean = false;
 

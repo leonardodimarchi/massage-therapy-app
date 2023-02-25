@@ -1,4 +1,4 @@
-<ng-container [formGroupName]="formGroupName">
+<ng-container [formGroup]="form">
   <label for="email" class="label__required">Email</label>
   <input
     id="email"
@@ -73,5 +73,5 @@
     />
   </div>
 
-  <button class="button" type="submit">Prosseguir</button>
+  <button [disabled]="form.invalid" class="button" type="submit">Prosseguir</button>
 </ng-container>
