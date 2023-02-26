@@ -1,21 +1,19 @@
-import { UserGenderEnum } from './../../../../../domain/models/user/user_gender.enum';
-import { PillSelectItem } from './../../../../components/pill-select/pill-select.component';
-import { Input } from '@angular/core';
+import { UserGenderEnum } from '@domain/models/user/user_gender.enum';
+import { PillSelectItem } from '@presenter/components/pill-select/pill-select.component';
 import { Component } from '@angular/core';
-import { ControlContainer, FormGroupDirective } from '@angular/forms';
+import { NestedFormGroup } from '@presenter/components/shared/nested-form-group';
+import { PersonalInformationForm } from '@presenter/models/pages/register/personal-information-form';
 
 @Component({
   selector: 'app-personal-information-form',
   templateUrl: './personal-information-form.component.html',
   styleUrls: ['./personal-information-form.component.scss'],
-  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class PersonalInformationFormComponent {
-  @Input()
-  public formGroupName: string = '';
+export class PersonalInformationFormComponent extends NestedFormGroup<PersonalInformationForm> {
 
   public genders: PillSelectItem<UserGenderEnum>[] = [
     { label: UserGenderEnum.getName(UserGenderEnum.MALE), value: UserGenderEnum.MALE },
     { label: UserGenderEnum.getName(UserGenderEnum.FEMALE), value: UserGenderEnum.FEMALE },
-  ]
+  ];
+
 }

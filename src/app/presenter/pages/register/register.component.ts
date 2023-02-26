@@ -3,7 +3,7 @@ import { FormBuilder, Validators } from "@angular/forms";
 import { UserGenderEnum } from "@domain/models/user/user_gender.enum";
 import { FormGroupFrom } from "@presenter/models/common/form-group-from";
 import { RegisterForm } from "@presenter/models/pages/register/register-form";
-import { RegisterStep } from "@presenter/models/pages/register/register-steps.enum";
+import { RegisterStep, RegisterStepHelper } from "@presenter/models/pages/register/register-steps.enum";
 
 @Component({
   selector: 'app-register',
@@ -37,6 +37,7 @@ export class RegisterComponent {
 
   public nextStep(): void {
     console.log(this.form.getRawValue());
+    this.step = RegisterStepHelper.getNext(this.step);
   }
 
   private createForm(): FormGroupFrom<RegisterForm> {

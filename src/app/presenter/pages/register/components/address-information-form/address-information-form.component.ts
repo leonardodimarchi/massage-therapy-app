@@ -1,14 +1,10 @@
-import { Input } from '@angular/core';
 import { Component } from '@angular/core';
-import { ControlContainer, FormGroupDirective } from '@angular/forms';
+import { NestedFormGroup } from '@presenter/components/shared/nested-form-group';
+import { AddressForm } from '@presenter/models/pages/register/address-form';
 
 @Component({
   selector: 'app-address-information-form',
   templateUrl: './address-information-form.component.html',
   styleUrls: ['./address-information-form.component.scss'],
-  viewProviders: [{ provide: ControlContainer, useExisting: FormGroupDirective }]
 })
-export class AddressInformationFormComponent {
-  @Input()
-  public formGroupName: string = '';
-}
+export class AddressInformationFormComponent extends NestedFormGroup<AddressForm> {}
