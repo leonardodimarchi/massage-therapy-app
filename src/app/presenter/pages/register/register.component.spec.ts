@@ -1,11 +1,15 @@
+import { FormBuilder } from '@angular/forms';
 import { RegisterComponent } from "./register.component";
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
 
-  beforeEach(async () => {
+  let formBuilder: FormBuilder;
 
-    component = new RegisterComponent();
+  beforeEach(async () => {
+    formBuilder = new FormBuilder();
+
+    component = new RegisterComponent(formBuilder);
   });
 
   it('should create', () => {
