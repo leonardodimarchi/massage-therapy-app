@@ -4,6 +4,7 @@ import { UserGenderEnum } from "@domain/models/user/user_gender.enum";
 import { FormGroupFrom } from "@presenter/models/common/form-group-from";
 import { RegisterForm } from "@presenter/models/pages/register/register-form";
 import { RegisterStep, RegisterStepHelper } from "@presenter/models/pages/register/register-steps.enum";
+import { FormValidators } from "@presenter/validators/form-validators";
 
 @Component({
   selector: 'app-register',
@@ -43,8 +44,8 @@ export class RegisterComponent {
   private createForm(): FormGroupFrom<RegisterForm> {
     return this.formBuilder.nonNullable.group({
       basicInformation: this.formBuilder.nonNullable.group({
-        email: ['', Validators.required],
-        name: [''],
+        email: ['', [Validators.required, Validators.email]],
+        name: ['', [Validators.required, FormValidators.name]],
         phone: [''],
         password: [''],
         passwordConfirmation: [''],
