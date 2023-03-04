@@ -10,4 +10,13 @@ export namespace FormValidators {
 
     return { name: true };
   }
+
+  export function phone(control: FormControl): ValidationErrors | null {
+    const value = control.value;
+
+    if (UserValidators.isValidPhone(value))
+      return null;
+
+    return { phone: true };
+  }
 }

@@ -11,6 +11,12 @@ export class UserValidators {
     return !!name.length && name.length >= 3 && name.length <= 1024;
   }
 
+  public static isValidPhone(value: string): boolean {
+    const phone = value.trim();
+
+    return !!phone.length
+  }
+
   public static isValidPassword(value: string): boolean {
     return value?.trim()?.length >= 6;
   }
