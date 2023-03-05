@@ -1,5 +1,5 @@
 import { UserValidators } from '@domain/validators/user/user_validators';
-import { FormControl, ValidationErrors } from "@angular/forms";
+import { AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn } from "@angular/forms";
 
 export namespace FormValidators {
   export function name(control: FormControl): ValidationErrors | null {
@@ -27,5 +27,22 @@ export namespace FormValidators {
       return null;
 
     return { password: true };
+  }
+
+  export function mustMatch(controlName: string, matchingControlName: string): (group: AbstractControl) => any {
+    return (group: AbstractControl) => {
+      const control = group.get(controlName);
+      const matchingControl = group.get(matchingControlName);
+
+      if (matchingControl?.errors && !matchingControl.errors['mustMatch']) {
+        return;
+      }
+
+      if (control?.value !== matchingControl?.value) {
+        matchingControl?.setErrors({ mustMatch: true });
+      } else {
+        matchingControl?.setErrors(null);
+      }
+    };
   }
 }

@@ -47,8 +47,10 @@ export class RegisterComponent {
         email: ['', [Validators.required, Validators.email]],
         name: ['', [Validators.required, FormValidators.name]],
         phone: ['', [Validators.required, FormValidators.phone]],
-        password: ['', Validators.required, FormValidators.password],
-        passwordConfirmation: ['', Validators.required, FormValidators.password],
+        password: ['', [Validators.required, FormValidators.password]],
+        passwordConfirmation: ['', [Validators.required, FormValidators.password]],
+      },{
+        validators: FormValidators.mustMatch('password', 'passwordConfirmation'),
       }),
       personalInformation: this.formBuilder.nonNullable.group({
         birthDate: [],
