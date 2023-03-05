@@ -18,6 +18,8 @@ export class UserValidators {
   }
 
   public static isValidPassword(value: string): boolean {
-    return value?.trim()?.length >= 6;
+    const password = value.trim();
+
+    return password.length >= 6 && password.length <= 512;
   }
 }

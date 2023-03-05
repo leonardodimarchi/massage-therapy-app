@@ -19,4 +19,13 @@ export namespace FormValidators {
 
     return { phone: true };
   }
+
+  export function password(control: FormControl): ValidationErrors | null {
+    const value = control.value;
+
+    if (UserValidators.isValidPassword(value))
+      return null;
+
+    return { password: true };
+  }
 }
