@@ -58,12 +58,12 @@ export class RegisterComponent {
         gender: [UserGenderEnum.FEMALE, [Validators.required]],
       }),
       address: this.formBuilder.nonNullable.group({
-        postalCode: [''],
-        state: [''],
-        city: [''],
-        neighborhood: [''],
-        street: [''],
-        houseNumber: [0],
+        postalCode: ['', [Validators.required]],
+        state: ['', [Validators.required]],
+        city: ['', [Validators.required]],
+        neighborhood: ['', [Validators.required]],
+        street: ['', [Validators.required]],
+        houseNumber: [0, [Validators.required]],
       })
     });
   }
