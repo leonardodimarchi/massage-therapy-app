@@ -20,7 +20,7 @@ export class RegisterComponent {
 
   public form: FormGroupFrom<RegisterForm>;
 
-  public step: RegisterStep = RegisterStep.BASIC_INFORMATION;
+  public step: RegisterStep = RegisterStep.PERSONAL_INFORMATION;
 
   public isLoading: boolean = false;
 
@@ -53,9 +53,9 @@ export class RegisterComponent {
         validators: FormValidators.mustMatch('password', 'passwordConfirmation'),
       }),
       personalInformation: this.formBuilder.nonNullable.group({
-        birthDate: [],
+        birthDate: [undefined, [Validators.required, FormValidators.birthDate]],
         diseaseHistory: [''],
-        gender: [UserGenderEnum.FEMALE],
+        gender: [UserGenderEnum.FEMALE, [Validators.required]],
       }),
       address: this.formBuilder.nonNullable.group({
         postalCode: [''],

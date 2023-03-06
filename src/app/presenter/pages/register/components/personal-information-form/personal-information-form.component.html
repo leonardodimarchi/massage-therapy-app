@@ -17,5 +17,5 @@
   <label for="gender" class="label__required">Sexo</label>
   <app-pill-select [items]="genders" formControlName="gender"></app-pill-select>
 
-  <button class="button" type="submit">Prosseguir</button>
+  <button [disabled]="form.invalid" class="button" type="submit">Prosseguir</button>
 </ng-container>

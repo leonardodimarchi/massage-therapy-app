@@ -22,4 +22,12 @@ export class UserValidators {
 
     return password.length >= 6 && password.length <= 512;
   }
+
+  public static isValidBirthDate(value: Date | string): boolean {
+    const today = new Date();
+    const minimumAge = 10;
+    const tenYearsBackDate = new Date(today.getFullYear() - minimumAge, today.getMonth(), today.getDate());
+
+    return tenYearsBackDate.getTime() >= new Date(value).getTime();
+  }
 }

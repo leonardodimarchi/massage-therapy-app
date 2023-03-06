@@ -20,6 +20,15 @@ export namespace FormValidators {
     return { phone: true };
   }
 
+  export function birthDate(control: FormControl): ValidationErrors | null {
+    const value = control.value;
+
+    if (UserValidators.isValidBirthDate(value))
+      return null;
+
+    return { birthDate: true };
+  }
+
   export function password(control: FormControl): ValidationErrors | null {
     const value = control.value;
 
