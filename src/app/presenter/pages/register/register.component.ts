@@ -37,7 +37,6 @@ export class RegisterComponent {
   }
 
   public nextStep(): void {
-    console.log(this.form.getRawValue());
     this.step = RegisterStepHelper.getNext(this.step);
   }
 
