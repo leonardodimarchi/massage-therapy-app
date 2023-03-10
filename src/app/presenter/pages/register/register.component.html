@@ -10,13 +10,13 @@
 
     <ng-container *ngIf="isAtPersonalInformation">
       <app-personal-information-form
-        formGroupName="personalInformation"
+        [formGroup]="form.controls.personalInformation"
       ></app-personal-information-form>
     </ng-container>
 
     <ng-container *ngIf="isAtAddress">
       <app-address-information-form
-        formGroupName="address"
+        [formGroup]="form.controls.address"
       ></app-address-information-form>
     </ng-container>
   </form>

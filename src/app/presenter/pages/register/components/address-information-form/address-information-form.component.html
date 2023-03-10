@@ -47,5 +47,5 @@
     formControlName="houseNumber"
   />
 
-  <button class="button" type="submit">Prosseguir</button>
+  <button [disabled]="form.invalid" class="button" type="submit">Prosseguir</button>
 </ng-container>

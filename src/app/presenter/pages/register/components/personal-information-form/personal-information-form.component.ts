@@ -5,7 +5,7 @@ import { NestedFormGroup } from '@presenter/components/shared/nested-form-group'
 import { PersonalInformationForm } from '@presenter/models/pages/register/personal-information-form';
 
 @Component({
-  selector: 'app-personal-information-form',
+  selector: '[formGroup] app-personal-information-form',
   templateUrl: './personal-information-form.component.html',
   styleUrls: ['./personal-information-form.component.scss'],
 })
