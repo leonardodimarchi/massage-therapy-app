@@ -1,16 +1,22 @@
 import { RegisterStep } from './../../models/pages/register/register-steps.enum';
 import { FormBuilder } from '@angular/forms';
 import { RegisterComponent } from "./register.component";
+import { RegisterUsecase } from '@domain/usecases/user/register_usecase';
+import { LoginUsecase } from '@domain/usecases/user/login_usecase';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
 
   let formBuilder: FormBuilder;
+  let registerUsecase: RegisterUsecase;
+  let loginUsecase: LoginUsecase;
 
   beforeEach(async () => {
     formBuilder = new FormBuilder();
+    registerUsecase = jasmine.createSpyObj('RegisterUsecase', ['call']);
+    loginUsecase = jasmine.createSpyObj('LoginUsecase', ['call'])
 
-    component = new RegisterComponent(formBuilder);
+    component = new RegisterComponent(formBuilder, loginUsecase, registerUsecase);
   });
 
   it('should create', () => {
@@ -34,6 +40,14 @@ describe('RegisterComponent', () => {
       component.nextStep();
 
       expect(component.step).toBe(RegisterStep.ADDRESS);
+    });
+
+    it('should call register when finishing ADDRESS step', async () => {
+      component.step = RegisterStep.ADDRESS;
+
+      await component.nextStep();
+
+      expect(registerUsecase.call).toHaveBeenCalledTimes(1);
     });
   });
 });

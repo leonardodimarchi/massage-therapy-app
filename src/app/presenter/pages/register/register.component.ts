@@ -1,7 +1,12 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { UserGenderEnum } from "@domain/models/user/user_gender.enum";
+import { LoginUsecase } from "@domain/usecases/user/login_usecase";
+import { RegisterUsecase } from "@domain/usecases/user/register_usecase";
 import { FormGroupFrom } from "@presenter/models/common/form-group-from";
+import { AddressForm } from "@presenter/models/pages/register/address-form";
+import { BasicInformationForm } from "@presenter/models/pages/register/basic-information-form";
+import { PersonalInformationForm } from "@presenter/models/pages/register/personal-information-form";
 import { RegisterForm } from "@presenter/models/pages/register/register-form";
 import { RegisterStep, RegisterStepHelper } from "@presenter/models/pages/register/register-steps.enum";
 import { FormValidators } from "@presenter/validators/form-validators";
@@ -14,6 +19,8 @@ import { FormValidators } from "@presenter/validators/form-validators";
 export class RegisterComponent {
   constructor(
     private readonly formBuilder: FormBuilder,
+    private readonly loginUsecase: LoginUsecase,
+    private readonly registerUsecase: RegisterUsecase,
   ) {
     this.form = this.createForm();
   }
@@ -36,7 +43,23 @@ export class RegisterComponent {
     return this.step === RegisterStep.ADDRESS;
   }
 
-  public nextStep(): void {
+  public async nextStep(): Promise<void> {
+    if (this.step === RegisterStep.ADDRESS) {
+      const {
+        address,
+        basicInformation,
+        personalInformation,
+      } = this.form.getRawValue()
+
+      return void await this.registerUsecase.call({
+        ...address as AddressForm,
+        ...basicInformation as BasicInformationForm,
+        ...personalInformation as PersonalInformationForm,
+        birthDate: new Date((personalInformation as PersonalInformationForm).birthDate),
+       });
+    }
+
+
     this.step = RegisterStepHelper.getNext(this.step);
   }
 
