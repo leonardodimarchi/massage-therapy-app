@@ -44,6 +44,8 @@ export class RegisterComponent {
   }
 
   public async nextStep(): Promise<void> {
+    this.isLoading = true;
+
     if (this.step === RegisterStep.ADDRESS) {
       const {
         address,

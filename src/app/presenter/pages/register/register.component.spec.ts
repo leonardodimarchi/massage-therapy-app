@@ -28,26 +28,40 @@ describe('RegisterComponent', () => {
   });
 
   describe('nextStep', () => {
-    it('should go from BASIC_INFORMATION to PERSONAL_INFORMATION', () => {
-      component.nextStep();
-
-      expect(component.step).toBe(RegisterStep.PERSONAL_INFORMATION);
+    describe('BASIC_INFORMATION', () => {
+      it('should go to PERSONAL_INFORMATION step', () => {
+        component.nextStep();
+  
+        expect(component.step).toBe(RegisterStep.PERSONAL_INFORMATION);
+      });
     });
 
-    it('should go from PERSONAL_INFORMATION to ADDRESS', () => {
-      component.step = RegisterStep.PERSONAL_INFORMATION;
-
-      component.nextStep();
-
-      expect(component.step).toBe(RegisterStep.ADDRESS);
+    describe('PERSONAL_INFORMATION', () => {
+      it('should go to ADDRESS step', () => {
+        component.step = RegisterStep.PERSONAL_INFORMATION;
+  
+        component.nextStep();
+  
+        expect(component.step).toBe(RegisterStep.ADDRESS);
+      });
     });
 
-    it('should call register when finishing ADDRESS step', async () => {
-      component.step = RegisterStep.ADDRESS;
+    describe('ADDRESS', () => {
+      it('should call register when finishing step', async () => {
+        component.step = RegisterStep.ADDRESS;
+  
+        await component.nextStep();
+  
+        expect(registerUsecase.call).toHaveBeenCalledTimes(1);
+      });
 
-      await component.nextStep();
-
-      expect(registerUsecase.call).toHaveBeenCalledTimes(1);
+      it('should set loading as true when calling register', async () => {
+        component.step = RegisterStep.ADDRESS;
+  
+        component.nextStep();
+  
+        expect(component.isLoading).toBeTrue();
+      });
     });
   });
 });
