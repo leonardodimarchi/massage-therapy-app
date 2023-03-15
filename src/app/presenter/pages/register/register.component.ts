@@ -61,11 +61,16 @@ export class RegisterComponent {
           personalInformation,
         } = this.form.getRawValue()
 
-        return void await this.registerUsecase.call({
+        await this.registerUsecase.call({
           ...address as AddressForm,
           ...basicInformation as BasicInformationForm,
           ...personalInformation as PersonalInformationForm,
           birthDate: new Date((personalInformation as PersonalInformationForm).birthDate),
+        });
+
+        return await this.loginUsecase.call({
+          email: (basicInformation as BasicInformationForm).email,
+          password: (basicInformation as BasicInformationForm).password,
         });
       }
 

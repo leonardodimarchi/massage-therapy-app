@@ -118,6 +118,15 @@ describe('RegisterComponent', () => {
   
         expect(toastService.showError).toHaveBeenCalledOnceWith(jasmine.objectContaining({ message: errorMessage }));
       });
+
+      it('should login after registering', async () => {
+        component.step = RegisterStep.ADDRESS;
+  
+        await component.nextStep();
+  
+        expect(loginUsecase.call).toHaveBeenCalledTimes(1);
+        expect(registerUsecase.call).toHaveBeenCalledBefore(loginUsecase.call);
+      });
     });
   });
 });
