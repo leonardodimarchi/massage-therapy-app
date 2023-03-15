@@ -1,8 +1,11 @@
 import { Component } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
+import { BadRequestError } from "@domain/errors";
+import { ValidationError } from "@domain/errors/validation_error";
 import { UserGenderEnum } from "@domain/models/user/user_gender.enum";
 import { LoginUsecase } from "@domain/usecases/user/login_usecase";
 import { RegisterUsecase } from "@domain/usecases/user/register_usecase";
+import { ToastServiceInterface } from "@infra/modules/toast/contracts/toast-service.interface";
 import { FormGroupFrom } from "@presenter/models/common/form-group-from";
 import { AddressForm } from "@presenter/models/pages/register/address-form";
 import { BasicInformationForm } from "@presenter/models/pages/register/basic-information-form";
@@ -21,6 +24,7 @@ export class RegisterComponent {
     private readonly formBuilder: FormBuilder,
     private readonly loginUsecase: LoginUsecase,
     private readonly registerUsecase: RegisterUsecase,
+    private readonly toastService: ToastServiceInterface,
   ) {
     this.form = this.createForm();
   }
@@ -67,7 +71,12 @@ export class RegisterComponent {
 
       this.step = RegisterStepHelper.getNext(this.step);
     } catch (error) {
+      const isWarning = error instanceof ValidationError || error instanceof BadRequestError;
 
+      if (isWarning)
+        return this.toastService.showWarning({ message: error.message });
+      
+      this.toastService.showError({ message: (error as any).message });
     } finally {
       this.isLoading = false;
     }
