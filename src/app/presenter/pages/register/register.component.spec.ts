@@ -62,6 +62,23 @@ describe('RegisterComponent', () => {
   
         expect(component.isLoading).toBeTrue();
       });
+
+      it('should set loading as false when finished', async () => {
+        component.step = RegisterStep.ADDRESS;
+  
+        await component.nextStep();
+  
+        expect(component.isLoading).toBeFalse();
+      });
+
+      it('should not call register if it is already loading', async () => {
+        component.step = RegisterStep.ADDRESS;
+        component.isLoading = true;
+
+        await component.nextStep();
+  
+        expect(registerUsecase.call).not.toHaveBeenCalled();
+      });
     });
   });
 });

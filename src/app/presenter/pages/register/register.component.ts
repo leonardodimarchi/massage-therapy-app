@@ -44,25 +44,33 @@ export class RegisterComponent {
   }
 
   public async nextStep(): Promise<void> {
-    this.isLoading = true;
+    if (this.isLoading)
+      return;
 
-    if (this.step === RegisterStep.ADDRESS) {
-      const {
-        address,
-        basicInformation,
-        personalInformation,
-      } = this.form.getRawValue()
+    try {
+      this.isLoading = true;
 
-      return void await this.registerUsecase.call({
-        ...address as AddressForm,
-        ...basicInformation as BasicInformationForm,
-        ...personalInformation as PersonalInformationForm,
-        birthDate: new Date((personalInformation as PersonalInformationForm).birthDate),
-       });
+      if (this.step === RegisterStep.ADDRESS) {
+        const {
+          address,
+          basicInformation,
+          personalInformation,
+        } = this.form.getRawValue()
+
+        return void await this.registerUsecase.call({
+          ...address as AddressForm,
+          ...basicInformation as BasicInformationForm,
+          ...personalInformation as PersonalInformationForm,
+          birthDate: new Date((personalInformation as PersonalInformationForm).birthDate),
+        });
+      }
+
+      this.step = RegisterStepHelper.getNext(this.step);
+    } catch (error) {
+
+    } finally {
+      this.isLoading = false;
     }
-
-
-    this.step = RegisterStepHelper.getNext(this.step);
   }
 
   private createForm(): FormGroupFrom<RegisterForm> {
@@ -73,7 +81,7 @@ export class RegisterComponent {
         phone: ['', [Validators.required, FormValidators.phone]],
         password: ['', [Validators.required, FormValidators.password]],
         passwordConfirmation: ['', [Validators.required, FormValidators.password]],
-      },{
+      }, {
         validators: FormValidators.mustMatch('password', 'passwordConfirmation'),
       }),
       personalInformation: this.formBuilder.nonNullable.group({
