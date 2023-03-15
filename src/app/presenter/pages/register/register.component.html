@@ -17,6 +17,7 @@
     <ng-container *ngIf="isAtAddress">
       <app-address-information-form
         [formGroup]="form.controls.address"
+        [isLoading]="isLoading"
       ></app-address-information-form>
     </ng-container>
   </form>

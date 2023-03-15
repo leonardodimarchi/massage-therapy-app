@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { NestedFormGroup } from '@presenter/components/shared/nested-form-group';
 import { AddressForm } from '@presenter/models/pages/register/address-form';
 
@@ -7,4 +7,7 @@ import { AddressForm } from '@presenter/models/pages/register/address-form';
   templateUrl: './address-information-form.component.html',
   styleUrls: ['./address-information-form.component.scss'],
 })
-export class AddressInformationFormComponent extends NestedFormGroup<AddressForm> {}
+export class AddressInformationFormComponent extends NestedFormGroup<AddressForm> {
+  @Input()
+  public isLoading: boolean = false;
+}
