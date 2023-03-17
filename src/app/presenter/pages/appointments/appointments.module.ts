@@ -12,7 +12,7 @@ import { AppointmentDatasourceInterface } from '@infra/contracts/datasources';
 import { AppointmentRepository } from '@infra/repositories/appointment/appointment_repository';
 import { HttpServiceInterface } from '@domain/contracts/services/http_service.interface';
 import { LoadingSpinnerModule } from '@infra/modules/loading/loading.module';
-import { BackButtonModule } from '@presenter/components/back-button/back-button.module';
+import { HeaderModule } from '@presenter/components/header/header.module';
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import { BackButtonModule } from '@presenter/components/back-button/back-button.
     AppointmentCardModule,
     InfiniteScrollModule,
     LoadingSpinnerModule,
-    BackButtonModule,
+    HeaderModule,
   ],
   declarations: [
     AppointmentsComponent,

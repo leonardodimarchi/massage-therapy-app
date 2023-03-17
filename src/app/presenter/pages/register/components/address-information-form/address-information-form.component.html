@@ -1,0 +1,45 @@
+<ng-container [formGroup]="form">
+  <label for="postalCode" class="label__required">CEP</label>
+  <input
+    id="postalCode"
+    class="input"
+    type="text"
+    formControlName="postalCode"
+  />
+
+  <label for="state" class="label__required">Estado</label>
+  <input id="state" class="input" type="text" formControlName="state" />
+
+  <label for="city" class="label__required">Cidade</label>
+  <input id="city" class="input" type="text" formControlName="city" />
+
+  <label for="neighborhood" class="label__required">Bairro</label>
+  <input
+    id="neighborhood"
+    class="input"
+    type="text"
+    formControlName="neighborhood"
+  />
+
+  <label for="street" class="label__required">Rua</label>
+  <input id="street" class="input" type="text" formControlName="street" />
+
+  <label for="houseNumber" class="label__required">Número</label>
+  <input
+    id="houseNumber"
+    class="input"
+    type="text"
+    formControlName="houseNumber"
+  />
+
+  <button
+    class="button"
+    type="submit"
+    [disabled]="form.invalid"
+    [loadingSpinner]="isLoading"
+    [loadingSpinnerBackdrop]="false"
+    loadingSpinnerPosition="right"
+  >
+    Prosseguir
+  </button>
+</ng-container>

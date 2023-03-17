@@ -1,0 +1,77 @@
+<ng-container [formGroup]="form">
+  <label for="email" class="label__required">Email</label>
+  <input
+    id="email"
+    class="input"
+    type="email"
+    autocomplete="email"
+    formControlName="email"
+  />
+
+  <label for="name" class="label__required">Nome</label>
+  <input
+    id="name"
+    class="input"
+    type="text"
+    autocomplete="name"
+    formControlName="name"
+  />
+
+  <!-- TODO: Phone mask -->
+  <label for="phone" class="label__required">Telefone</label>
+  <input
+    id="phone"
+    class="input"
+    type="tel"
+    autocomplete="tel"
+    formControlName="phone"
+  />
+
+  <label for="password" class="label__required">Senha</label>
+  <div class="input-with-suffix">
+    <input
+      id="password"
+      class="input"
+      [type]="isShowingPassword ? 'text' : 'password'"
+      autocomplete="new-password"
+      formControlName="password"
+    />
+
+    <img
+      *ngIf="isShowingPassword"
+      (click)="isShowingPassword = false"
+      src="assets/icons/eye-off-outline.svg"
+    />
+    <img
+      *ngIf="!isShowingPassword"
+      (click)="isShowingPassword = true"
+      src="assets/icons/eye-outline.svg"
+    />
+  </div>
+
+  <label for="passwordConfirmation" class="label__required">
+    Confirme sua senha
+  </label>
+  <div class="input-with-suffix">
+    <input
+      id="passwordConfirmation"
+      class="input"
+      [type]="isShowingConfirmationPassword ? 'text' : 'password'"
+      autocomplete="new-password"
+      formControlName="passwordConfirmation"
+    />
+
+    <img
+      *ngIf="isShowingConfirmationPassword"
+      (click)="isShowingConfirmationPassword = false"
+      src="assets/icons/eye-off-outline.svg"
+    />
+    <img
+      *ngIf="!isShowingConfirmationPassword"
+      (click)="isShowingConfirmationPassword = true"
+      src="assets/icons/eye-outline.svg"
+    />
+  </div>
+
+  <button [disabled]="form.invalid" class="button" type="submit">Prosseguir</button>
+</ng-container>

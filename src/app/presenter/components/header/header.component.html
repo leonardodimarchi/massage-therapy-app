@@ -1,0 +1,9 @@
+<div
+  class="header"
+  [class.header__with-title]="!!title">
+    <img src="assets/icons/arrow-back.svg" (click)="goBack()">
+
+    <ng-container *ngIf="title">
+      <h1>{{ title }}</h1>
+    </ng-container>
+</div>

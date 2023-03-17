@@ -1,15 +1,18 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { RouterServiceInterface } from '@infra/modules/router/contracts/router-service.interface';
 
 @Component({
-  selector: 'app-back-button',
-  templateUrl: './back-button.component.html',
-  styleUrls: ['./back-button.component.scss']
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss']
 })
-export class BackButtonComponent {
+export class HeaderComponent {
   constructor(
     private readonly routerService: RouterServiceInterface,
   ) {}
+
+  @Input()
+  public title: string = '';
 
   public async goBack(): Promise<void> {
     await this.routerService.goBack();

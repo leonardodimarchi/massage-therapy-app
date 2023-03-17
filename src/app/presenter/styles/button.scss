@@ -4,6 +4,7 @@
   justify-content: center;
 
   height: 3rem;
+  min-height: 3rem;
   width: 100%;
 
   color: white;
@@ -14,4 +15,12 @@
   background: var(--color-pink);
   box-shadow: 4px 8px 24px rgba(255, 87, 92, 0.25);
   border-radius: 100px;
+
+  transition: background 0.5s;
+
+  &:disabled {
+    border: 1px solid var(--color-pink);
+    color: var(--color-pink);
+    background: white;
+  }
 }
