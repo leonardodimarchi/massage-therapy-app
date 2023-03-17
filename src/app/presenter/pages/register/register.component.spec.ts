@@ -95,7 +95,6 @@ describe('RegisterComponent', () => {
   
         expect(toastService.showWarning).toHaveBeenCalledOnceWith(jasmine.objectContaining({ message: errorMessage }));
       });
-
       
       it('should show a warning if has bad request errors', async () => {
         const errorMessage = 'bad request error message';
