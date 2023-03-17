@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-height: 100%;
+
+  > input, > .input-with-suffix, > textarea {
+    margin-bottom: 1.5rem;
+  }
+
+  > button {
+    margin-top: auto;
+    margin-bottom: 2rem;
+  }
+}

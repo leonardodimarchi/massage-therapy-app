@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BackButtonComponent } from './back-button.component';
 import { RouterServiceInterface } from '@infra/modules/router/contracts/router-service.interface';
 import { RouterService } from '@infra/modules/router/services/router.service';
+import { HeaderComponent } from './header.component';
 
 @NgModule({
   imports: [
     CommonModule,
   ],
   declarations: [
-    BackButtonComponent,
+    HeaderComponent,
   ],
   exports: [
-    BackButtonComponent,
+    HeaderComponent,
   ],
   providers: [
     {
@@ -21,4 +21,4 @@ import { RouterService } from '@infra/modules/router/services/router.service';
     }
   ]
 })
-export class BackButtonModule { }
+export class HeaderModule { }

@@ -1,3 +1,4 @@
+import { FormBuilder } from '@angular/forms';
 import { LoginUsecase } from "@domain/usecases/user/login_usecase";
 import { LoginComponent } from "@presenter/pages/login/login.component";
 import { ToastServiceInterface } from "@infra/modules/toast/contracts/toast-service.interface";
@@ -9,13 +10,15 @@ describe('LoginComponent', () => {
   let loginUsecase: jasmine.SpyObj<LoginUsecase>;
   let toastService: jasmine.SpyObj<ToastServiceInterface>;
   let routerService: jasmine.SpyObj<RouterServiceInterface>;
+  let formBuilder: FormBuilder;
 
   beforeEach(async () => {
     loginUsecase = jasmine.createSpyObj('LoginUsecase', ['call']);
     toastService = jasmine.createSpyObj('ToastServiceInterface', ['showError']);
     routerService = jasmine.createSpyObj('RouterServiceInterface', ['navigate']);
+    formBuilder = new FormBuilder();
 
-    component = new LoginComponent(loginUsecase, toastService, routerService);
+    component = new LoginComponent(loginUsecase, toastService, routerService, formBuilder);
   });
 
   it('should create', () => {

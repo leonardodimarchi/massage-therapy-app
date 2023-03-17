@@ -2,13 +2,18 @@ import { UserAccessModule } from "@infra/guards/user-access/user-access.module";
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { UserAccessGuard } from "@infra/guards/user-access/user-access.guard";
-import { RouteData } from "./models/interfaces/route-data.interface";
+import { RouteData } from "./models/router/route-data.interface";
 
 const routeData: { [key: string]: RouteData } = {
   login: {
     isUnprotectedRoute: true,
     redirectTo: 'home',
     animation: 'fromLeft',
+  },
+  register: {
+    isUnprotectedRoute: true,
+    redirectTo: 'home',
+    animation: 'fromRight',
   },
   home: {
     isProtectedRoute: true,
@@ -27,6 +32,12 @@ const routes: Routes = [
     loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule),
     canActivate: [UserAccessGuard],
     data: routeData['login'],
+  },
+  {
+    path: 'register',
+    loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterModule),
+    canActivate: [UserAccessGuard],
+    data: routeData['register'],
   },
   {
     path: 'home',

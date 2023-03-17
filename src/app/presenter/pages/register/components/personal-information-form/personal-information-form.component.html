@@ -1,0 +1,21 @@
+<ng-container [formGroup]="form">
+  <label for="birthDate" class="label__required">Data de nascimento</label>
+  <input
+    id="birthDate"
+    class="input"
+    type="date"
+    formControlName="birthDate"
+  />
+
+  <label for="diseaseHistory" class="label">Histórico de doenças, lesões e cirurgias</label>
+  <textarea
+    id="diseaseHistory"
+    class="textarea"
+    formControlName="diseaseHistory"
+  ></textarea>
+
+  <label for="gender" class="label__required">Sexo</label>
+  <app-pill-select [items]="genders" formControlName="gender"></app-pill-select>
+
+  <button [disabled]="form.invalid" class="button" type="submit">Prosseguir</button>
+</ng-container>

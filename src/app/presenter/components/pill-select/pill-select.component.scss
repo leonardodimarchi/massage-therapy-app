@@ -1,0 +1,33 @@
+.pill-select {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 1.5rem;
+
+  .pill {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: fit-content;
+
+    padding: 0px 10px;
+    background: var(--color-gray);
+    border-radius: 15px;
+
+    > p {
+      font-size: 0.7rem;
+      font-family: Inter, Urbanist, sans-serif;
+      white-space: nowrap;
+      color: var(--color-gray-dark);
+    }
+
+    &.active {
+      border: 2px solid var(--color-gray-dark);
+
+      > p {
+        color: black;
+      }
+    }
+  }
+}
