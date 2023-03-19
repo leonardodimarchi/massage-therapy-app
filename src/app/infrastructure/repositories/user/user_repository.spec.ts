@@ -67,11 +67,13 @@ describe('UserRepository', () => {
       password: '123456',
       gender: UserGenderEnum.MALE,
       diseaseHistory: 'My history',
-      state: 'SP',
-      city: 'Sorocaba',
-      postalCode: '18273648',
-      neighborhood: 'My neighborhood',
-      houseNumber: 123,
+      address: {
+        state: 'SP',
+        city: 'Sorocaba',
+        postalCode: '18273648',
+        neighborhood: 'My neighborhood',
+        houseNumber: 123,
+      }
     }
 
     it('should call the datasource with the correct params', async () => {

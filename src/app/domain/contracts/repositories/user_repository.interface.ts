@@ -21,10 +21,12 @@ export interface RegisterParams {
   gender: UserGenderEnum;
   diseaseHistory?: string;
 
-  state: string;
-  city: string;
-  postalCode: string;
-  neighborhood: string;
-  houseNumber: number;
+  address: {
+    state: string;
+    city: string;
+    postalCode: string;
+    neighborhood: string;
+    houseNumber: number;
+  }
 }
 
