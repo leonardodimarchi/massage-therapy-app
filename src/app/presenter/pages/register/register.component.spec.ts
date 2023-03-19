@@ -6,6 +6,7 @@ import { LoginUsecase } from '@domain/usecases/user/login_usecase';
 import { ValidationError } from '@domain/errors/validation_error';
 import { ToastServiceInterface } from '@infra/modules/toast/contracts/toast-service.interface';
 import { BadRequestError } from '@domain/errors';
+import { RouterServiceInterface } from '@infra/modules/router/contracts/router-service.interface';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -14,14 +15,16 @@ describe('RegisterComponent', () => {
   let registerUsecase: jasmine.SpyObj<RegisterUsecase>;
   let loginUsecase: jasmine.SpyObj<LoginUsecase>;
   let toastService: jasmine.SpyObj<ToastServiceInterface>;
+  let routerService: jasmine.SpyObj<RouterServiceInterface>;
 
   beforeEach(async () => {
     formBuilder = new FormBuilder();
     registerUsecase = jasmine.createSpyObj('RegisterUsecase', ['call']);
     loginUsecase = jasmine.createSpyObj('LoginUsecase', ['call']);
     toastService = jasmine.createSpyObj('ToastServiceInterface', ['showWarning', 'showError']);
+    routerService = jasmine.createSpyObj('RouterServiceInterface', ['navigate']);
 
-    component = new RegisterComponent(formBuilder, loginUsecase, registerUsecase, toastService);
+    component = new RegisterComponent(formBuilder, loginUsecase, registerUsecase, toastService, routerService);
   });
 
   it('should create', () => {
@@ -125,6 +128,7 @@ describe('RegisterComponent', () => {
   
         expect(loginUsecase.call).toHaveBeenCalledTimes(1);
         expect(registerUsecase.call).toHaveBeenCalledBefore(loginUsecase.call);
+        expect(routerService.navigate).toHaveBeenCalledOnceWith('/login');
       });
     });
   });

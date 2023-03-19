@@ -5,6 +5,7 @@ import { ValidationError } from "@domain/errors/validation_error";
 import { UserGenderEnum } from "@domain/models/user/user_gender.enum";
 import { LoginUsecase } from "@domain/usecases/user/login_usecase";
 import { RegisterUsecase } from "@domain/usecases/user/register_usecase";
+import { RouterServiceInterface } from "@infra/modules/router/contracts/router-service.interface";
 import { ToastServiceInterface } from "@infra/modules/toast/contracts/toast-service.interface";
 import { FormGroupFrom } from "@presenter/models/common/form-group-from";
 import { AddressForm } from "@presenter/models/pages/register/address-form";
@@ -25,6 +26,7 @@ export class RegisterComponent {
     private readonly loginUsecase: LoginUsecase,
     private readonly registerUsecase: RegisterUsecase,
     private readonly toastService: ToastServiceInterface,
+    private readonly routerService: RouterServiceInterface,
   ) {
     this.form = this.createForm();
   }
@@ -62,16 +64,23 @@ export class RegisterComponent {
         } = this.form.getRawValue()
 
         await this.registerUsecase.call({
-          ...address as AddressForm,
+          address: {
+            ...address as AddressForm,
+            houseNumber: +(address as AddressForm).houseNumber,
+          },
           ...basicInformation as BasicInformationForm,
           ...personalInformation as PersonalInformationForm,
           birthDate: new Date((personalInformation as PersonalInformationForm).birthDate),
         });
 
-        return await this.loginUsecase.call({
+        await this.loginUsecase.call({
           email: (basicInformation as BasicInformationForm).email,
           password: (basicInformation as BasicInformationForm).password,
         });
+
+        // TODO: Adicionar toast de sucesso
+
+        return await this.routerService.navigate('/login');
       }
 
       this.step = RegisterStepHelper.getNext(this.step);

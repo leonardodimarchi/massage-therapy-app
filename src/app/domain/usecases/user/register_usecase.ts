@@ -12,11 +12,13 @@ export interface RegisterUseCaseInput {
     gender: UserGenderEnum;
     diseaseHistory?: string;
 
-    state: string;
-    city: string;
-    postalCode: string;
-    neighborhood: string;
-    houseNumber: number;
+    address: {
+        state: string;
+        city: string;
+        postalCode: string;
+        neighborhood: string;
+        houseNumber: number;
+    }
 }
 
 export interface RegisterUseCaseOutput {
@@ -26,7 +28,7 @@ export interface RegisterUseCaseOutput {
 export class RegisterUsecase implements UseCase<RegisterUseCaseInput, RegisterUseCaseOutput> {
     constructor(
         private readonly repository: UserRepositoryInterface,
-    ) {}
+    ) { }
 
     public async call({
         email,
@@ -36,27 +38,19 @@ export class RegisterUsecase implements UseCase<RegisterUseCaseInput, RegisterUs
         password,
         gender,
         diseaseHistory,
-        state,
-        city,
-        postalCode,
-        neighborhood,
-        houseNumber,
+        address,
     }: RegisterUseCaseInput): Promise<RegisterUseCaseOutput> {
-      const createdUser = await this.repository.register({
-        email,
-        name,
-        phone,
-        birthDate,
-        password,
-        gender,
-        diseaseHistory,
-        state,
-        city,
-        postalCode,
-        neighborhood,
-        houseNumber,
-      });
+        const createdUser = await this.repository.register({
+            email,
+            name,
+            phone,
+            birthDate,
+            password,
+            gender,
+            diseaseHistory,
+            address,
+        });
 
-      return { createdUser };
+        return { createdUser };
     }
 }
