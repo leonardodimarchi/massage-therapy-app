@@ -19,6 +19,12 @@ export class ToastService implements ToastServiceInterface {
   public showWarning(config: ToastConfig): void {
     this.toastr.warning(config.message, config.title, {
       positionClass: 'toast-bottom-center',
-    })
+    });
+  }
+
+  public showSuccess(config: ToastConfig): void {
+    this.toastr.success(config.message, config.title, {
+      positionClass: 'toast-bottom-center',
+    });
   }
 }
