@@ -78,7 +78,10 @@ export class RegisterComponent {
           password: (basicInformation as BasicInformationForm).password,
         });
 
-        // TODO: Adicionar toast de sucesso
+        this.toastService.showSuccess({
+          title: 'Sucesso!',
+          message: 'Sua conta foi cadastrada =)'
+        });
 
         return await this.routerService.navigate('/login');
       }
@@ -89,7 +92,7 @@ export class RegisterComponent {
 
       if (isWarning)
         return this.toastService.showWarning({ message: error.message });
-      
+
       this.toastService.showError({ message: (error as any).message });
     } finally {
       this.isLoading = false;

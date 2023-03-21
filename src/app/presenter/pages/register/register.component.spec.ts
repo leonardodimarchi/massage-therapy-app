@@ -21,7 +21,7 @@ describe('RegisterComponent', () => {
     formBuilder = new FormBuilder();
     registerUsecase = jasmine.createSpyObj('RegisterUsecase', ['call']);
     loginUsecase = jasmine.createSpyObj('LoginUsecase', ['call']);
-    toastService = jasmine.createSpyObj('ToastServiceInterface', ['showWarning', 'showError']);
+    toastService = jasmine.createSpyObj('ToastServiceInterface', ['showWarning', 'showError', 'showSuccess']);
     routerService = jasmine.createSpyObj('RouterServiceInterface', ['navigate']);
 
     component = new RegisterComponent(formBuilder, loginUsecase, registerUsecase, toastService, routerService);
@@ -39,7 +39,7 @@ describe('RegisterComponent', () => {
     describe('BASIC_INFORMATION', () => {
       it('should go to PERSONAL_INFORMATION step', () => {
         component.nextStep();
-  
+
         expect(component.step).toBe(RegisterStep.PERSONAL_INFORMATION);
       });
     });
@@ -47,9 +47,9 @@ describe('RegisterComponent', () => {
     describe('PERSONAL_INFORMATION', () => {
       it('should go to ADDRESS step', () => {
         component.step = RegisterStep.PERSONAL_INFORMATION;
-  
+
         component.nextStep();
-  
+
         expect(component.step).toBe(RegisterStep.ADDRESS);
       });
     });
@@ -57,25 +57,25 @@ describe('RegisterComponent', () => {
     describe('ADDRESS', () => {
       it('should call register when finishing step', async () => {
         component.step = RegisterStep.ADDRESS;
-  
+
         await component.nextStep();
-  
+
         expect(registerUsecase.call).toHaveBeenCalledTimes(1);
       });
 
       it('should set loading as true when calling register', async () => {
         component.step = RegisterStep.ADDRESS;
-  
+
         component.nextStep();
-  
+
         expect(component.isLoading).toBeTrue();
       });
 
       it('should set loading as false when finished', async () => {
         component.step = RegisterStep.ADDRESS;
-  
+
         await component.nextStep();
-  
+
         expect(component.isLoading).toBeFalse();
       });
 
@@ -84,7 +84,7 @@ describe('RegisterComponent', () => {
         component.isLoading = true;
 
         await component.nextStep();
-  
+
         expect(registerUsecase.call).not.toHaveBeenCalled();
       });
 
@@ -95,10 +95,10 @@ describe('RegisterComponent', () => {
         registerUsecase.call.and.throwError(new ValidationError(errorMessage));
 
         await component.nextStep();
-  
+
         expect(toastService.showWarning).toHaveBeenCalledOnceWith(jasmine.objectContaining({ message: errorMessage }));
       });
-      
+
       it('should show a warning if has bad request errors', async () => {
         const errorMessage = 'bad request error message';
 
@@ -106,7 +106,7 @@ describe('RegisterComponent', () => {
         registerUsecase.call.and.throwError(new BadRequestError(errorMessage));
 
         await component.nextStep();
-  
+
         expect(toastService.showWarning).toHaveBeenCalledOnceWith(jasmine.objectContaining({ message: errorMessage }));
       });
 
@@ -117,15 +117,23 @@ describe('RegisterComponent', () => {
         registerUsecase.call.and.throwError(new Error(errorMessage));
 
         await component.nextStep();
-  
+
         expect(toastService.showError).toHaveBeenCalledOnceWith(jasmine.objectContaining({ message: errorMessage }));
+      });
+
+      it('should show a success toast after registering', async () => {
+        component.step = RegisterStep.ADDRESS;
+
+        await component.nextStep();
+
+        expect(toastService.showSuccess).toHaveBeenCalledTimes(1);
       });
 
       it('should login after registering', async () => {
         component.step = RegisterStep.ADDRESS;
-  
+
         await component.nextStep();
-  
+
         expect(loginUsecase.call).toHaveBeenCalledTimes(1);
         expect(registerUsecase.call).toHaveBeenCalledBefore(loginUsecase.call);
         expect(routerService.navigate).toHaveBeenCalledOnceWith('/login');
