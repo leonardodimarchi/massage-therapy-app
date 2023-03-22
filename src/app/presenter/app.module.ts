@@ -7,6 +7,7 @@ import { HttpModule } from "@infra/modules/http/http.module";
 import { ToastModule } from "@infra/modules/toast/toast.module";
 import { AppRoutingModule } from "@presenter/app-routing.module";
 import { AppComponent } from "@presenter/app.component";
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { AppComponent } from "@presenter/app.component";
     BrowserAnimationsModule,
     ToastModule.forRoot(),
     UserModule.forRoot(),
+    NgxMaskModule.forRoot(),
     AppRoutingModule,
     HttpModule.with({
       baseUrl: environment.apiBaseUrl,
