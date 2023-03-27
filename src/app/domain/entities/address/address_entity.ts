@@ -4,7 +4,6 @@ export interface AddressEntityProps {
   city: string;
   neighborhood: string;
   street: string;
-  houseNumber: number;
 }
 
 export class AddressEntity {
@@ -53,13 +52,5 @@ export class AddressEntity {
 
   public get street(): string {
     return this.props.street;
-  }
-
-  public set houseNumber(houseNumber: number) {
-    this.props.houseNumber = houseNumber;
-  }
-
-  public get houseNumber(): number {
-    return this.props.houseNumber;
   }
 }

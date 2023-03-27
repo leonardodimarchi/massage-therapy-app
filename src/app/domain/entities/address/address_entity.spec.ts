@@ -7,7 +7,6 @@ describe('AddressEntity', () => {
     const city = 'city';
     const neighborhood = 'neighborhood';
     const street = 'street';
-    const houseNumber = 1;
 
     const address = new AddressEntity({
       postalCode,
@@ -15,7 +14,6 @@ describe('AddressEntity', () => {
       city,
       neighborhood,
       street,
-      houseNumber,
     });
 
     expect(address.postalCode).toBe(postalCode);
@@ -23,6 +21,5 @@ describe('AddressEntity', () => {
     expect(address.city).toBe(city);
     expect(address.neighborhood).toBe(neighborhood);
     expect(address.street).toBe(street);
-    expect(address.houseNumber).toBe(houseNumber);
   });
 });

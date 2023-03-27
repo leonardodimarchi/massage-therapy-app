@@ -1,3 +1,4 @@
+import { AddressByPostalCodeDto } from '@infra/models/address/dto/address_by_postal_code_dto';
 import { AddressEntity, AddressEntityProps } from "@domain/entities/address/address_entity";
 
 const postalCode = 'postalCode';
@@ -5,7 +6,6 @@ const state = 'state';
 const city = 'city';
 const neighborhood = 'neighborhood';
 const street = 'street';
-const houseNumber = 1;
 
 export const mockedAddressEntity = new AddressEntity({
   postalCode,
@@ -13,7 +13,6 @@ export const mockedAddressEntity = new AddressEntity({
   city,
   neighborhood,
   street,
-  houseNumber,
 });
 
 export const mockedAddressEntityProps: AddressEntityProps = {
@@ -22,5 +21,12 @@ export const mockedAddressEntityProps: AddressEntityProps = {
   city,
   neighborhood,
   street,
-  houseNumber,
 };
+
+export const mockedAddressByPostalCodeDto: AddressByPostalCodeDto = {
+  cep: postalCode,
+  city,
+  state,
+  street,
+  neighborhood,
+}
