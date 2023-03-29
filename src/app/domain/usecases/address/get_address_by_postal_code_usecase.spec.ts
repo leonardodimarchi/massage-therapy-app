@@ -1,12 +1,12 @@
 import { GetAddressByPostalCodeUsecase } from './get_address_by_postal_code_usecase';
-import { PostalCodeRepositoryInterface } from '@domain/contracts/repositories';
+import { AddressRepositoryInterface } from '@domain/contracts/repositories';
 import { AddressValidators } from '@domain/validators/address/address_validators';
 import { ValidationError } from '@domain/errors/validation_error';
 import { mockedAddressEntity } from '@mocks/address/address_entity_mock';
 
 describe('GetAddressByPostalCodeUsecase', () => {
   let usecase: GetAddressByPostalCodeUsecase;
-  let repository: jasmine.SpyObj<PostalCodeRepositoryInterface>;
+  let repository: jasmine.SpyObj<AddressRepositoryInterface>;
 
   beforeEach(() => {
     repository = jasmine.createSpyObj('PostalCodeRepositoryInterface', ['getAddressByPostalCode']);

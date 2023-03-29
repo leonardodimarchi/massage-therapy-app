@@ -1,13 +1,13 @@
-import { AddressByPostalCodeMapper } from './../../models/address/mappers/address_by_postal_code_mapper';
+import { AddressByPostalCodeMapper } from '../../models/address/mappers/address_by_postal_code_mapper';
 import { HttpErrorHandler } from '@infra/repositories/shared/errors/http_error_handler';
 import { AddressEntity } from '@domain/entities/address/address_entity';
-import { PostalCodeRepositoryInterface } from "@domain/contracts/repositories";
-import { PostalCodeDatasourceInterface } from '@infra/contracts/datasources';
+import { AddressRepositoryInterface } from "@domain/contracts/repositories";
+import { AddressDatasourceInterface } from '@infra/contracts/datasources';
 
-export class PostalCodeRepository implements PostalCodeRepositoryInterface {
+export class PostalCodeRepository implements AddressRepositoryInterface {
 
   constructor(
-    private readonly datasource: PostalCodeDatasourceInterface,
+    private readonly datasource: AddressDatasourceInterface,
   ) {}
 
   async getAddressByPostalCode(postalCode: string): Promise<AddressEntity> {

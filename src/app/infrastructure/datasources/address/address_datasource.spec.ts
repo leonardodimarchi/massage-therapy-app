@@ -1,6 +1,6 @@
-import { PostalCodeDatasource } from "./postal_code_datasource";
+import { PostalCodeDatasource } from "./address_datasource";
 
-describe('PostalCodeDatasource', () => {
+describe('AddessDatasource', () => {
     let datasource: PostalCodeDatasource;
 
     beforeEach(() => {
