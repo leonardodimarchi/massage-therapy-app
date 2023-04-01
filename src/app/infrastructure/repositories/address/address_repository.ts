@@ -4,7 +4,7 @@ import { AddressEntity } from '@domain/entities/address/address_entity';
 import { AddressRepositoryInterface } from "@domain/contracts/repositories";
 import { AddressDatasourceInterface } from '@infra/contracts/datasources';
 
-export class PostalCodeRepository implements AddressRepositoryInterface {
+export class AddressRepository implements AddressRepositoryInterface {
 
   constructor(
     private readonly datasource: AddressDatasourceInterface,

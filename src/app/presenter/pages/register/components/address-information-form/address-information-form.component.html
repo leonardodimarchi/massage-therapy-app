@@ -1,12 +1,12 @@
 <ng-container [formGroup]="form">
   <label for="postalCode" class="label__required">CEP</label>
-  <!-- TODO: Busca por CEP (maskFilled) -->
   <input
     id="postalCode"
     class="input"
     type="text"
     formControlName="postalCode"
     mask="00000-000"
+    (focusout)="fillAddressByPostalCode()"
   />
 
   <label for="state" class="label__required">Estado</label>

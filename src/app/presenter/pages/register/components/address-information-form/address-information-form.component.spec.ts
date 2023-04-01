@@ -1,33 +1,59 @@
-import { FormGroup, FormGroupDirective, ControlContainer } from '@angular/forms';
+import { FormGroup, FormGroupDirective, ControlContainer, Validators, FormControl } from '@angular/forms';
 import { AddressInformationFormComponent } from './address-information-form.component';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { GetAddressByPostalCodeUsecase } from '@domain/usecases/address/get_address_by_postal_code_usecase';
+import { mockedAddressEntity } from '@mocks/address/address_entity_mock';
 
 describe('AddressInformationFormComponent', () => {
   let component: AddressInformationFormComponent;
   let fixture: ComponentFixture<AddressInformationFormComponent>;
 
+  let getAddressByPostalCodeUsecase: jasmine.SpyObj<GetAddressByPostalCodeUsecase>;
+
   beforeEach(async () => {
     const parentForm: FormGroup = new FormGroup({
-      basicInformation: new FormGroup({}),
+      street: new FormControl(),
+      city: new FormControl(),
+      neighborhood: new FormControl(),
+      state: new FormControl(),
+      postalCode: new FormControl(),
     });
 
     const formGroupDirective: FormGroupDirective = new FormGroupDirective([], []);
     formGroupDirective.form = parentForm;
 
+    getAddressByPostalCodeUsecase = jasmine.createSpyObj('GetAddressByPostalCodeUsecase', ['call']);
+
     await TestBed.configureTestingModule({
       declarations: [ AddressInformationFormComponent ],
       providers: [
         { provide: ControlContainer, useValue: formGroupDirective },
+        { provide: GetAddressByPostalCodeUsecase, useValue: getAddressByPostalCodeUsecase },
       ]
     })
     .compileComponents();
 
     fixture = TestBed.createComponent(AddressInformationFormComponent);
     component = fixture.componentInstance;
+
     fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  describe('Postal Code', () => {
+    it('should fill address fields', async () => {
+      getAddressByPostalCodeUsecase.call.and.resolveTo(mockedAddressEntity);
+
+      component.form.controls.postalCode.setValue('12345678');
+      await component.fillAddressByPostalCode();
+
+      expect(component.form.value.street).toEqual(mockedAddressEntity.street);
+      expect(component.form.value.city).toEqual(mockedAddressEntity.city);
+      expect(component.form.value.neighborhood).toEqual(mockedAddressEntity.neighborhood);
+      expect(component.form.value.state).toEqual(mockedAddressEntity.state);
+    });
   });
 });

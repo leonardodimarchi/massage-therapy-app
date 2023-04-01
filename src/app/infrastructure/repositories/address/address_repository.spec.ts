@@ -1,16 +1,16 @@
 import { AddressEntity } from '@domain/entities/address/address_entity';
 import { mockedAddressEntity, mockedAddressByPostalCodeDto } from '@mocks/address/address_entity_mock';
-import { PostalCodeRepository } from './address_repository';
+import { AddressRepository } from './address_repository';
 import { AddressDatasourceInterface } from '@infra/contracts/datasources';
 import { HttpErrorHandler } from '../shared/errors/http_error_handler';
 
 describe('AddressRepository', () => {
   let datasource: jasmine.SpyObj<AddressDatasourceInterface>;
-  let repository: PostalCodeRepository;
+  let repository: AddressRepository;
 
   beforeEach(() => {
     datasource = jasmine.createSpyObj('PostalCodeDatasourceInterface', ['getAddressByPostalCode']);
-    repository = new PostalCodeRepository(datasource);
+    repository = new AddressRepository(datasource);
   });
 
   it('should return an AddressEntity from the datasource', async () => {
