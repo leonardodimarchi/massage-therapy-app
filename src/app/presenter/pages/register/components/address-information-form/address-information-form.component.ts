@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { GetAddressByPostalCodeUsecase } from '@domain/usecases/address/get_address_by_postal_code_usecase';
 import { NestedFormGroup } from '@presenter/components/shared/nested-form-group';
 import { AddressForm } from '@presenter/models/pages/register/address-form';
+import { AddressValidators } from '@domain/validators/address/address_validators';
 
 @Component({
   selector: '[formGroup] app-address-information-form',
@@ -22,10 +23,13 @@ export class AddressInformationFormComponent extends NestedFormGroup<AddressForm
   public isLoading: boolean = false;
 
   public async fillAddressByPostalCode(): Promise<void> {
-    // TODO: Add loading, validate postalcode and error handling
+    // TODO: Add loading and error handling
     const postalCode = this.form.value.postalCode;
 
     if (!postalCode)
+      return;
+
+    if (!AddressValidators.isValidPostalCode(postalCode))
       return;
 
     const result = await this.getAddressByPostalCodeUsecase.call({ postalCode });

@@ -3,6 +3,7 @@ import { AddressInformationFormComponent } from './address-information-form.comp
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GetAddressByPostalCodeUsecase } from '@domain/usecases/address/get_address_by_postal_code_usecase';
 import { mockedAddressEntity } from '@mocks/address/address_entity_mock';
+import { AddressValidators } from '@domain/validators/address/address_validators';
 
 describe('AddressInformationFormComponent', () => {
   let component: AddressInformationFormComponent;
@@ -54,6 +55,22 @@ describe('AddressInformationFormComponent', () => {
       expect(component.form.value.city).toEqual(mockedAddressEntity.city);
       expect(component.form.value.neighborhood).toEqual(mockedAddressEntity.neighborhood);
       expect(component.form.value.state).toEqual(mockedAddressEntity.state);
+    });
+
+    it('should not call if has empty postal code', async () => {
+      component.form.controls.postalCode.setValue('');
+      await component.fillAddressByPostalCode();
+
+      expect(getAddressByPostalCodeUsecase.call).not.toHaveBeenCalled();
+    });
+
+    it('should not call if has invalid postal code', async () => {
+      spyOn(AddressValidators, 'isValidPostalCode').and.returnValue(false);
+      component.form.controls.postalCode.setValue('...');
+
+      await component.fillAddressByPostalCode();
+
+      expect(getAddressByPostalCodeUsecase.call).not.toHaveBeenCalled();
     });
   });
 });
