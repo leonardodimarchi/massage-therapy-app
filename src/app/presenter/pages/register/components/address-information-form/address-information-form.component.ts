@@ -4,6 +4,7 @@ import { GetAddressByPostalCodeUsecase } from '@domain/usecases/address/get_addr
 import { NestedFormGroup } from '@presenter/components/shared/nested-form-group';
 import { AddressForm } from '@presenter/models/pages/register/address-form';
 import { AddressValidators } from '@domain/validators/address/address_validators';
+import { ToastServiceInterface } from '@infra/modules/toast/contracts/toast-service.interface';
 
 @Component({
   selector: '[formGroup] app-address-information-form',
@@ -14,6 +15,7 @@ export class AddressInformationFormComponent extends NestedFormGroup<AddressForm
 
   constructor(
     protected override readonly controlContainer: ControlContainer,
+    private readonly toastService: ToastServiceInterface,
     private readonly getAddressByPostalCodeUsecase: GetAddressByPostalCodeUsecase,
   ) {
     super(controlContainer);
@@ -23,7 +25,7 @@ export class AddressInformationFormComponent extends NestedFormGroup<AddressForm
   public isLoading: boolean = false;
 
   public async fillAddressByPostalCode(): Promise<void> {
-    // TODO: Add loading and error handling
+    // TODO: Add loading 
     const postalCode = this.form.value.postalCode;
 
     if (!postalCode)
@@ -32,15 +34,20 @@ export class AddressInformationFormComponent extends NestedFormGroup<AddressForm
     if (!AddressValidators.isValidPostalCode(postalCode))
       return;
 
-    const result = await this.getAddressByPostalCodeUsecase.call({ postalCode });
+    try {
+      const result = await this.getAddressByPostalCodeUsecase.call({ postalCode });
 
-    this.form.patchValue({
-      postalCode,
-      city: result.city,
-      neighborhood: result.neighborhood,
-      state: result.state,
-      street: result.street,
-    });
+      this.form.patchValue({
+        postalCode,
+        city: result.city,
+        neighborhood: result.neighborhood,
+        state: result.state,
+        street: result.street,
+      });
+    } catch (error: unknown) {
+      if (error instanceof Error)
+        this.toastService.showWarning({ message: error.message });
+    }
   }
 
 }

@@ -4,12 +4,14 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { GetAddressByPostalCodeUsecase } from '@domain/usecases/address/get_address_by_postal_code_usecase';
 import { mockedAddressEntity } from '@mocks/address/address_entity_mock';
 import { AddressValidators } from '@domain/validators/address/address_validators';
+import { ToastServiceInterface } from '@infra/modules/toast/contracts/toast-service.interface';
 
 describe('AddressInformationFormComponent', () => {
   let component: AddressInformationFormComponent;
   let fixture: ComponentFixture<AddressInformationFormComponent>;
 
   let getAddressByPostalCodeUsecase: jasmine.SpyObj<GetAddressByPostalCodeUsecase>;
+  let toastService: jasmine.SpyObj<ToastServiceInterface>;
 
   beforeEach(async () => {
     const parentForm: FormGroup = new FormGroup({
@@ -23,12 +25,14 @@ describe('AddressInformationFormComponent', () => {
     const formGroupDirective: FormGroupDirective = new FormGroupDirective([], []);
     formGroupDirective.form = parentForm;
 
+    toastService = jasmine.createSpyObj('ToastServiceInterface', ['showWarning']);
     getAddressByPostalCodeUsecase = jasmine.createSpyObj('GetAddressByPostalCodeUsecase', ['call']);
 
     await TestBed.configureTestingModule({
       declarations: [ AddressInformationFormComponent ],
       providers: [
         { provide: ControlContainer, useValue: formGroupDirective },
+        { provide: ToastServiceInterface, useValue: toastService },
         { provide: GetAddressByPostalCodeUsecase, useValue: getAddressByPostalCodeUsecase },
       ]
     })
@@ -71,6 +75,15 @@ describe('AddressInformationFormComponent', () => {
       await component.fillAddressByPostalCode();
 
       expect(getAddressByPostalCodeUsecase.call).not.toHaveBeenCalled();
+    });
+
+    it('should show an alert if something goes wrong', async () => {
+      getAddressByPostalCodeUsecase.call.and.throwError(new Error('Mocked error'));
+
+      component.form.controls.postalCode.setValue('12345678');
+      await component.fillAddressByPostalCode();
+
+      expect(toastService.showWarning).toHaveBeenCalledTimes(1);
     });
   });
 });
