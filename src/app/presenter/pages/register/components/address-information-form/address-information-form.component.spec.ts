@@ -1,6 +1,6 @@
 import { FormGroup, FormGroupDirective, ControlContainer, Validators, FormControl } from '@angular/forms';
 import { AddressInformationFormComponent } from './address-information-form.component';
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { GetAddressByPostalCodeUsecase } from '@domain/usecases/address/get_address_by_postal_code_usecase';
 import { mockedAddressEntity } from '@mocks/address/address_entity_mock';
 import { AddressValidators } from '@domain/validators/address/address_validators';
@@ -84,6 +84,30 @@ describe('AddressInformationFormComponent', () => {
       await component.fillAddressByPostalCode();
 
       expect(toastService.showWarning).toHaveBeenCalledTimes(1);
+    });
+
+    it('should set loading while fetching', fakeAsync(() => {
+      getAddressByPostalCodeUsecase.call.and.resolveTo(mockedAddressEntity);
+
+      component.form.controls.postalCode.setValue('12345678');
+      component.fillAddressByPostalCode();
+
+      expect(component.isLoadingPostalCodeSearch).toBeTrue();
+
+      tick()
+
+      expect(component.isLoadingPostalCodeSearch).toBeFalse();
+    }));
+
+    it('should not fetch if it is already loading', async () => {
+      getAddressByPostalCodeUsecase.call.and.resolveTo(mockedAddressEntity);
+
+      component.isLoadingPostalCodeSearch = true;
+      component.form.controls.postalCode.setValue('12345678');
+      
+      await component.fillAddressByPostalCode();
+
+      expect(getAddressByPostalCodeUsecase.call).not.toHaveBeenCalled();
     });
   });
 });

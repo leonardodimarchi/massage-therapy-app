@@ -24,8 +24,12 @@ export class AddressInformationFormComponent extends NestedFormGroup<AddressForm
   @Input()
   public isLoading: boolean = false;
 
+  public isLoadingPostalCodeSearch: boolean = false;
+
   public async fillAddressByPostalCode(): Promise<void> {
-    // TODO: Add loading 
+    if (this.isLoadingPostalCodeSearch)
+      return;
+
     const postalCode = this.form.value.postalCode;
 
     if (!postalCode)
@@ -33,6 +37,8 @@ export class AddressInformationFormComponent extends NestedFormGroup<AddressForm
 
     if (!AddressValidators.isValidPostalCode(postalCode))
       return;
+
+    this.isLoadingPostalCodeSearch = true;
 
     try {
       const result = await this.getAddressByPostalCodeUsecase.call({ postalCode });
@@ -47,6 +53,8 @@ export class AddressInformationFormComponent extends NestedFormGroup<AddressForm
     } catch (error: unknown) {
       if (error instanceof Error)
         this.toastService.showWarning({ message: error.message });
+    } finally {
+      this.isLoadingPostalCodeSearch = false
     }
   }
 
