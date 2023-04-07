@@ -6,7 +6,7 @@ import { FormGroupFrom } from '@presenter/models/common/form-group-from';
 @Directive()
 export class NestedFormGroup<TGroup extends object> implements OnInit {
   constructor(
-    private controlContainer: ControlContainer,
+    protected readonly controlContainer: ControlContainer,
   ) { }
 
   public form!: FormGroupFrom<TGroup>;
