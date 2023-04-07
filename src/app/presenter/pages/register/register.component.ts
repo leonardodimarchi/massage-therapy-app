@@ -121,7 +121,7 @@ export class RegisterComponent {
         city: ['', [Validators.required]],
         neighborhood: ['', [Validators.required]],
         street: ['', [Validators.required]],
-        houseNumber: [0, [Validators.required]],
+        houseNumber: [undefined, [Validators.required, Validators.min(1)]],
       })
     });
   }

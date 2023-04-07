@@ -52,7 +52,7 @@ export class AddressInformationFormComponent extends NestedFormGroup<AddressForm
       });
     } catch (error: unknown) {
       if (error instanceof Error)
-        this.toastService.showWarning({ message: error.message });
+        this.toastService.showWarning({ message: 'CEP não encontrado =/' });
     } finally {
       this.isLoadingPostalCodeSearch = false
     }
