@@ -1,10 +1,21 @@
+import { NavigationEnd, Router } from "@angular/router";
 import { BackButtonService } from "./back-button.service";
+import { Subject } from "rxjs";
+import { Event } from "@angular/router";
+import { NavigationStart } from "@angular/router";
 
 describe('BackButtonService', () => {
   let service: BackButtonService;
 
+  let routerSpy: jasmine.SpyObj<Router>;
+  let routerEvents: Subject<Event>;
+
   beforeEach(() => {
-    service = new BackButtonService();
+    routerEvents = new Subject<Event>();
+    routerSpy = jasmine.createSpyObj('Router', [''], { events: routerEvents });
+
+    service = new BackButtonService(routerSpy);
+    service.initialize();
   });
 
   it('should be created', () => {
@@ -36,6 +47,15 @@ describe('BackButtonService', () => {
 
       expect((service as any).actions.length).toBe(1);
       expect((service as any).actions[0].key).toBe('key-2');
+    });
+  });
+
+  describe('Routing', () => {
+    it('should set the url at the stack when routing', () => {
+      routerEvents.next(new NavigationEnd(1, '/my-url', 'my-new-url'));
+
+      expect((service as any).navigationStack.length).toBe(1);
+      expect((service as any).navigationStack[0]).toBe('/my-url');
     });
   });
 });
