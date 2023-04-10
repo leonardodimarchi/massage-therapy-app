@@ -49,6 +49,9 @@ The presenter layer is our last one. It will have all the UI part of the APP. Th
 - Pages
     - Here, we'll have the app UI, with all the pages and modules for each one. We'll need to inject all the dependencies for the pages, telling the page to use X usecase with Y repository and Z datasource. 
 
+- Components
+    - Here, we will have some components that can be shared through the pages
+
 - Styles
     - This one will hold our global css stuff, such as button/input styles. 
   
