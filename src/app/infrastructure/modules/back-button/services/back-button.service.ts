@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { NavigationEnd, Router } from "@angular/router";
+import { App } from "@capacitor/app";
 
 interface Action {
   key: string;
@@ -11,18 +11,20 @@ interface Action {
 })
 export class BackButtonService {
 
-  constructor(
-    private readonly router: Router,
-  ) {}
-
   private actions: Action[] = [];
-  private navigationStack: string[] = [];
 
   initialize(): void {
-    this.router.events
-    .subscribe((event) => {
-      if (event instanceof NavigationEnd)
-        this.navigationStack.push(event.url);
+    App.addListener('backButton', ({canGoBack}) => {
+      if(!canGoBack) {
+        App.exitApp();
+
+      } else if (this.actions.length) {
+        const lastAction = this.actions.pop();
+
+        lastAction?.action();
+      } else {
+        window.history.back();
+      }
     });
   }
 
