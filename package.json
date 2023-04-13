@@ -20,6 +20,7 @@
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
     "@capacitor/android": "^4.6.1",
+    "@capacitor/app": "^4.1.1",
     "@capacitor/core": "^4.6.1",
     "cep-promise": "^4.4.0",
     "ngx-mask": "^14.2.4",

@@ -8,6 +8,7 @@ import { ToastModule } from "@infra/modules/toast/toast.module";
 import { AppRoutingModule } from "@presenter/app-routing.module";
 import { AppComponent } from "@presenter/app.component";
 import { NgxMaskModule } from 'ngx-mask';
+import { BackButtonModule } from '@infra/modules/back-button/back-button.module';
 
 @NgModule({
   declarations: [
@@ -19,11 +20,12 @@ import { NgxMaskModule } from 'ngx-mask';
     ToastModule.forRoot(),
     UserModule.forRoot(),
     NgxMaskModule.forRoot(),
+    BackButtonModule,
     AppRoutingModule,
     HttpModule.with({
       baseUrl: environment.apiBaseUrl,
     }),
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
