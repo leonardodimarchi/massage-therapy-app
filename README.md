@@ -46,8 +46,14 @@ The infrastructure layer is responsible for implementing the interfaces defined 
 ### Presenter
 The presenter layer is our last one. It will have all the UI part of the APP. The Angular framework will appear here (and just a bit at the infrastructure layer, cause we're using the Angular HttpClient).
 
+- Animations
+  - Here, i'll add globally available animations
+
 - Pages
     - Here, we'll have the app UI, with all the pages and modules for each one. We'll need to inject all the dependencies for the pages, telling the page to use X usecase with Y repository and Z datasource. 
+
+- Components
+    - Here, we will have some components that can be shared through the pages
 
 - Styles
     - This one will hold our global css stuff, such as button/input styles. 

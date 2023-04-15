@@ -15,6 +15,10 @@
   font-family: 'Urbanist', sans-serif;
 }
 
+body {
+  height: 100vh;
+}
+
 .position-static {
   position: static !important;
 }
@@ -29,14 +33,26 @@
   align-items: center;
 
   width: 100%;
-
-  padding: 0 4rem;
   height: var(--page-action-height);
 
+  padding: 0rem 4rem;
+
   pointer-events: none;
-  background: linear-gradient(0deg, rgb(255 255 255) 40%, rgba(0, 212, 255, 0) 100%);
 
   > * {
+    animation: fadeIn 0.5s, fromBottom 0.6s cubic-bezier(0.6, -0.01, 0, 1.80);
     pointer-events: auto;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    z-index: -1;
+
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(0deg, rgb(255 255 255) 40%, rgba(0, 212, 255, 0) 100%);
+
+    animation: fromBottom 0.4s cubic-bezier(0.6, -0.01, 0.6, 0.85);
   }
 }

@@ -5,8 +5,12 @@
   flex-direction: column;
   align-items: center;
 
+  height: 100vh;
+
   padding: 3rem;
   padding-bottom: var(--page-action-height);
+
+  overflow: auto;
 
   > img {
     width: 35vw;
@@ -14,6 +18,8 @@
     height: auto;
 
     margin-bottom: 2.5rem;
+
+    animation: fadeIn 0.6s, fromTop 0.4s cubic-bezier(0.6, -0.01, 0.6, 0.85);
   }
 
   > h1 {
@@ -37,6 +43,8 @@
     gap: 2rem;
 
     padding: 0 1.5rem;
+
+    animation: fadeIn 0.4s;
 
     > img {
       width: 5rem;

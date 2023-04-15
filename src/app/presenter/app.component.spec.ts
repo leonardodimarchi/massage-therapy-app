@@ -1,20 +1,20 @@
 import { fakeAsync, tick } from "@angular/core/testing";
 import { UserServiceInterface } from "../domain/contracts/services/user_service.interface";
 import { AppComponent } from "./app.component";
+import { BackButtonService } from "@infra/modules/back-button/services/back-button.service";
 
 describe('AppComponent', () => {
-  let component: AppComponent;
   let userServiceSpy: jasmine.SpyObj<UserServiceInterface>;
+  let backButtonServiceSpy: jasmine.SpyObj<BackButtonService>;
 
   const createComponent = () => {
-    return new AppComponent(userServiceSpy);
+    return new AppComponent(userServiceSpy, backButtonServiceSpy);
   }
 
   beforeEach(() => {
     userServiceSpy = jasmine.createSpyObj('UserServiceInterface', ['isLogged', 'setUpLoggedUser']);
+    backButtonServiceSpy = jasmine.createSpyObj('BackButtonService', ['initialize']);
     userServiceSpy.isLogged.and.resolveTo(true);
-
-    component = createComponent();
 
     userServiceSpy.isLogged.calls.reset();
   });

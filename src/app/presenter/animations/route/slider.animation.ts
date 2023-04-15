@@ -22,26 +22,26 @@ function slideTo(direction: SliderDirections): (AnimationQueryMetadata | Animati
       style({
         position: 'absolute',
         top: 0,
-        [direction]: 0,
         width: '100%',
+        transform: 'translateX(0)',
       })
     ], queryOptions),
     query(':enter', [
       style({
-        [direction]: '-100%',
+        transform: `translateX(${direction === 'left' ? '-100%' : '100%'})`,
         opacity: 0,
       })
     ]),
     group([
       query(':leave', [
         animate('300ms ease', style({
-          [direction]: '100%',
+          transform: `translateX(${direction === 'left' ? '100%' : '-100%'})`,
           opacity: 0,
         }))
       ], queryOptions),
       query(':enter', [
         animate('300ms ease', style({
-          [direction]: '0%',
+          transform: 'translateX(0)',
           opacity: 1,
         })),
       ])
