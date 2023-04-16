@@ -56,36 +56,10 @@ export class RegisterComponent {
     try {
       this.isLoading = true;
 
-      if (this.step === RegisterStep.ADDRESS) {
-        const {
-          address,
-          basicInformation,
-          personalInformation,
-        } = this.form.getRawValue()
+      if (this.step === RegisterStep.ADDRESS)
+        return await this.register();
 
-        await this.registerUsecase.call({
-          address: {
-            ...address as AddressForm,
-            houseNumber: +(address as AddressForm).houseNumber,
-          },
-          ...basicInformation as BasicInformationForm,
-          ...personalInformation as PersonalInformationForm,
-          birthDate: new Date((personalInformation as PersonalInformationForm).birthDate),
-        });
-
-        await this.loginUsecase.call({
-          email: (basicInformation as BasicInformationForm).email,
-          password: (basicInformation as BasicInformationForm).password,
-        });
-
-        this.toastService.showSuccess({
-          title: 'Sucesso!',
-          message: 'Sua conta foi cadastrada =)'
-        });
-
-        return await this.routerService.navigate('/login');
-      }
-
+      // TODO: Add action for the back button
       this.step = RegisterStepHelper.getNext(this.step);
     } catch (error) {
       const isWarning = error instanceof ValidationError || error instanceof BadRequestError;
@@ -97,6 +71,36 @@ export class RegisterComponent {
     } finally {
       this.isLoading = false;
     }
+  }
+
+  private async register(): Promise<void> {
+    const {
+      address,
+      basicInformation,
+      personalInformation,
+    } = this.form.getRawValue()
+
+    await this.registerUsecase.call({
+      address: {
+        ...address as AddressForm,
+        houseNumber: +(address as AddressForm).houseNumber,
+      },
+      ...basicInformation as BasicInformationForm,
+      ...personalInformation as PersonalInformationForm,
+      birthDate: new Date((personalInformation as PersonalInformationForm).birthDate),
+    });
+
+    await this.loginUsecase.call({
+      email: (basicInformation as BasicInformationForm).email,
+      password: (basicInformation as BasicInformationForm).password,
+    });
+
+    this.toastService.showSuccess({
+      title: 'Sucesso!',
+      message: 'Sua conta foi cadastrada =)'
+    });
+
+    return await this.routerService.navigate('/login');
   }
 
   private createForm(): FormGroupFrom<RegisterForm> {
