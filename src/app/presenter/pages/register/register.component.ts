@@ -50,10 +50,7 @@ export class RegisterComponent {
   }
 
   public returnStep(): void {
-    if (this.step === RegisterStep.PERSONAL_INFORMATION)
-      this.step = RegisterStep.BASIC_INFORMATION;
-    else
-      this.step = RegisterStep.PERSONAL_INFORMATION;
+    this.step = RegisterStepHelper.getPrevious(this.step);
   }
 
   public async nextStep(): Promise<void> {
@@ -67,6 +64,7 @@ export class RegisterComponent {
         return await this.register();
 
       // TODO: Add action for the back button
+      // TODO: Add getNext and getPrevious tests at the RegisterStepHelper test file
       this.step = RegisterStepHelper.getNext(this.step);
     } catch (error) {
       const isWarning = error instanceof ValidationError || error instanceof BadRequestError;
