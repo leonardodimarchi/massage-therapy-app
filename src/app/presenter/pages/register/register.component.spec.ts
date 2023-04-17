@@ -140,4 +140,22 @@ describe('RegisterComponent', () => {
       });
     });
   });
+
+  describe('returnStep', () => {
+    it('should return to the BASIC_INFORMATION step', () => {
+      component.step = RegisterStep.PERSONAL_INFORMATION;
+
+      component.returnStep();
+
+      expect(component.step).toBe(RegisterStep.BASIC_INFORMATION);
+    });
+
+    it('should return to the PERSONAL_INFORMATION step', () => {
+      component.step = RegisterStep.ADDRESS;
+
+      component.returnStep();
+
+      expect(component.step).toBe(RegisterStep.PERSONAL_INFORMATION);
+    });
+  });
 });

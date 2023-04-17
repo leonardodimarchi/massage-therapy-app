@@ -21,5 +21,11 @@
       ></app-address-information-form>
     </ng-container>
   </form>
-  <!-- TODO: Add button to go back a step -->
+  
+  <button 
+    *ngIf="!isAtBasicInformation" 
+    class="button__tertiary" 
+    (click)="returnStep()">
+    Voltar
+  </button>
 </div>

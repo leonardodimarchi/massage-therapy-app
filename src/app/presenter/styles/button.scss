@@ -23,4 +23,12 @@
     color: var(--color-pink);
     background: white;
   }
+
+  &__tertiary {
+    @extend .button;
+
+    color: var(--color-gray-dark);
+    background: transparent;
+    box-shadow: none;
+  }
 }

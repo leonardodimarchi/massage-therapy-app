@@ -49,6 +49,13 @@ export class RegisterComponent {
     return this.step === RegisterStep.ADDRESS;
   }
 
+  public returnStep(): void {
+    if (this.step === RegisterStep.PERSONAL_INFORMATION)
+      this.step = RegisterStep.BASIC_INFORMATION;
+    else
+      this.step = RegisterStep.PERSONAL_INFORMATION;
+  }
+
   public async nextStep(): Promise<void> {
     if (this.isLoading)
       return;
