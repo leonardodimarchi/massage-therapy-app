@@ -27,4 +27,8 @@ export class RegisterStepHelper {
 
     return previous[current];
   }
+
+  public static toList(): RegisterStep[] {
+    return Object.values(RegisterStep);
+  }
 }
