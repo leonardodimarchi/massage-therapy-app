@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable, NgZone } from "@angular/core";
 import { App } from "@capacitor/app";
 
 interface Action {
@@ -11,20 +11,26 @@ interface Action {
 })
 export class BackButtonService {
 
+  constructor(
+    private readonly ngZone: NgZone,
+  ) {}
+
   private actions: Action[] = [];
 
   initialize(): void {
     App.addListener('backButton', ({canGoBack}) => {
-      if(!canGoBack) {
-        App.exitApp();
+      this.ngZone.run(() => {
+        if(!canGoBack) {
+          App.exitApp();
 
-      } else if (this.actions.length) {
-        const lastAction = this.actions.pop();
+        } else if (this.actions.length) {
+          const lastAction = this.actions.pop();
 
-        lastAction?.action();
-      } else {
-        window.history.back();
-      }
+          lastAction?.action();
+        } else {
+          window.history.back();
+        }
+      })
     });
   }
 

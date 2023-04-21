@@ -7,6 +7,7 @@ import { ValidationError } from '@domain/errors/validation_error';
 import { ToastServiceInterface } from '@infra/modules/toast/contracts/toast-service.interface';
 import { BadRequestError } from '@domain/errors';
 import { RouterServiceInterface } from '@infra/modules/router/contracts/router-service.interface';
+import { BackButtonService } from '@infra/modules/back-button/services/back-button.service';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -16,6 +17,7 @@ describe('RegisterComponent', () => {
   let loginUsecase: jasmine.SpyObj<LoginUsecase>;
   let toastService: jasmine.SpyObj<ToastServiceInterface>;
   let routerService: jasmine.SpyObj<RouterServiceInterface>;
+  let backButtonService: jasmine.SpyObj<BackButtonService>;
 
   beforeEach(async () => {
     formBuilder = new FormBuilder();
@@ -23,8 +25,9 @@ describe('RegisterComponent', () => {
     loginUsecase = jasmine.createSpyObj('LoginUsecase', ['call']);
     toastService = jasmine.createSpyObj('ToastServiceInterface', ['showWarning', 'showError', 'showSuccess']);
     routerService = jasmine.createSpyObj('RouterServiceInterface', ['navigate']);
+    backButtonService = jasmine.createSpyObj('BackButtonService', ['addAction', 'removeAction']);
 
-    component = new RegisterComponent(formBuilder, loginUsecase, registerUsecase, toastService, routerService);
+    component = new RegisterComponent(formBuilder, loginUsecase, registerUsecase, toastService, routerService, backButtonService);
   });
 
   it('should create', () => {

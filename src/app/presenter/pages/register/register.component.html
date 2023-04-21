@@ -1,3 +1,4 @@
+<!-- TODO: Improve responsiveness at mobile with keyboard open -->
 <div class="page">
   <app-header title="Criar perfil"></app-header>
 
@@ -21,10 +22,10 @@
       ></app-address-information-form>
     </ng-container>
   </form>
-  
-  <button 
-    *ngIf="!isAtBasicInformation" 
-    class="button__tertiary" 
+
+  <button
+    *ngIf="!isAtBasicInformation"
+    class="button__tertiary"
     (click)="returnStep()">
     Voltar
   </button>

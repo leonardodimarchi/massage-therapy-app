@@ -8,7 +8,8 @@ describe('BackButtonService', () => {
   let service: BackButtonService;
 
   beforeEach(() => {
-    service = new BackButtonService();
+    const zone = jasmine.createSpyObj('NgZone', ['run']);
+    service = new BackButtonService(zone);
     service.initialize();
   });
 
