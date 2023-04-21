@@ -58,9 +58,11 @@ export class RegisterComponent implements OnDestroy {
   }
 
   public returnStep(): void {
-    this.backButtonService.removeAction(`register-return-step-to-${this.step}`);
+    const previousStep = RegisterStepHelper.getPrevious(this.step);
 
-    this.step = RegisterStepHelper.getPrevious(this.step);
+    this.backButtonService.removeAction(`register-return-step-to-${previousStep}`);
+
+    this.step = previousStep
   }
 
   public async nextStep(): Promise<void> {
