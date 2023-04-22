@@ -16,4 +16,19 @@ export class RegisterStepHelper {
 
     return next[current];
   }
+
+  public static getPrevious(current: RegisterStep): RegisterStep {
+    const previous: Record<RegisterStep, RegisterStep> = {
+      [RegisterStep.BASIC_INFORMATION]: RegisterStep.BASIC_INFORMATION,
+      [RegisterStep.PERSONAL_INFORMATION]: RegisterStep.BASIC_INFORMATION,
+      [RegisterStep.ADDRESS]: RegisterStep.PERSONAL_INFORMATION,
+      [RegisterStep.DONE]: RegisterStep.ADDRESS,
+    }
+
+    return previous[current];
+  }
+
+  public static toList(): RegisterStep[] {
+    return Object.values(RegisterStep);
+  }
 }

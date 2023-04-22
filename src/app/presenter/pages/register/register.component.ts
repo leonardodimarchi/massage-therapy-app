@@ -1,10 +1,11 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { BadRequestError } from "@domain/errors";
 import { ValidationError } from "@domain/errors/validation_error";
 import { UserGenderEnum } from "@domain/models/user/user_gender.enum";
 import { LoginUsecase } from "@domain/usecases/user/login_usecase";
 import { RegisterUsecase } from "@domain/usecases/user/register_usecase";
+import { BackButtonService } from "@infra/modules/back-button/services/back-button.service";
 import { RouterServiceInterface } from "@infra/modules/router/contracts/router-service.interface";
 import { ToastServiceInterface } from "@infra/modules/toast/contracts/toast-service.interface";
 import { FormGroupFrom } from "@presenter/models/common/form-group-from";
@@ -20,13 +21,14 @@ import { FormValidators } from "@presenter/validators/form-validators";
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
-export class RegisterComponent {
+export class RegisterComponent implements OnDestroy {
   constructor(
     private readonly formBuilder: FormBuilder,
     private readonly loginUsecase: LoginUsecase,
     private readonly registerUsecase: RegisterUsecase,
     private readonly toastService: ToastServiceInterface,
     private readonly routerService: RouterServiceInterface,
+    private readonly backButtonService: BackButtonService,
   ) {
     this.form = this.createForm();
   }
@@ -49,6 +51,20 @@ export class RegisterComponent {
     return this.step === RegisterStep.ADDRESS;
   }
 
+  public ngOnDestroy(): void {
+    RegisterStepHelper.toList().forEach(step => {
+      this.backButtonService.removeAction(`register-return-step-to-${step}`);
+    })
+  }
+
+  public returnStep(): void {
+    const previousStep = RegisterStepHelper.getPrevious(this.step);
+
+    this.backButtonService.removeAction(`register-return-step-to-${previousStep}`);
+
+    this.step = previousStep
+  }
+
   public async nextStep(): Promise<void> {
     if (this.isLoading)
       return;
@@ -56,35 +72,13 @@ export class RegisterComponent {
     try {
       this.isLoading = true;
 
-      if (this.step === RegisterStep.ADDRESS) {
-        const {
-          address,
-          basicInformation,
-          personalInformation,
-        } = this.form.getRawValue()
+      if (this.step === RegisterStep.ADDRESS)
+        return await this.register();
 
-        await this.registerUsecase.call({
-          address: {
-            ...address as AddressForm,
-            houseNumber: +(address as AddressForm).houseNumber,
-          },
-          ...basicInformation as BasicInformationForm,
-          ...personalInformation as PersonalInformationForm,
-          birthDate: new Date((personalInformation as PersonalInformationForm).birthDate),
-        });
-
-        await this.loginUsecase.call({
-          email: (basicInformation as BasicInformationForm).email,
-          password: (basicInformation as BasicInformationForm).password,
-        });
-
-        this.toastService.showSuccess({
-          title: 'Sucesso!',
-          message: 'Sua conta foi cadastrada =)'
-        });
-
-        return await this.routerService.navigate('/login');
-      }
+      this.backButtonService.addAction({
+        key: `register-return-step-to-${this.step}`,
+        action: this.returnStep.bind(this),
+      });
 
       this.step = RegisterStepHelper.getNext(this.step);
     } catch (error) {
@@ -97,6 +91,36 @@ export class RegisterComponent {
     } finally {
       this.isLoading = false;
     }
+  }
+
+  private async register(): Promise<void> {
+    const {
+      address,
+      basicInformation,
+      personalInformation,
+    } = this.form.getRawValue()
+
+    await this.registerUsecase.call({
+      address: {
+        ...address as AddressForm,
+        houseNumber: +(address as AddressForm).houseNumber,
+      },
+      ...basicInformation as BasicInformationForm,
+      ...personalInformation as PersonalInformationForm,
+      birthDate: new Date((personalInformation as PersonalInformationForm).birthDate),
+    });
+
+    await this.loginUsecase.call({
+      email: (basicInformation as BasicInformationForm).email,
+      password: (basicInformation as BasicInformationForm).password,
+    });
+
+    this.toastService.showSuccess({
+      title: 'Sucesso!',
+      message: 'Sua conta foi cadastrada =)'
+    });
+
+    return await this.routerService.navigate('/login');
   }
 
   private createForm(): FormGroupFrom<RegisterForm> {

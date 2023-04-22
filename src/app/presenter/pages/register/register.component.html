@@ -1,3 +1,4 @@
+<!-- TODO: Scroll back to the top when closing the keyboard -->
 <div class="page">
   <app-header title="Criar perfil"></app-header>
 
@@ -21,4 +22,11 @@
       ></app-address-information-form>
     </ng-container>
   </form>
+
+  <button
+    *ngIf="!isAtBasicInformation"
+    class="button__tertiary"
+    (click)="returnStep()">
+    Voltar
+  </button>
 </div>
